@@ -1,0 +1,434 @@
+{
+  "id": "network",
+  "title": "네트워크",
+  "displayOrder": 5,
+  "subcategories": [
+    {
+      "id": "osi-tcpip",
+      "title": "OSI 7계층과 TCP/IP",
+      "displayOrder": 1,
+      "items": [
+        {
+          "id": "net-osi-vs-tcpip",
+          "title": "OSI 7계층과 TCP/IP 모델",
+          "displayOrder": 1,
+          "summary": "OSI 7계층은 통신 과정을 이해하기 위한 참조 모델이고, TCP/IP는 실제 인터넷 프로토콜 스택에 더 가까운 실용 모델이다.",
+          "keywords": [
+            "OSI 7계층",
+            "TCP/IP",
+            "계층형 구조",
+            "네트워크 모델",
+            "캡슐화"
+          ],
+          "body": [
+            "계층형 모델은 통신 문제를 역할별로 나눠 이해하고 구현하기 쉽게 만든다. 물리 계층부터 응용 계층까지 책임을 분리하면 각 층의 변화가 전체에 미치는 영향을 줄일 수 있다.",
+            "OSI는 학습과 분석에 유용한 참조 모델이고, TCP/IP는 실제 인터넷에서 널리 쓰이는 프로토콜 묶음에 가깝다. 면접에서는 둘을 경쟁 관계보다 추상화 수준 차이로 이해하는 편이 좋다.",
+            "좋은 답변은 각 계층 예시를 몇 개 들고, 데이터가 내려가며 캡슐화되고 올라가며 역캡슐화된다는 흐름까지 설명하는 형태다."
+          ],
+          "keyPoints": [
+            "OSI는 참조 모델, TCP/IP는 실사용 중심 모델이다.",
+            "계층 분리는 역할 분리와 변경 용이성에 도움이 된다.",
+            "캡슐화 개념과 함께 설명하면 이해가 선명해진다."
+          ],
+          "interviewPrompts": [
+            "OSI 7계층과 TCP/IP 4계층을 비교해보세요.",
+            "계층형 네트워크 모델을 왜 쓰나요?"
+          ],
+          "checkQuestions": [
+            "OSI 7계층은 실제 장비 구현 그대로를 뜻할까?",
+            "계층 구조는 역할 분리를 돕는가?"
+          ],
+          "relatedItemIds": [
+            "net-tcp-vs-udp",
+            "net-web-request-flow",
+            "net-dns-resolution"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tcp-udp",
+      "title": "TCP와 UDP",
+      "displayOrder": 2,
+      "items": [
+        {
+          "id": "net-tcp-vs-udp",
+          "title": "TCP와 UDP 비교",
+          "displayOrder": 1,
+          "summary": "TCP는 연결 기반, 신뢰성 중심 프로토콜이고 UDP는 비연결 기반, 지연 최소화 중심 프로토콜이다.",
+          "keywords": [
+            "TCP",
+            "UDP",
+            "신뢰성",
+            "연결 지향",
+            "비연결"
+          ],
+          "body": [
+            "TCP는 데이터 순서 보장, 재전송, 흐름 제어, 혼잡 제어를 통해 신뢰성 있는 통신을 제공한다. 대신 연결 설정과 관리 비용이 든다.",
+            "UDP는 헤더가 단순하고 연결 설정이 없어 빠르고 가볍다. 대신 순서 보장과 재전송을 스스로 제공하지 않으므로, 필요한 경우 애플리케이션 레벨에서 보완해야 한다.",
+            "면접에서는 속도만으로 비교하지 말고, 실시간성과 신뢰성 요구가 다른 문제에 어떤 프로토콜이 맞는지 예시를 드는 편이 좋다."
+          ],
+          "keyPoints": [
+            "TCP는 신뢰성, UDP는 단순성과 낮은 지연에 강하다.",
+            "UDP가 무조건 더 좋거나 나쁜 것이 아니다.",
+            "프로토콜 선택은 요구 사항 기반이어야 한다."
+          ],
+          "interviewPrompts": [
+            "TCP와 UDP를 비교 설명해보세요.",
+            "실시간 스트리밍에서 UDP를 고려하는 이유는 무엇인가요?"
+          ],
+          "checkQuestions": [
+            "TCP는 순서를 보장할까?",
+            "UDP는 연결 설정 없이 바로 보낼 수 있을까?"
+          ],
+          "relatedItemIds": [
+            "net-three-way-four-way",
+            "net-osi-vs-tcpip"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tcp-handshake",
+      "title": "3-way handshake와 4-way handshake",
+      "displayOrder": 3,
+      "items": [
+        {
+          "id": "net-three-way-four-way",
+          "title": "3-way handshake와 4-way handshake",
+          "displayOrder": 1,
+          "summary": "3-way handshake는 TCP 연결을 성립하고, 4-way handshake는 양방향 연결을 독립적으로 종료한다.",
+          "keywords": [
+            "3-way handshake",
+            "4-way handshake",
+            "SYN",
+            "ACK",
+            "FIN"
+          ],
+          "body": [
+            "TCP는 연결을 맺기 전에 서로 송수신 가능 상태를 확인해야 한다. SYN과 ACK를 주고받는 3-way handshake가 그 역할을 한다.",
+            "연결 종료는 양방향 통신을 각각 닫아야 하므로 보통 4단계로 진행된다. FIN과 ACK가 나뉘는 이유는 상대가 아직 보낼 데이터가 남아 있을 수 있기 때문이다.",
+            "면접에서는 과정 이름만 외우기보다, 왜 연결 성립은 3번이고 종료는 4번이 되는지 설명하는 편이 훨씬 설득력 있다."
+          ],
+          "keyPoints": [
+            "연결 성립은 상호 준비 상태 확인이 핵심이다.",
+            "연결 종료는 양방향을 독립적으로 닫는다.",
+            "TCP의 신뢰성 특성과 핸드셰이크가 연결된다."
+          ],
+          "interviewPrompts": [
+            "3-way handshake 과정을 설명해보세요.",
+            "왜 연결 종료는 4-way handshake인가요?"
+          ],
+          "checkQuestions": [
+            "연결 종료는 단방향 종료 한 번으로 끝날까?",
+            "SYN과 ACK는 서로 다른 역할을 가질까?"
+          ],
+          "relatedItemIds": [
+            "net-tcp-vs-udp",
+            "net-http-vs-https"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "http-https",
+      "title": "HTTP와 HTTPS",
+      "displayOrder": 4,
+      "items": [
+        {
+          "id": "net-http-vs-https",
+          "title": "HTTP와 HTTPS의 차이",
+          "displayOrder": 1,
+          "summary": "HTTP는 평문 기반 애플리케이션 프로토콜이고, HTTPS는 TLS를 더해 기밀성과 무결성, 인증을 강화한 형태다.",
+          "keywords": [
+            "HTTP",
+            "HTTPS",
+            "TLS",
+            "암호화",
+            "인증서"
+          ],
+          "body": [
+            "HTTP는 웹에서 요청과 응답을 주고받는 기본 프로토콜이다. 구조는 단순하지만 평문 전송이라 도청과 변조에 취약하다.",
+            "HTTPS는 HTTP 위에 TLS를 적용해 데이터를 암호화하고, 서버 인증서를 통해 상대가 누구인지 검증한다. 그래서 로그인, 결제, 개인정보 전송에 사실상 필수다.",
+            "면접에서는 암호화만 강조하지 말고, 무결성과 인증까지 함께 설명하는 것이 좋다."
+          ],
+          "keyPoints": [
+            "HTTPS는 HTTP에 보안 계층을 더한 형태다.",
+            "기밀성, 무결성, 인증이 핵심 가치다.",
+            "현대 웹에서는 HTTPS가 기본 전제에 가깝다."
+          ],
+          "interviewPrompts": [
+            "HTTP와 HTTPS를 비교 설명해보세요.",
+            "HTTPS가 제공하는 보안 이점은 무엇인가요?"
+          ],
+          "checkQuestions": [
+            "HTTPS는 단순히 포트 번호만 다른 프로토콜일까?",
+            "암호화 외에 서버 인증도 중요한 요소일까?"
+          ],
+          "relatedItemIds": [
+            "net-three-way-four-way",
+            "net-cookie-vs-session",
+            "db-sql-injection",
+            "net-get-vs-post",
+            "net-cors-basics",
+            "net-web-request-flow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "http-methods",
+      "title": "HTTP 메서드(GET/POST 중심)",
+      "displayOrder": 5,
+      "items": [
+        {
+          "id": "net-get-vs-post",
+          "title": "GET과 POST의 차이",
+          "displayOrder": 1,
+          "summary": "GET은 주로 조회, POST는 서버 상태 변경을 위한 요청에 사용된다. URL 노출 여부만이 아니라 의미와 멱등성 차이가 중요하다.",
+          "keywords": [
+            "GET",
+            "POST",
+            "HTTP 메서드",
+            "멱등성",
+            "조회와 변경"
+          ],
+          "body": [
+            "GET은 리소스를 조회하는 의미를 갖고, 동일 요청을 여러 번 보내도 서버 상태를 바꾸지 않는 것이 이상적이다. 캐싱과 북마크, 링크 공유와도 잘 맞는다.",
+            "POST는 서버에 새로운 처리나 상태 변경을 요청할 때 많이 사용한다. 요청 본문에 데이터를 담아 보내는 경우가 일반적이지만, 본문 사용 여부가 본질은 아니다.",
+            "면접에서는 GET은 안전하고 POST는 안전하지 않다처럼 단순화하기보다, 메서드의 의도와 멱등성 차이를 설명하는 것이 더 정확하다."
+          ],
+          "keyPoints": [
+            "메서드 구분의 핵심은 의도와 의미다.",
+            "GET은 조회, POST는 처리 요청에 가깝다.",
+            "URL에 보인다고 해서 보안성이 자동으로 결정되지는 않는다."
+          ],
+          "interviewPrompts": [
+            "GET과 POST를 비교 설명해보세요.",
+            "GET 요청은 왜 캐싱과 잘 연결되나요?"
+          ],
+          "checkQuestions": [
+            "GET과 POST의 차이는 데이터 길이 하나로만 설명될까?",
+            "같은 GET 요청을 여러 번 보내도 서버 상태가 바뀌지 않아야 할까?"
+          ],
+          "relatedItemIds": [
+            "net-http-vs-https",
+            "net-rest-restful"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cookie-session",
+      "title": "쿠키와 세션",
+      "displayOrder": 6,
+      "items": [
+        {
+          "id": "net-cookie-vs-session",
+          "title": "쿠키와 세션의 차이",
+          "displayOrder": 1,
+          "summary": "쿠키는 클라이언트 측에 저장되는 정보이고, 세션은 서버 측 상태 관리 개념이다. 둘은 대체 관계보다 함께 쓰이는 경우가 많다.",
+          "keywords": [
+            "쿠키",
+            "세션",
+            "상태 관리",
+            "로그인",
+            "세션 ID"
+          ],
+          "body": [
+            "HTTP는 기본적으로 상태를 기억하지 않기 때문에 로그인 같은 기능을 위해 상태 관리 장치가 필요하다. 쿠키는 브라우저에 저장되어 요청마다 함께 전송될 수 있는 데이터다.",
+            "세션은 서버가 사용자 상태를 관리하는 방식이다. 보통 브라우저에는 세션 자체가 아니라 세션 식별자만 쿠키로 저장하고, 실제 사용자 정보는 서버에 둔다.",
+            "면접에서는 쿠키와 세션을 완전히 별개라고만 설명하기보다, 세션 기반 인증에서 둘이 어떻게 함께 동작하는지 설명하는 것이 중요하다."
+          ],
+          "keyPoints": [
+            "쿠키는 저장 위치, 세션은 상태 관리 방식에 가깝다.",
+            "세션 ID를 쿠키에 담아 함께 쓰는 경우가 많다.",
+            "보안과 확장성을 고려해 저장 내용을 설계해야 한다."
+          ],
+          "interviewPrompts": [
+            "쿠키와 세션의 차이를 설명해보세요.",
+            "세션 기반 로그인은 어떻게 동작하나요?"
+          ],
+          "checkQuestions": [
+            "세션은 항상 브라우저에 직접 저장될까?",
+            "쿠키는 클라이언트 측 저장소 역할을 할 수 있을까?"
+          ],
+          "relatedItemIds": [
+            "net-http-vs-https",
+            "net-rest-restful"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dns",
+      "title": "DNS",
+      "displayOrder": 7,
+      "items": [
+        {
+          "id": "net-dns-resolution",
+          "title": "DNS 조회 과정",
+          "displayOrder": 1,
+          "summary": "DNS는 사람이 읽기 쉬운 도메인 이름을 IP 주소로 변환하는 시스템이다. 브라우저 캐시부터 재귀 질의까지 단계적으로 조회된다.",
+          "keywords": [
+            "DNS",
+            "도메인",
+            "IP 주소",
+            "재귀 질의",
+            "캐시"
+          ],
+          "body": [
+            "사용자가 도메인을 입력하면 브라우저나 운영체제는 먼저 로컬 캐시를 확인한다. 없으면 DNS 서버에 질의해 해당 도메인의 IP를 찾아간다.",
+            "이 과정은 루트 네임서버, TLD 서버, 권한 있는 네임서버를 거치는 단계적 조회로 이뤄질 수 있다. 캐시가 잘 동작하면 실제 전체 과정을 매번 반복하지는 않는다.",
+            "면접에서는 DNS를 단순 전화번호부 비유에서 끝내지 말고, 왜 웹 요청 전에 DNS 조회가 먼저 필요한지까지 이어서 설명하면 좋다."
+          ],
+          "keyPoints": [
+            "DNS는 이름을 주소로 바꾸는 시스템이다.",
+            "캐시는 DNS 성능에 큰 영향을 준다.",
+            "웹 요청 흐름의 초반 단계에서 핵심 역할을 한다."
+          ],
+          "interviewPrompts": [
+            "DNS가 무엇인지 설명해보세요.",
+            "브라우저에서 URL을 입력하면 DNS는 언제 동작하나요?"
+          ],
+          "checkQuestions": [
+            "DNS는 도메인을 IP로 바꾸는 역할을 할까?",
+            "캐시가 있으면 조회 단계를 줄일 수 있을까?"
+          ],
+          "relatedItemIds": [
+            "net-web-request-flow",
+            "net-osi-vs-tcpip"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cors",
+      "title": "CORS",
+      "displayOrder": 8,
+      "items": [
+        {
+          "id": "net-cors-basics",
+          "title": "CORS의 목적과 동작",
+          "displayOrder": 1,
+          "summary": "CORS는 브라우저가 다른 출처의 자원 요청을 제한하는 정책을 서버와 협력해 완화하는 메커니즘이다.",
+          "keywords": [
+            "CORS",
+            "same-origin policy",
+            "브라우저 보안",
+            "preflight",
+            "origin"
+          ],
+          "body": [
+            "브라우저는 기본적으로 다른 출처의 리소스 접근을 제한한다. 이를 Same-Origin Policy라고 하며, 악성 스크립트가 임의 요청을 남용하지 못하게 돕는다.",
+            "CORS는 서버가 특정 출처를 허용한다는 헤더를 보내면 브라우저가 제한을 완화하도록 만든 규칙이다. 일부 요청은 실제 요청 전에 preflight 요청으로 허용 여부를 먼저 확인한다.",
+            "면접에서는 CORS가 서버 에러가 아니라 브라우저 보안 정책이라는 점을 분명히 말하는 것이 중요하다."
+          ],
+          "keyPoints": [
+            "CORS는 브라우저 보안 정책과 관련된 메커니즘이다.",
+            "서버는 허용 헤더로 정책 완화를 명시한다.",
+            "preflight는 실제 요청 전에 권한을 확인하는 단계다."
+          ],
+          "interviewPrompts": [
+            "CORS가 무엇인지 설명해보세요.",
+            "왜 브라우저에서만 CORS 문제가 두드러지나요?"
+          ],
+          "checkQuestions": [
+            "CORS는 브라우저 정책과 관련이 있을까?",
+            "서버 간 통신에서도 동일하게 CORS 에러가 핵심 이슈일까?"
+          ],
+          "relatedItemIds": [
+            "net-http-vs-https",
+            "net-rest-restful"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "web-request-flow",
+      "title": "웹 요청 흐름",
+      "displayOrder": 9,
+      "items": [
+        {
+          "id": "net-web-request-flow",
+          "title": "브라우저에 URL을 입력했을 때의 흐름",
+          "displayOrder": 1,
+          "summary": "브라우저 요청은 DNS 조회, TCP 연결, HTTP 요청, 서버 처리, 응답 렌더링 같은 여러 계층 단계를 거친다.",
+          "keywords": [
+            "웹 요청 흐름",
+            "브라우저",
+            "DNS",
+            "TCP 연결",
+            "렌더링"
+          ],
+          "body": [
+            "사용자가 URL을 입력하면 브라우저는 먼저 캐시와 DNS를 통해 서버 주소를 확인한다. 그다음 TCP 또는 TLS 연결을 준비하고 HTTP 요청을 전송한다.",
+            "서버는 요청을 처리해 응답을 보내고, 브라우저는 HTML을 파싱하며 추가 리소스를 요청하고 렌더링을 진행한다. 이 과정은 네트워크와 브라우저 내부 동작이 함께 얽혀 있다.",
+            "면접에서는 이 흐름을 계층별로 설명하면 좋다. DNS, TCP handshake, TLS, HTTP, 렌더링을 큰 단계로 나눠 말하면 정리된 인상을 준다."
+          ],
+          "keyPoints": [
+            "웹 요청은 하나의 동작처럼 보여도 여러 단계가 이어진 결과다.",
+            "DNS, 연결 수립, 애플리케이션 요청, 렌더링이 핵심 흐름이다.",
+            "네트워크와 브라우저 동작을 함께 설명할 수 있어야 한다."
+          ],
+          "interviewPrompts": [
+            "브라우저에 URL을 입력하면 어떤 일이 일어나나요?",
+            "웹 페이지가 보이기까지의 과정을 네트워크 관점에서 설명해보세요."
+          ],
+          "checkQuestions": [
+            "DNS 조회는 웹 요청 흐름의 초기에 필요할까?",
+            "응답을 받으면 브라우저는 바로 화면만 그릴까?"
+          ],
+          "relatedItemIds": [
+            "net-dns-resolution",
+            "net-osi-vs-tcpip",
+            "net-http-vs-https"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rest-restful",
+      "title": "REST와 RESTful",
+      "displayOrder": 10,
+      "items": [
+        {
+          "id": "net-rest-restful",
+          "title": "REST와 RESTful API의 개념",
+          "displayOrder": 1,
+          "summary": "REST는 리소스 중심으로 HTTP를 활용하는 아키텍처 스타일이고, RESTful은 그 원칙을 비교적 잘 따르는 API를 가리키는 표현이다.",
+          "keywords": [
+            "REST",
+            "RESTful",
+            "리소스",
+            "HTTP 메서드",
+            "URI"
+          ],
+          "body": [
+            "REST는 URI로 리소스를 식별하고 HTTP 메서드로 행위를 표현하는 스타일이다. 상태를 서버에 두지 않는 무상태성, 계층화 같은 제약도 함께 언급된다.",
+            "RESTful은 REST 원칙을 잘 지키는 API라는 의미로 자주 쓰이지만, 절대적인 인증 마크처럼 받아들이면 곤란하다. 실무에서는 완벽한 REST보다 일관된 설계가 더 중요할 때도 많다.",
+            "면접에서는 CRUD를 URI와 메서드에 어떻게 녹이는지, 그리고 왜 무상태성이 확장성에 도움이 되는지 정도를 함께 말하면 좋다."
+          ],
+          "keyPoints": [
+            "REST는 규격보다 설계 스타일에 가깝다.",
+            "리소스 중심 URI와 HTTP 메서드 활용이 핵심이다.",
+            "RESTful은 상대적 표현이므로 맥락 있게 설명해야 한다."
+          ],
+          "interviewPrompts": [
+            "REST와 RESTful을 설명해보세요.",
+            "좋은 REST API 설계의 기준은 무엇인가요?"
+          ],
+          "checkQuestions": [
+            "REST는 리소스 중심 설계와 관련이 있을까?",
+            "RESTful은 완벽한 정답 여부만 가르는 단어일까?"
+          ],
+          "relatedItemIds": [
+            "net-get-vs-post",
+            "net-cookie-vs-session",
+            "net-cors-basics"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,490 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 70;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		02D219CA279E9647D425A07A /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B2C3A6E563CC7338387D3D8 /* categories.json */; };
+		049812D27B5310D1D1BAF432 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 847196E54B522131E6E1AA78 /* CasePaths */; };
+		112178E0C2958CE875254177 /* DesignSystem.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 033CB2256013A491A93DCF09 /* DesignSystem.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		15B3A9053E3399A6F53E2EBE /* Features.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 19D30606510C5400C66E0847 /* Features.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22976B03CCA1B39CF04DE04B /* Domain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 85BE6B4E832F21CE126268F5 /* Domain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		250AC386DD4AEE7B39B0E90D /* algorithms.prod.json in Resources */ = {isa = PBXBuildFile; fileRef = ECA8E914F4E5C3419673A477 /* algorithms.prod.json */; };
+		42D570AEBE27A2A8234F0F60 /* data-structure.prod.json in Resources */ = {isa = PBXBuildFile; fileRef = A07A480F339DD051637E4C69 /* data-structure.prod.json */; };
+		524BC41B7DD7F30940F1839E /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE1D134A0E647F58EB30F56 /* Core.framework */; };
+		5CC998181E8A2D87178DD9FC /* DesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 033CB2256013A491A93DCF09 /* DesignSystem.framework */; };
+		6BF3F91D509F04884EFD8D82 /* Entity.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BEDAE6D4AC72736263F58A /* Entity.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6C1A6BBB3EC6D7C990DE72AF /* TuistBundle+DailyDevMacOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C99CD0AA8302206975B13 /* TuistBundle+DailyDevMacOS.swift */; };
+		6C2C3104DD5599E5A4CBD538 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE1D134A0E647F58EB30F56 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6E58A0D353FE4B150A9F2B32 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = ABFD859E62778B707FEB9A68 /* Dependencies */; };
+		86B976C4135BBE166FFD740B /* network.prod.json in Resources */ = {isa = PBXBuildFile; fileRef = 45D4D1161D66C497201F92E7 /* network.prod.json */; };
+		8FD318A31BF7F4F927B33D9B /* Features.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D30606510C5400C66E0847 /* Features.framework */; };
+		93D085D83CC56AE486693E7E /* operating-system.prod.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F801909A334B87C88A06391 /* operating-system.prod.json */; };
+		B00F652184FEED7DE54C317B /* Data.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9636677D290C6FEC6EFC8B2 /* Data.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B188C00BD00F75E1A4DD2788 /* DailyDevMacOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D212DCD6B6C2CBE8BFF7F10 /* DailyDevMacOSApp.swift */; };
+		CEEB696092F80D5C88EF52F0 /* database.prod.json in Resources */ = {isa = PBXBuildFile; fileRef = 86B64B72BB1EE1A00EB97233 /* database.prod.json */; };
+		EA2132490FA78CFCA16CE397 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = AFEDA021A053269CFBF28B6A /* ComposableArchitecture */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		07C07063415F46686176E0AD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6C2C3104DD5599E5A4CBD538 /* Core.framework in Embed Frameworks */,
+				B00F652184FEED7DE54C317B /* Data.framework in Embed Frameworks */,
+				112178E0C2958CE875254177 /* DesignSystem.framework in Embed Frameworks */,
+				22976B03CCA1B39CF04DE04B /* Domain.framework in Embed Frameworks */,
+				6BF3F91D509F04884EFD8D82 /* Entity.framework in Embed Frameworks */,
+				15B3A9053E3399A6F53E2EBE /* Features.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		033CB2256013A491A93DCF09 /* DesignSystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DesignSystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		19D30606510C5400C66E0847 /* Features.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Features.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		45D4D1161D66C497201F92E7 /* network.prod.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = network.prod.json; sourceTree = "<group>"; };
+		4B2C3A6E563CC7338387D3D8 /* categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
+		5D212DCD6B6C2CBE8BFF7F10 /* DailyDevMacOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDevMacOSApp.swift; sourceTree = "<group>"; };
+		7EE1D134A0E647F58EB30F56 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F801909A334B87C88A06391 /* operating-system.prod.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "operating-system.prod.json"; sourceTree = "<group>"; };
+		85BE6B4E832F21CE126268F5 /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		86B64B72BB1EE1A00EB97233 /* database.prod.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = database.prod.json; sourceTree = "<group>"; };
+		A02881E58F0D7A5ADE0C6F6B /* DailyDevMacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyDevMacOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A07A480F339DD051637E4C69 /* data-structure.prod.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "data-structure.prod.json"; sourceTree = "<group>"; };
+		C9636677D290C6FEC6EFC8B2 /* Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2BEDAE6D4AC72736263F58A /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D95CDF62366CD4D376034E65 /* DailyDevMacOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DailyDevMacOS-Info.plist"; sourceTree = "<group>"; };
+		ECA8E914F4E5C3419673A477 /* algorithms.prod.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = algorithms.prod.json; sourceTree = "<group>"; };
+		F48C99CD0AA8302206975B13 /* TuistBundle+DailyDevMacOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+DailyDevMacOS.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F8E7B40777A97E813AAF06AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				524BC41B7DD7F30940F1839E /* Core.framework in Frameworks */,
+				5CC998181E8A2D87178DD9FC /* DesignSystem.framework in Frameworks */,
+				8FD318A31BF7F4F927B33D9B /* Features.framework in Frameworks */,
+				EA2132490FA78CFCA16CE397 /* ComposableArchitecture in Frameworks */,
+				6E58A0D353FE4B150A9F2B32 /* Dependencies in Frameworks */,
+				049812D27B5310D1D1BAF432 /* CasePaths in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		189BF565ED72B8A64A3E173C /* Derived */ = {
+			isa = PBXGroup;
+			children = (
+				2AA03F460C58C381271E0BBA /* InfoPlists */,
+				6E202EECDADC2DB07CFBC598 /* Sources */,
+			);
+			path = Derived;
+			sourceTree = "<group>";
+		};
+		2AA03F460C58C381271E0BBA /* InfoPlists */ = {
+			isa = PBXGroup;
+			children = (
+				D95CDF62366CD4D376034E65 /* DailyDevMacOS-Info.plist */,
+			);
+			path = InfoPlists;
+			sourceTree = "<group>";
+		};
+		34E5961F4F49B810829480DD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4969EB228B9CE381667DB8B7 /* CS */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4969C79CADFAD02A602438A6 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				189BF565ED72B8A64A3E173C /* Derived */,
+				34E5961F4F49B810829480DD /* Resources */,
+				E755E635B98948816417CDA0 /* Sources */,
+			);
+			name = Project;
+			sourceTree = "<group>";
+		};
+		4969EB228B9CE381667DB8B7 /* CS */ = {
+			isa = PBXGroup;
+			children = (
+				ECA8E914F4E5C3419673A477 /* algorithms.prod.json */,
+				4B2C3A6E563CC7338387D3D8 /* categories.json */,
+				A07A480F339DD051637E4C69 /* data-structure.prod.json */,
+				86B64B72BB1EE1A00EB97233 /* database.prod.json */,
+				45D4D1161D66C497201F92E7 /* network.prod.json */,
+				7F801909A334B87C88A06391 /* operating-system.prod.json */,
+			);
+			path = CS;
+			sourceTree = "<group>";
+		};
+		6E202EECDADC2DB07CFBC598 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				F48C99CD0AA8302206975B13 /* TuistBundle+DailyDevMacOS.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		6FBFA26B56F30718C37FE10C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7EE1D134A0E647F58EB30F56 /* Core.framework */,
+				A02881E58F0D7A5ADE0C6F6B /* DailyDevMacOS.app */,
+				C9636677D290C6FEC6EFC8B2 /* Data.framework */,
+				033CB2256013A491A93DCF09 /* DesignSystem.framework */,
+				85BE6B4E832F21CE126268F5 /* Domain.framework */,
+				D2BEDAE6D4AC72736263F58A /* Entity.framework */,
+				19D30606510C5400C66E0847 /* Features.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		987C3AE634511B5D7B21B2C7 = {
+			isa = PBXGroup;
+			children = (
+				4969C79CADFAD02A602438A6 /* Project */,
+				6FBFA26B56F30718C37FE10C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E755E635B98948816417CDA0 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				5D212DCD6B6C2CBE8BFF7F10 /* DailyDevMacOSApp.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8AD075B89E468C33CDF702A0 /* DailyDevMacOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 742FEE54216BF490954038D0 /* Build configuration list for PBXNativeTarget "DailyDevMacOS" */;
+			buildPhases = (
+				07C16477C253ED3310F277E6 /* Sources */,
+				956A44219819D50DD34AB51A /* Resources */,
+				F8E7B40777A97E813AAF06AF /* Frameworks */,
+				07C07063415F46686176E0AD /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DailyDevMacOS;
+			packageProductDependencies = (
+				AFEDA021A053269CFBF28B6A /* ComposableArchitecture */,
+				ABFD859E62778B707FEB9A68 /* Dependencies */,
+				847196E54B522131E6E1AA78 /* CasePaths */,
+			);
+			productName = DailyDevMacOS;
+			productReference = A02881E58F0D7A5ADE0C6F6B /* DailyDevMacOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		138C2E752F3B0F4D051B3EEF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				ORGANIZATIONNAME = DailyDev;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 4D1D2358BB90957BA15D380E /* Build configuration list for PBXProject "DailyDevMacOS" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 987C3AE634511B5D7B21B2C7;
+			packageReferences = (
+				C00DA01772BDECCBC1B21314 /* XCRemoteSwiftPackageReference "swift-case-paths" */,
+				9A34039B0E53D319E4C2C739 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				3591E15D3EC92082CD226E94 /* XCRemoteSwiftPackageReference "swift-dependencies" */,
+			);
+			productRefGroup = 6FBFA26B56F30718C37FE10C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8AD075B89E468C33CDF702A0 /* DailyDevMacOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		956A44219819D50DD34AB51A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				250AC386DD4AEE7B39B0E90D /* algorithms.prod.json in Resources */,
+				02D219CA279E9647D425A07A /* categories.json in Resources */,
+				42D570AEBE27A2A8234F0F60 /* data-structure.prod.json in Resources */,
+				CEEB696092F80D5C88EF52F0 /* database.prod.json in Resources */,
+				86B976C4135BBE166FFD740B /* network.prod.json in Resources */,
+				93D085D83CC56AE486693E7E /* operating-system.prod.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		07C16477C253ED3310F277E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C1A6BBB3EC6D7C990DE72AF /* TuistBundle+DailyDevMacOS.swift in Sources */,
+				B188C00BD00F75E1A4DD2788 /* DailyDevMacOSApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		18163E6AAE0A8D226FD29528 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Derived/InfoPlists/DailyDevMacOS-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dailydev.macos;
+				PRODUCT_NAME = DailyDevMacOS;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		2CBAEFABDC07ACA2EACB8C54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7BC2F23D432B618D72A93B26 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		99BABE7086CA003E87FA2F33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Derived/InfoPlists/DailyDevMacOS-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dailydev.macos;
+				PRODUCT_NAME = DailyDevMacOS;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4D1D2358BB90957BA15D380E /* Build configuration list for PBXProject "DailyDevMacOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BC2F23D432B618D72A93B26 /* Debug */,
+				2CBAEFABDC07ACA2EACB8C54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		742FEE54216BF490954038D0 /* Build configuration list for PBXNativeTarget "DailyDevMacOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18163E6AAE0A8D226FD29528 /* Debug */,
+				99BABE7086CA003E87FA2F33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3591E15D3EC92082CD226E94 /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-dependencies";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.12.0;
+			};
+		};
+		9A34039B0E53D319E4C2C739 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.25.0;
+			};
+		};
+		C00DA01772BDECCBC1B21314 /* XCRemoteSwiftPackageReference "swift-case-paths" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-case-paths";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		847196E54B522131E6E1AA78 /* CasePaths */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CasePaths;
+		};
+		ABFD859E62778B707FEB9A68 /* Dependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Dependencies;
+		};
+		AFEDA021A053269CFBF28B6A /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 138C2E752F3B0F4D051B3EEF /* Project object */;
+}

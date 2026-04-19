@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+# SwiftPM/Xcode build artifacts
+/.build/
+DerivedData/
+**/.build/
+**/DerivedData/
+# Xcode user data
+**/xcuserdata/
+**/*.xcuserstate
+# Tuist generated
+Tuist/
+

@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "categories": [
+    {
+      "id": "data-structure",
+      "title": "자료구조",
+      "displayOrder": 1,
+      "devFile": "data-structure.dev.json",
+      "prodFile": "data-structure.prod.json"
+    },
+    {
+      "id": "algorithms",
+      "title": "알고리즘",
+      "displayOrder": 2,
+      "devFile": "algorithms.dev.json",
+      "prodFile": "algorithms.prod.json"
+    },
+    {
+      "id": "operating-system",
+      "title": "운영체제",
+      "displayOrder": 3,
+      "devFile": "operating-system.dev.json",
+      "prodFile": "operating-system.prod.json"
+    },
+    {
+      "id": "database",
+      "title": "데이터베이스",
+      "displayOrder": 4,
+      "devFile": "database.dev.json",
+      "prodFile": "database.prod.json"
+    },
+    {
+      "id": "network",
+      "title": "네트워크",
+      "displayOrder": 5,
+      "devFile": "network.dev.json",
+      "prodFile": "network.prod.json"
+    }
+  ]
+}
