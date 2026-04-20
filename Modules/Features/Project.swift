@@ -15,6 +15,14 @@ let project = Project(
         .remote(
             url: "https://github.com/pointfreeco/swift-case-paths",
             requirement: .upToNextMajor(from: "1.7.0")
+        ),
+        .remote(
+            url: "https://github.com/pointfreeco/swift-perception",
+            requirement: .upToNextMajor(from: "2.0.0")
+        ),
+        .remote(
+            url: "https://github.com/pointfreeco/swift-identified-collections",
+            requirement: .upToNextMajor(from: "1.1.0")
         )
     ],
     targets: [
@@ -38,6 +46,8 @@ let project = Project(
                 .package(product: "ComposableArchitecture"),
                 .package(product: "Dependencies"),
                 .package(product: "CasePaths"),
+                .package(product: "Perception"),
+                .package(product: "IdentifiedCollections"),
             ]
         )
     ]

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,12 +11,14 @@
 		1029D851769D248D86633081 /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 3293A63035026FA9C2590410 /* categories.json */; };
 		15A41E004A71C19406355548 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B58E2A3FFC4EAD8B252DC07 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		30282FE471C0FCFD5180EB74 /* network.prod.json in Resources */ = {isa = PBXBuildFile; fileRef = 4090F57EAB52FB31C8D91534 /* network.prod.json */; };
+		4DFF445F8B47427C034BA091 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8C2234DC4F42CDBBCAD900F /* Assets.xcassets */; };
 		52D7445AD20C5389AFC6C804 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 4B8C76AA11048480435B74B8 /* Dependencies */; };
 		58F26249843B15D6A503B2DC /* Features.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBEEEA08AFA86E3BE9B818FD /* Features.framework */; };
 		85F13A28E16FDA0775379A69 /* DesignSystem.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10D27FA7D0925A79AF2DC890 /* DesignSystem.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		879F61E6D76C5E7854922C93 /* data-structure.prod.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B56B3B97E8CA6A362E2601D /* data-structure.prod.json */; };
 		897F3AACAF3F8C973449ADF1 /* DesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10D27FA7D0925A79AF2DC890 /* DesignSystem.framework */; };
 		8CE7DCC3778D3E47458CEE2E /* database.prod.json in Resources */ = {isa = PBXBuildFile; fileRef = F2784F5F0420BB051DD14B45 /* database.prod.json */; };
+		A23F1FC5C1F389FA6A4D8836 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 136164CB889B8B31268FC41F /* IdentifiedCollections */; };
 		AF587F78C8C7CC26F255D732 /* Entity.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7F6D2B8A72DA801D1ECEDB /* Entity.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B64AC1A9987CB82156AB4A97 /* TuistBundle+DailyDeviOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F7C29C5290CF9209083D /* TuistBundle+DailyDeviOS.swift */; };
 		B7197C1EC12F2BC6162154DF /* Domain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 17C689B8D3B3407522CA994D /* Domain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -25,6 +27,7 @@
 		CF36621E9B0000AD8BFB58EC /* Features.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBEEEA08AFA86E3BE9B818FD /* Features.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2A5388820358FEF9C708B40 /* DailyDeviOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6666AB4A3039C8D3F1F5C8 /* DailyDeviOSApp.swift */; };
 		E551B1F7FD2326BB426DCE83 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 15F2012FE010B3065ABFE41D /* CasePaths */; };
+		E8B1DE2D1207C064D596F491 /* TuistAssets+DailyDeviOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63313E7F1C53A9654A5D478F /* TuistAssets+DailyDeviOS.swift */; };
 		F29E8322FE072F3F45E4D524 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B58E2A3FFC4EAD8B252DC07 /* Core.framework */; };
 		F364226102660729A6EB8C4A /* operating-system.prod.json in Resources */ = {isa = PBXBuildFile; fileRef = C0A756BA778080027A62A0D9 /* operating-system.prod.json */; };
 /* End PBXBuildFile section */
@@ -56,6 +59,7 @@
 		1958E0B47EAA5DC168DFD8CB /* algorithms.prod.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = algorithms.prod.json; sourceTree = "<group>"; };
 		3293A63035026FA9C2590410 /* categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
 		4090F57EAB52FB31C8D91534 /* network.prod.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = network.prod.json; sourceTree = "<group>"; };
+		63313E7F1C53A9654A5D478F /* TuistAssets+DailyDeviOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+DailyDeviOS.swift"; sourceTree = "<group>"; };
 		67E5B8D0CB054A489E33D692 /* DailyDeviOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DailyDeviOS-Info.plist"; sourceTree = "<group>"; };
 		8A7F6D2B8A72DA801D1ECEDB /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B58E2A3FFC4EAD8B252DC07 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +69,7 @@
 		C741F7C29C5290CF9209083D /* TuistBundle+DailyDeviOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+DailyDeviOS.swift"; sourceTree = "<group>"; };
 		DBEEEA08AFA86E3BE9B818FD /* Features.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Features.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2784F5F0420BB051DD14B45 /* database.prod.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = database.prod.json; sourceTree = "<group>"; };
+		F8C2234DC4F42CDBBCAD900F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +83,7 @@
 				C2E43C82F85AC7E166F02AE1 /* ComposableArchitecture in Frameworks */,
 				52D7445AD20C5389AFC6C804 /* Dependencies in Frameworks */,
 				E551B1F7FD2326BB426DCE83 /* CasePaths in Frameworks */,
+				A23F1FC5C1F389FA6A4D8836 /* IdentifiedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +119,7 @@
 		A83EC1194E04B0A4FE35E369 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				63313E7F1C53A9654A5D478F /* TuistAssets+DailyDeviOS.swift */,
 				C741F7C29C5290CF9209083D /* TuistBundle+DailyDeviOS.swift */,
 			);
 			path = Sources;
@@ -149,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				DB8A46C4E7D788A16323C6F6 /* CS */,
+				F8C2234DC4F42CDBBCAD900F /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -191,6 +199,7 @@
 				8629424AE30F2BB82136050D /* ComposableArchitecture */,
 				4B8C76AA11048480435B74B8 /* Dependencies */,
 				15F2012FE010B3065ABFE41D /* CasePaths */,
+				136164CB889B8B31268FC41F /* IdentifiedCollections */,
 			);
 			productName = DailyDeviOS;
 			productReference = B0A007AC5E7153CF3816541A /* DailyDeviOS.app */;
@@ -204,8 +213,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = DailyDev;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 04C1F30C4334C76926516C18 /* Build configuration list for PBXProject "DailyDeviOS" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -220,6 +227,7 @@
 				AC4469ACFAFF72DE9AEE6678 /* XCRemoteSwiftPackageReference "swift-case-paths" */,
 				1B4160CE6F06A5C370ABC51F /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				E77E639992EAD556A96DEFE7 /* XCRemoteSwiftPackageReference "swift-dependencies" */,
+				1F3D924D434378D7713F5A74 /* XCRemoteSwiftPackageReference "swift-identified-collections" */,
 			);
 			productRefGroup = B339C83D9155BA49014E852D /* Products */;
 			projectDirPath = "";
@@ -235,6 +243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DFF445F8B47427C034BA091 /* Assets.xcassets in Resources */,
 				0B323CF882AA6FF77D51EE79 /* algorithms.prod.json in Resources */,
 				1029D851769D248D86633081 /* categories.json in Resources */,
 				879F61E6D76C5E7854922C93 /* data-structure.prod.json in Resources */,
@@ -251,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8B1DE2D1207C064D596F491 /* TuistAssets+DailyDeviOS.swift in Sources */,
 				B64AC1A9987CB82156AB4A97 /* TuistBundle+DailyDeviOS.swift in Sources */,
 				D2A5388820358FEF9C708B40 /* DailyDeviOSApp.swift in Sources */,
 			);
@@ -265,6 +275,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = U6NUHA5DNR;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Derived/InfoPlists/DailyDeviOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
@@ -278,10 +289,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -354,6 +362,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = U6NUHA5DNR;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Derived/InfoPlists/DailyDeviOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
@@ -459,6 +468,14 @@
 				minimumVersion = 1.25.0;
 			};
 		};
+		1F3D924D434378D7713F5A74 /* XCRemoteSwiftPackageReference "swift-identified-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-identified-collections";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 		AC4469ACFAFF72DE9AEE6678 /* XCRemoteSwiftPackageReference "swift-case-paths" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-case-paths";
@@ -478,6 +495,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		136164CB889B8B31268FC41F /* IdentifiedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IdentifiedCollections;
+		};
 		15F2012FE010B3065ABFE41D /* CasePaths */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CasePaths;

@@ -8,18 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		105BA16A0597D948BD6EB9ED /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBAC73EA60F6E402DEB8584 /* Core.framework */; };
+		12DE326B5091B8CF92BAE46A /* HomeLessonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515AE5416D1891241F71A729 /* HomeLessonDetailView.swift */; };
 		1BBBEBCDDDCE9720E25D2B6E /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 863CFA92628D08FB0B92EDF5 /* CasePaths */; };
 		3708C7A995E819ECE15B6EFC /* HomeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C945B550375087B5BF6AD7 /* HomeFeature.swift */; };
 		42164F7CDF364EB8129CD1D6 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 5768E189BFB5611B93F398A1 /* ComposableArchitecture */; };
+		44430B095458D8395FD0BF3E /* HomeIOSPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AD6C189BF2C16295A6D0A7 /* HomeIOSPresentation.swift */; };
+		4A47D4971915BE111757F957 /* Perception in Frameworks */ = {isa = PBXBuildFile; productRef = AA9A57A910C55737CE7C2810 /* Perception */; };
 		566266BD1589BA06FAA5128D /* CSContentClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81E1946F23F1D348C01986F /* CSContentClient.swift */; };
 		56F39FAAD24C7AE4708B5DC3 /* DesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FFBE7A108F18E4BC72024CC /* DesignSystem.framework */; };
+		5B7F0A390C38A8095537E564 /* HomeIOSStubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FED0690B2C5885ECA8F905 /* HomeIOSStubs.swift */; };
+		6D1CB24DED37F86C13EAB1AC /* HomeTopicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C43B353DCD75B3E50EFDB4C /* HomeTopicDetailView.swift */; };
 		741B408863E9927CE07ED120 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = D010A5034AC3A2442BE5084D /* Dependencies */; };
 		7630A991294883D29EEDF8C9 /* Entity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57861FD57D214748EE9450C /* Entity.framework */; };
 		8F71231DD092E751C23528CD /* HomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F4644F84F59154238E5FE6 /* HomeScene.swift */; };
 		917115A32022F1E463B0B67B /* HomeIOSContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D50468562579F03DF027F11 /* HomeIOSContainer.swift */; };
+		9DA9B07B92457A99BAC4FA22 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = B49279EC525B29F7AD534C60 /* IdentifiedCollections */; };
 		C84B71B5DCE336D87B3FECB1 /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC0A40AF3BF7E6FC38591E93 /* Domain.framework */; };
+		D0D0225504A513CAAF90DDBE /* HomeIOSModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E926E110D4553A9033083EB /* HomeIOSModels.swift */; };
 		D2D13A824AED67BEC8AF02E6 /* Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BDB830008325FCEA9565BD /* Data.framework */; };
 		F814B2C96D902A9FBBD92739 /* HomeMacView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F41B78C66BC5203DB087C7 /* HomeMacView.swift */; };
+		FEABDF44C5AE002CF727EF79 /* HomeIOSCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE07616DD7EBDD65B9BA3CC7 /* HomeIOSCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,14 +47,20 @@
 		04C945B550375087B5BF6AD7 /* HomeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeature.swift; sourceTree = "<group>"; };
 		12F41B78C66BC5203DB087C7 /* HomeMacView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMacView.swift; sourceTree = "<group>"; };
 		18E99D44D88F2DDCA5B5DB6E /* Features-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Features-Info.plist"; sourceTree = "<group>"; };
+		3C43B353DCD75B3E50EFDB4C /* HomeTopicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopicDetailView.swift; sourceTree = "<group>"; };
+		515AE5416D1891241F71A729 /* HomeLessonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeLessonDetailView.swift; sourceTree = "<group>"; };
 		5EBAC73EA60F6E402DEB8584 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FFBE7A108F18E4BC72024CC /* DesignSystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DesignSystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E926E110D4553A9033083EB /* HomeIOSModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIOSModels.swift; sourceTree = "<group>"; };
 		9D50468562579F03DF027F11 /* HomeIOSContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIOSContainer.swift; sourceTree = "<group>"; };
 		A0BDB830008325FCEA9565BD /* Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A57861FD57D214748EE9450C /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE07616DD7EBDD65B9BA3CC7 /* HomeIOSCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIOSCoordinator.swift; sourceTree = "<group>"; };
 		B0F4644F84F59154238E5FE6 /* HomeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScene.swift; sourceTree = "<group>"; };
+		B9AD6C189BF2C16295A6D0A7 /* HomeIOSPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIOSPresentation.swift; sourceTree = "<group>"; };
 		BC0A40AF3BF7E6FC38591E93 /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA836247ACFC66DB8F6AC46D /* Features.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Features.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7FED0690B2C5885ECA8F905 /* HomeIOSStubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIOSStubs.swift; sourceTree = "<group>"; };
 		F81E1946F23F1D348C01986F /* CSContentClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSContentClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +77,8 @@
 				42164F7CDF364EB8129CD1D6 /* ComposableArchitecture in Frameworks */,
 				741B408863E9927CE07ED120 /* Dependencies in Frameworks */,
 				1BBBEBCDDDCE9720E25D2B6E /* CasePaths in Frameworks */,
+				4A47D4971915BE111757F957 /* Perception in Frameworks */,
+				9DA9B07B92457A99BAC4FA22 /* IdentifiedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +130,12 @@
 			isa = PBXGroup;
 			children = (
 				9D50468562579F03DF027F11 /* HomeIOSContainer.swift */,
+				AE07616DD7EBDD65B9BA3CC7 /* HomeIOSCoordinator.swift */,
+				7E926E110D4553A9033083EB /* HomeIOSModels.swift */,
+				B9AD6C189BF2C16295A6D0A7 /* HomeIOSPresentation.swift */,
+				E7FED0690B2C5885ECA8F905 /* HomeIOSStubs.swift */,
+				515AE5416D1891241F71A729 /* HomeLessonDetailView.swift */,
+				3C43B353DCD75B3E50EFDB4C /* HomeTopicDetailView.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -172,6 +194,8 @@
 				5768E189BFB5611B93F398A1 /* ComposableArchitecture */,
 				D010A5034AC3A2442BE5084D /* Dependencies */,
 				863CFA92628D08FB0B92EDF5 /* CasePaths */,
+				AA9A57A910C55737CE7C2810 /* Perception */,
+				B49279EC525B29F7AD534C60 /* IdentifiedCollections */,
 			);
 			productName = Features;
 			productReference = DA836247ACFC66DB8F6AC46D /* Features.framework */;
@@ -201,6 +225,8 @@
 				2C0F16237CC91268EF8838AE /* XCRemoteSwiftPackageReference "swift-case-paths" */,
 				5D046EEB18102D4ED00669D9 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				9D0300393D2409AFBFC22E88 /* XCRemoteSwiftPackageReference "swift-dependencies" */,
+				F36DC4B70670BA830F568E1E /* XCRemoteSwiftPackageReference "swift-identified-collections" */,
+				0AE88E71668380324151D28D /* XCRemoteSwiftPackageReference "swift-perception" */,
 			);
 			productRefGroup = 17B1BBDDC4C99DACE8CC2DDD /* Products */;
 			projectDirPath = "";
@@ -230,6 +256,12 @@
 				3708C7A995E819ECE15B6EFC /* HomeFeature.swift in Sources */,
 				8F71231DD092E751C23528CD /* HomeScene.swift in Sources */,
 				917115A32022F1E463B0B67B /* HomeIOSContainer.swift in Sources */,
+				FEABDF44C5AE002CF727EF79 /* HomeIOSCoordinator.swift in Sources */,
+				D0D0225504A513CAAF90DDBE /* HomeIOSModels.swift in Sources */,
+				44430B095458D8395FD0BF3E /* HomeIOSPresentation.swift in Sources */,
+				5B7F0A390C38A8095537E564 /* HomeIOSStubs.swift in Sources */,
+				12DE326B5091B8CF92BAE46A /* HomeLessonDetailView.swift in Sources */,
+				6D1CB24DED37F86C13EAB1AC /* HomeTopicDetailView.swift in Sources */,
 				F814B2C96D902A9FBBD92739 /* HomeMacView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,6 +487,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0AE88E71668380324151D28D /* XCRemoteSwiftPackageReference "swift-perception" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-perception";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		2C0F16237CC91268EF8838AE /* XCRemoteSwiftPackageReference "swift-case-paths" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-case-paths";
@@ -479,6 +519,14 @@
 				minimumVersion = 1.12.0;
 			};
 		};
+		F36DC4B70670BA830F568E1E /* XCRemoteSwiftPackageReference "swift-identified-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-identified-collections";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -489,6 +537,14 @@
 		863CFA92628D08FB0B92EDF5 /* CasePaths */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CasePaths;
+		};
+		AA9A57A910C55737CE7C2810 /* Perception */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Perception;
+		};
+		B49279EC525B29F7AD534C60 /* IdentifiedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IdentifiedCollections;
 		};
 		D010A5034AC3A2442BE5084D /* Dependencies */ = {
 			isa = XCSwiftPackageProductDependency;
