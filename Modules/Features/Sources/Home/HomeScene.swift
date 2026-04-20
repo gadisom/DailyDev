@@ -12,7 +12,7 @@ public struct HomeScene: View {
         Group {
             switch store.platform {
             case .iOS:
-                HomeIOSContainer(store: store)
+                HomeIOSCoordinator(store: store)
             case .macOS:
                 HomeMacView(store: store)
             }
