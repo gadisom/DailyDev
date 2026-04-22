@@ -59,8 +59,7 @@ struct HomeMacView: View {
 
         let subcategoryCount = content.subcategories.count
         let itemCount = content.subcategories.reduce(0) { $0 + $1.items.count }
-        let versionText = store.manifest.map { " (manifest v\($0.version))" } ?? ""
-        return "\(content.title) / 하위분류 \(subcategoryCount)개, 항목 \(itemCount)개\(versionText)"
+        return "\(content.title) / 하위분류 \(subcategoryCount)개, 항목 \(itemCount)개"
     }
 }
 #else

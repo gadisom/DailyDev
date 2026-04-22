@@ -26,7 +26,9 @@ let project = Project(
             deploymentTargets: .macOS("14.0"),
             infoPlist: .extendingDefault(
                 with: [
-                    "CFBundleDisplayName": "DailyDev"
+                    "CFBundleDisplayName": "DailyDev",
+                    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_sWMT0op09LVNmJpnHYY6wg_ZIy-bHMV",
+                    "SUPABASE_ANON_KEY": ""
                 ]
             ),
             sources: ["Sources/**"],

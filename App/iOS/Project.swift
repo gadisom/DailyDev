@@ -26,11 +26,15 @@ let project = Project(
             name: "DailyDeviOS",
             destinations: [.iPhone, .iPad],
             product: .app,
+            productName: "DailyDev",
             bundleId: "com.dailydev.ios",
             deploymentTargets: .iOS("18.0"),
             infoPlist: .extendingDefault(
                 with: [
                     "CFBundleDisplayName": "DailyDev",
+                    "CFBundleName": "DailyDev",
+                    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_sWMT0op09LVNmJpnHYY6wg_ZIy-bHMV",
+                    "SUPABASE_ANON_KEY": "",
                     "UILaunchScreen": [:]
                 ]
             ),

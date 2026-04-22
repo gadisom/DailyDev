@@ -13,6 +13,22 @@ struct LessonCharacteristic: Identifiable {
     }
 }
 
+enum LessonContentBlockKind: Sendable {
+    case definition
+    case keyPoints
+    case interviewPrompts
+    case checkQuestions
+    case image
+    case other
+}
+
+struct LessonContentBlock: Identifiable, Sendable {
+    let id: String
+    let kind: LessonContentBlockKind
+    let items: [String]
+    let imageURLs: [URL]
+}
+
 struct ChapterRow: Identifiable {
     let id: String
     let title: String

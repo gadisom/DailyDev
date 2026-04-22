@@ -17,7 +17,7 @@
 
 // MARK: - Asset Catalogs
 
-public enum DailyDeviOSAsset: Sendable {
+public enum DailyDevAsset: Sendable {
 }
 
 // MARK: - Implementation Details

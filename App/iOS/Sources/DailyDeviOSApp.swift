@@ -13,6 +13,11 @@ struct DailyDeviOSApp: App {
     ) {
         HomeFeature()
     }
+    private let postStore = Store(
+        initialState: PostFeature.State()
+    ) {
+        PostFeature()
+    }
 
     var body: some Scene {
         WindowGroup {
@@ -38,6 +43,12 @@ struct DailyDeviOSApp: App {
                 .tabItem {
                     Image(systemName: "questionmark.circle")
                     Text("Quiz")
+                }
+
+                PostScene(store: postStore)
+                .tabItem {
+                    Image(systemName: "doc.text")
+                    Text("Post")
                 }
 
                 NavigationStack {

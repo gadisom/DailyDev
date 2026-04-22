@@ -13,7 +13,6 @@ public struct HomeFeature {
 
         public var platform: Platform
         public var environment: AppEnvironment
-        public var manifest: CSContentManifest?
         public var categories: [CSCategoryDefinition]
         public var selectedCategoryID: String?
         public var selectedContent: CSCategoryContent?
@@ -26,7 +25,6 @@ public struct HomeFeature {
         ) {
             self.platform = platform
             self.environment = environment
-            self.manifest = nil
             self.categories = []
             self.selectedCategoryID = nil
             self.selectedContent = nil
@@ -38,7 +36,6 @@ public struct HomeFeature {
     public enum Action: BindableAction, Sendable {
         case binding(BindingAction<State>)
         case task
-        case manifestLoaded(Result<CSContentManifest, Error>)
         case categoriesLoaded(Result<[CSCategoryDefinition], Error>)
         case categorySelected(String)
         case categoryContentLoaded(Result<CSCategoryContent, Error>)
@@ -61,22 +58,12 @@ public struct HomeFeature {
                 state.errorMessage = nil
                 return .run { send in
                     do {
-                        let manifest = try await csContentClient.fetchManifest()
-                        await send(.manifestLoaded(.success(manifest)))
                         let categories = try await csContentClient.fetchCategories()
                         await send(.categoriesLoaded(.success(categories)))
                     } catch {
                         await send(.categoriesLoaded(.failure(error)))
                     }
                 }
-
-            case let .manifestLoaded(.success(manifest)):
-                state.manifest = manifest
-                return .none
-
-            case let .manifestLoaded(.failure(error)):
-                state.errorMessage = error.localizedDescription
-                return .none
 
             case let .categoriesLoaded(.success(categories)):
                 state.categories = categories
@@ -105,7 +92,7 @@ public struct HomeFeature {
 
                 return .run { send in
                     do {
-                        let content = try await csContentClient.fetchCategoryContent(category.prodFile)
+                        let content = try await csContentClient.fetchCategoryContent(category.id)
                         await send(.categoryContentLoaded(.success(content)))
                     } catch {
                         await send(.categoryContentLoaded(.failure(error)))

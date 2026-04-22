@@ -25,11 +25,7 @@ struct HomeLessonDetailView: View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 48) {
                 lessonHeaderSection
-                definitionSection
-                separator
-                keyCharacteristicsSection
-                separator
-                interviewPrepSection
+                orderedContentSection
 
                 if let nextLesson = presentation.nextLessonRow {
                     nextLessonButton(nextLesson)
@@ -68,6 +64,111 @@ struct HomeLessonDetailView: View {
         )
     }
 
+    @ViewBuilder
+    private var orderedContentSection: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            ForEach(Array(presentation.contentBlocks.enumerated()), id: \.element.id) { index, block in
+                lessonContentBlockView(block)
+
+                if index < presentation.contentBlocks.count - 1 {
+                    separator
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func lessonContentBlockView(_ block: LessonContentBlock) -> some View {
+        switch block.kind {
+        case .definition:
+            definitionBlock(items: block.items)
+        case .image:
+            imageBlock(urls: block.imageURLs)
+        case .keyPoints:
+            keyPointsBlock(items: block.items)
+        case .interviewPrompts:
+            checklistCard(title: "INTERVIEW PROMPTS", items: block.items)
+        case .checkQuestions:
+            checklistCard(title: "CHECK QUESTIONS", items: block.items)
+        case .other:
+            genericTextBlock(items: block.items)
+        }
+    }
+
+    private func definitionBlock(items: [String]) -> some View {
+        VStack(alignment: .leading, spacing: 16) {
+            DailyDevSectionTitle("DEFINITION")
+
+            ForEach(Array(items.enumerated()), id: \.offset) { _, item in
+                Text(item)
+                    .font(.system(size: 16, weight: .regular))
+                    .lineSpacing(7)
+                    .foregroundStyle(Color(red: 0.28, green: 0.34, blue: 0.41))
+            }
+        }
+    }
+
+    private func keyPointsBlock(items: [String]) -> some View {
+        VStack(alignment: .leading, spacing: 24) {
+            DailyDevSectionTitle("KEY CHARACTERISTICS")
+
+            VStack(alignment: .leading, spacing: 32) {
+                ForEach(Array(items.enumerated()), id: \.offset) { index, point in
+                    VStack(alignment: .leading, spacing: 8) {
+                        let number = index + 1 < 10 ? "0\(index + 1)" : "\(index + 1)"
+
+                        Text("POINT \(number)")
+                            .font(.system(size: 16, weight: .bold))
+                            .foregroundStyle(Color(red: 0.06, green: 0.09, blue: 0.16))
+
+                        Text(point)
+                            .font(.system(size: 14, weight: .regular))
+                            .lineSpacing(6)
+                            .foregroundStyle(Color(red: 0.28, green: 0.34, blue: 0.41))
+                    }
+                }
+            }
+        }
+    }
+
+    private func imageBlock(urls: [URL]) -> some View {
+        VStack(spacing: 12) {
+            ForEach(Array(urls.enumerated()), id: \.offset) { _, imageURL in
+                AsyncImage(url: imageURL) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .interpolation(.high)
+                            .scaledToFit()
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 220)
+                    case .failure:
+                        EmptyView()
+                    case .empty:
+                        ProgressView()
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 220)
+                            .tint(Color(red: 0.0, green: 0.35, blue: 0.74))
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
+            }
+        }
+    }
+
+    private func genericTextBlock(items: [String]) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            ForEach(Array(items.enumerated()), id: \.offset) { _, item in
+                Text(item)
+                    .font(.system(size: 15, weight: .regular))
+                    .lineSpacing(6)
+                    .foregroundStyle(Color(red: 0.24, green: 0.30, blue: 0.38))
+            }
+        }
+    }
+
     private var lessonHeaderSection: some View {
         VStack(alignment: .leading, spacing: 16) {
             
@@ -83,71 +184,6 @@ struct HomeLessonDetailView: View {
             RoundedRectangle(cornerRadius: 999)
                 .fill(Color(red: 0.0, green: 0.35, blue: 0.74))
                 .frame(width: 48, height: 4)
-        }
-    }
-
-    private var definitionSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            DailyDevSectionTitle("DEFINITION")
-
-            if !presentation.definitionHeadline.isEmpty {
-                Text(presentation.definitionHeadline)
-                    .font(.system(size: 18, weight: .medium))
-                    .lineSpacing(7)
-                    .foregroundStyle(Color(red: 0.20, green: 0.26, blue: 0.33))
-            }
-
-            if !presentation.definitionBody.isEmpty {
-                Text(presentation.definitionBody)
-                    .font(.system(size: 16, weight: .regular))
-                    .lineSpacing(7)
-                    .foregroundStyle(Color(red: 0.28, green: 0.34, blue: 0.41))
-            }
-
-            if !presentation.keywordTags.isEmpty {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 8) {
-                        ForEach(presentation.keywordTags, id: \.self) { tag in
-                            DailyDevTagChip(tag)
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private var keyCharacteristicsSection: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            DailyDevSectionTitle("KEY CHARACTERISTICS")
-
-            VStack(alignment: .leading, spacing: 32) {
-                ForEach(presentation.characteristics) { characteristic in
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(characteristic.title)
-                            .font(.system(size: 16, weight: .bold))
-                            .foregroundStyle(Color(red: 0.06, green: 0.09, blue: 0.16))
-
-                        Text(characteristic.description)
-                            .font(.system(size: 14, weight: .regular))
-                            .lineSpacing(6)
-                            .foregroundStyle(Color(red: 0.28, green: 0.34, blue: 0.41))
-                    }
-                }
-            }
-        }
-    }
-
-    private var interviewPrepSection: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            DailyDevSectionTitle("INTERVIEW PREP")
-
-            if !presentation.interviewPrompts.isEmpty {
-                checklistCard(title: "INTERVIEW PROMPTS", items: presentation.interviewPrompts)
-            }
-
-            if !presentation.checkQuestions.isEmpty {
-                checklistCard(title: "CHECK QUESTIONS", items: presentation.checkQuestions)
-            }
         }
     }
 

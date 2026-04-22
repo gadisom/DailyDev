@@ -7,17 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B323CF882AA6FF77D51EE79 /* algorithms.prod.json in Resources */ = {isa = PBXBuildFile; fileRef = 1958E0B47EAA5DC168DFD8CB /* algorithms.prod.json */; };
-		1029D851769D248D86633081 /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 3293A63035026FA9C2590410 /* categories.json */; };
 		15A41E004A71C19406355548 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B58E2A3FFC4EAD8B252DC07 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		30282FE471C0FCFD5180EB74 /* network.prod.json in Resources */ = {isa = PBXBuildFile; fileRef = 4090F57EAB52FB31C8D91534 /* network.prod.json */; };
 		4DFF445F8B47427C034BA091 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8C2234DC4F42CDBBCAD900F /* Assets.xcassets */; };
 		52D7445AD20C5389AFC6C804 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 4B8C76AA11048480435B74B8 /* Dependencies */; };
 		58F26249843B15D6A503B2DC /* Features.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBEEEA08AFA86E3BE9B818FD /* Features.framework */; };
 		85F13A28E16FDA0775379A69 /* DesignSystem.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10D27FA7D0925A79AF2DC890 /* DesignSystem.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		879F61E6D76C5E7854922C93 /* data-structure.prod.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B56B3B97E8CA6A362E2601D /* data-structure.prod.json */; };
 		897F3AACAF3F8C973449ADF1 /* DesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10D27FA7D0925A79AF2DC890 /* DesignSystem.framework */; };
-		8CE7DCC3778D3E47458CEE2E /* database.prod.json in Resources */ = {isa = PBXBuildFile; fileRef = F2784F5F0420BB051DD14B45 /* database.prod.json */; };
 		A23F1FC5C1F389FA6A4D8836 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 136164CB889B8B31268FC41F /* IdentifiedCollections */; };
 		AF587F78C8C7CC26F255D732 /* Entity.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7F6D2B8A72DA801D1ECEDB /* Entity.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B64AC1A9987CB82156AB4A97 /* TuistBundle+DailyDeviOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F7C29C5290CF9209083D /* TuistBundle+DailyDeviOS.swift */; };
@@ -29,7 +24,6 @@
 		E551B1F7FD2326BB426DCE83 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 15F2012FE010B3065ABFE41D /* CasePaths */; };
 		E8B1DE2D1207C064D596F491 /* TuistAssets+DailyDeviOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63313E7F1C53A9654A5D478F /* TuistAssets+DailyDeviOS.swift */; };
 		F29E8322FE072F3F45E4D524 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B58E2A3FFC4EAD8B252DC07 /* Core.framework */; };
-		F364226102660729A6EB8C4A /* operating-system.prod.json in Resources */ = {isa = PBXBuildFile; fileRef = C0A756BA778080027A62A0D9 /* operating-system.prod.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,22 +47,16 @@
 
 /* Begin PBXFileReference section */
 		02BD5F64CD54E453FF3EFBC7 /* Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0B56B3B97E8CA6A362E2601D /* data-structure.prod.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "data-structure.prod.json"; sourceTree = "<group>"; };
 		10D27FA7D0925A79AF2DC890 /* DesignSystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DesignSystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		17C689B8D3B3407522CA994D /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1958E0B47EAA5DC168DFD8CB /* algorithms.prod.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = algorithms.prod.json; sourceTree = "<group>"; };
-		3293A63035026FA9C2590410 /* categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
-		4090F57EAB52FB31C8D91534 /* network.prod.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = network.prod.json; sourceTree = "<group>"; };
+		49FEABAAA91EBF41BFF13A9A /* DailyDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63313E7F1C53A9654A5D478F /* TuistAssets+DailyDeviOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+DailyDeviOS.swift"; sourceTree = "<group>"; };
 		67E5B8D0CB054A489E33D692 /* DailyDeviOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DailyDeviOS-Info.plist"; sourceTree = "<group>"; };
 		8A7F6D2B8A72DA801D1ECEDB /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B58E2A3FFC4EAD8B252DC07 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A6666AB4A3039C8D3F1F5C8 /* DailyDeviOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDeviOSApp.swift; sourceTree = "<group>"; };
-		B0A007AC5E7153CF3816541A /* DailyDeviOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyDeviOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C0A756BA778080027A62A0D9 /* operating-system.prod.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "operating-system.prod.json"; sourceTree = "<group>"; };
 		C741F7C29C5290CF9209083D /* TuistBundle+DailyDeviOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+DailyDeviOS.swift"; sourceTree = "<group>"; };
 		DBEEEA08AFA86E3BE9B818FD /* Features.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Features.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F2784F5F0420BB051DD14B45 /* database.prod.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = database.prod.json; sourceTree = "<group>"; };
 		F8C2234DC4F42CDBBCAD900F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,7 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				8B58E2A3FFC4EAD8B252DC07 /* Core.framework */,
-				B0A007AC5E7153CF3816541A /* DailyDeviOS.app */,
+				49FEABAAA91EBF41BFF13A9A /* DailyDev.app */,
 				02BD5F64CD54E453FF3EFBC7 /* Data.framework */,
 				10D27FA7D0925A79AF2DC890 /* DesignSystem.framework */,
 				17C689B8D3B3407522CA994D /* Domain.framework */,
@@ -139,23 +127,9 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DB8A46C4E7D788A16323C6F6 /* CS */ = {
-			isa = PBXGroup;
-			children = (
-				1958E0B47EAA5DC168DFD8CB /* algorithms.prod.json */,
-				3293A63035026FA9C2590410 /* categories.json */,
-				0B56B3B97E8CA6A362E2601D /* data-structure.prod.json */,
-				F2784F5F0420BB051DD14B45 /* database.prod.json */,
-				4090F57EAB52FB31C8D91534 /* network.prod.json */,
-				C0A756BA778080027A62A0D9 /* operating-system.prod.json */,
-			);
-			path = CS;
-			sourceTree = "<group>";
-		};
 		E2DE3FCFD154F8D416244E76 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DB8A46C4E7D788A16323C6F6 /* CS */,
 				F8C2234DC4F42CDBBCAD900F /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -201,8 +175,8 @@
 				15F2012FE010B3065ABFE41D /* CasePaths */,
 				136164CB889B8B31268FC41F /* IdentifiedCollections */,
 			);
-			productName = DailyDeviOS;
-			productReference = B0A007AC5E7153CF3816541A /* DailyDeviOS.app */;
+			productName = DailyDev;
+			productReference = 49FEABAAA91EBF41BFF13A9A /* DailyDev.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -244,12 +218,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DFF445F8B47427C034BA091 /* Assets.xcassets in Resources */,
-				0B323CF882AA6FF77D51EE79 /* algorithms.prod.json in Resources */,
-				1029D851769D248D86633081 /* categories.json in Resources */,
-				879F61E6D76C5E7854922C93 /* data-structure.prod.json in Resources */,
-				8CE7DCC3778D3E47458CEE2E /* database.prod.json in Resources */,
-				30282FE471C0FCFD5180EB74 /* network.prod.json in Resources */,
-				F364226102660729A6EB8C4A /* operating-system.prod.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +252,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dailydev.ios;
-				PRODUCT_NAME = DailyDeviOS;
+				PRODUCT_NAME = DailyDev;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -371,7 +339,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dailydev.ios;
-				PRODUCT_NAME = DailyDeviOS;
+				PRODUCT_NAME = DailyDev;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

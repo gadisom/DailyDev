@@ -30,5 +30,9 @@
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SUPABASE_ANON_KEY</key>
+	<string></string>
+	<key>SUPABASE_PUBLISHABLE_KEY</key>
+	<string>sb_publishable_sWMT0op09LVNmJpnHYY6wg_ZIy-bHMV</string>
 </dict>
 </plist>

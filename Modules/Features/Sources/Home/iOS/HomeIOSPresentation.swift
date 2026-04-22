@@ -17,6 +17,8 @@ struct HomeLessonPresentation {
     let lessonTitle: String
     let lessonNumberText: String
     let lessonBadgeText: String
+    let illustrationURLs: [URL]
+    let contentBlocks: [LessonContentBlock]
     let definitionHeadline: String
     let definitionBody: String
     let characteristics: [LessonCharacteristic]
@@ -128,6 +130,22 @@ enum HomeIOSPresentationBuilder {
             .sorted(by: { $0.displayOrder < $1.displayOrder })
             .first
 
+        let illustrationURLs: [URL] = {
+            var rawURLs: [String] = selectedStudyItem?.imageUrls ?? []
+            if let fallback = selectedStudyItem?.imageUrl, !fallback.isEmpty {
+                rawURLs.append(fallback)
+            }
+
+            var resolved: [URL] = []
+            for raw in rawURLs {
+                guard let url = normalizedImageURL(from: raw) else { continue }
+                if !resolved.contains(url) {
+                    resolved.append(url)
+                }
+            }
+            return resolved
+        }()
+
         let definitionHeadline = selectedStudyItem?.summary ?? ""
 
         let definitionBody = selectedStudyItem?.body
@@ -172,10 +190,43 @@ enum HomeIOSPresentationBuilder {
             return chapterRows[nextIndex]
         }()
 
+        let contentBlocks: [LessonContentBlock] = {
+            guard let selectedStudyItem else { return [] }
+
+            let ordered = selectedStudyItem.orderedBlocks ?? []
+            return ordered.enumerated().compactMap { index, block in
+                let kind = lessonContentBlockKind(from: block.type)
+                switch kind {
+                case .image:
+                    let urls = block.items.compactMap { normalizedImageURL(from: $0) }
+                    guard !urls.isEmpty else { return nil }
+                    return LessonContentBlock(
+                        id: "lesson-block-\(index)-image",
+                        kind: .image,
+                        items: [],
+                        imageURLs: urls
+                    )
+                default:
+                    let items = block.items
+                        .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                        .filter { !$0.isEmpty }
+                    guard !items.isEmpty else { return nil }
+                    return LessonContentBlock(
+                        id: "lesson-block-\(index)-\(block.type)",
+                        kind: kind,
+                        items: items,
+                        imageURLs: []
+                    )
+                }
+            }
+        }()
+
         return HomeLessonPresentation(
             lessonTitle: lessonTitle,
             lessonNumberText: lessonNumber < 10 ? "0\(lessonNumber)" : "\(lessonNumber)",
             lessonBadgeText: lessonBadgeText,
+            illustrationURLs: illustrationURLs,
+            contentBlocks: contentBlocks,
             definitionHeadline: definitionHeadline,
             definitionBody: definitionBody,
             characteristics: characteristics,
@@ -184,6 +235,35 @@ enum HomeIOSPresentationBuilder {
             checkQuestions: checkQuestions,
             nextLessonRow: nextLessonRow
         )
+    }
+
+    private static func normalizedImageURL(from raw: String) -> URL? {
+        if let url = URL(string: raw), url.scheme != nil {
+            return url
+        }
+
+        if let encoded = raw.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),
+           let url = URL(string: encoded),
+           url.scheme != nil {
+            return url
+        }
+
+        return nil
+    }
+
+    private static func lessonContentBlockKind(from type: String) -> LessonContentBlockKind {
+        let normalized = type
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .lowercased()
+
+        if normalized.contains("image") { return .image }
+        if normalized.contains("definition") { return .definition }
+        if normalized.contains("key") || normalized.contains("point") { return .keyPoints }
+        if normalized.contains("interview") { return .interviewPrompts }
+        if normalized.contains("check") || normalized.contains("question") || normalized.contains("quiz") {
+            return .checkQuestions
+        }
+        return .other
     }
 
     private static func cardTags(

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1D069AAAC3B48989FAC7DDF6"
-               BuildableName = "DailyDeviOS.app"
+               BuildableName = "DailyDev.app"
                BlueprintName = "DailyDeviOS"
                ReferencedContainer = "container:DailyDeviOS.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1D069AAAC3B48989FAC7DDF6"
-            BuildableName = "DailyDeviOS.app"
+            BuildableName = "DailyDev.app"
             BlueprintName = "DailyDeviOS"
             ReferencedContainer = "container:DailyDeviOS.xcodeproj">
          </BuildableReference>
@@ -63,7 +63,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1D069AAAC3B48989FAC7DDF6"
-            BuildableName = "DailyDeviOS.app"
+            BuildableName = "DailyDev.app"
             BlueprintName = "DailyDeviOS"
             ReferencedContainer = "container:DailyDeviOS.xcodeproj">
          </BuildableReference>

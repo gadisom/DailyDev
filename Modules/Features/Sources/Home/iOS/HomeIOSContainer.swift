@@ -35,10 +35,8 @@ struct HomeIOSContainer: View {
     private var curriculumSection: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 4) {
-                DailyDevSectionTitle("CURRICULUM")
-
                 Text("Core Disciplines")
-                    .font(.system(size: 34, weight: .bold, design: .rounded))
+                    .font(.largeTitle.weight(.bold))
                     .foregroundStyle(Color(red: 0.06, green: 0.09, blue: 0.16))
             }
 
