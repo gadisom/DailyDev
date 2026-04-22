@@ -2,6 +2,7 @@ import SwiftUI
 import ComposableArchitecture
 import Core
 import Features
+import DesignSystem
 
 @main
 struct DailyDeviOSApp: App {
@@ -28,18 +29,7 @@ struct DailyDeviOSApp: App {
                         Text("Home")
                     }
 
-                NavigationStack {
-                    VStack(spacing: 12) {
-                        Image(systemName: "questionmark.circle")
-                            .font(.system(size: 34))
-                            .foregroundStyle(.secondary)
-                        Text("Quiz")
-                            .font(.headline)
-                            .foregroundStyle(.secondary)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color(.systemGroupedBackground))
-                }
+                QuizScene()
                 .tabItem {
                     Image(systemName: "questionmark.circle")
                     Text("Quiz")
@@ -68,6 +58,8 @@ struct DailyDeviOSApp: App {
                     Text("Profile")
                 }
             }
+            .accentColor(BrandPalette.green)
+            .tint(BrandPalette.green)
         }
     }
 }

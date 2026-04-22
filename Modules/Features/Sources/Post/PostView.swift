@@ -1,10 +1,25 @@
 import ComposableArchitecture
 import Entity
 import SwiftUI
+import DesignSystem
 
 struct PostView: View {
     @Bindable var store: StoreOf<PostFeature>
     @Environment(\.openURL) private var openURL
+
+    private enum Layout {
+        static let sectionSpacing: CGFloat = Spacing.sm
+        static let listVerticalSpacing: CGFloat = Spacing.sm
+        static let chipPaddingH: CGFloat = Spacing.md
+        static let chipPaddingV: CGFloat = Spacing.xs
+        static let chipSpacing: CGFloat = Spacing.sm
+        static let filterBarPaddingH: CGFloat = Spacing.md
+        static let filterBarPaddingV: CGFloat = Spacing.sm
+        static let reconnectIconSize: CGFloat = 13
+        static let listSidePadding: CGFloat = Spacing.md
+        static let listItemCornerRadius: CGFloat = Radius.md
+        static let listItemGap: CGFloat = Spacing.xxs
+    }
 
     var body: some View {
         NavigationStack {
@@ -26,10 +41,23 @@ struct PostView: View {
                     errorBody
                 }
             }
-            .navigationTitle("Tech Posts")
+            .background(BrandPalette.background.ignoresSafeArea())
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Tech Posts")
+                        .font(DailyDevTypography.title3)
+                        .foregroundStyle(BrandPalette.green)
+                }
+            }
+            .toolbarBackground(BrandPalette.background, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarColorScheme(.light, for: .navigationBar)
             .refreshable {
                 store.send(.refreshRequested)
             }
+            .tint(BrandPalette.green)
         }
     }
 
@@ -38,7 +66,8 @@ struct PostView: View {
         VStack(spacing: 12) {
             ProgressView()
             Text("글 목록을 불러오는 중...")
-                .foregroundStyle(.secondary)
+                .font(DailyDevTypography.bodySmallRegular)
+                .foregroundStyle(BrandPalette.ink3)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
@@ -48,14 +77,22 @@ struct PostView: View {
     private var emptyBody: some View {
         VStack(spacing: 12) {
             Text("글이 없습니다.")
-                .font(.headline)
+                .font(DailyDevTypography.title3)
+                .foregroundStyle(BrandPalette.ink)
             Text("다시 불러오려면 새로고침을 눌러주세요.")
-                .foregroundStyle(.secondary)
+                .font(DailyDevTypography.bodySmallRegular)
+                .foregroundStyle(BrandPalette.ink3)
             Button("다시 시도") {
                 store.send(.retryTapped)
             }
             .disabled(!store.canRetry)
-            .buttonStyle(.borderedProminent)
+            .font(DailyDevTypography.label)
+            .foregroundStyle(BrandPalette.surfaceWhite)
+            .padding(.horizontal, Layout.chipPaddingH)
+            .padding(.vertical, Layout.chipPaddingV)
+            .background(BrandPalette.green)
+            .clipShape(Capsule())
+            .opacity(store.canRetry ? 1 : 0.45)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
@@ -65,15 +102,23 @@ struct PostView: View {
     private var errorBody: some View {
         VStack(spacing: 12) {
             Text("문제가 발생했습니다")
-                .font(.headline)
+                .font(DailyDevTypography.title3)
+                .foregroundStyle(BrandPalette.ink)
             Text(store.message)
-                .foregroundStyle(.secondary)
+                .font(DailyDevTypography.bodySmallRegular)
+                .foregroundStyle(BrandPalette.ink3)
                 .multilineTextAlignment(.center)
             Button("다시 시도") {
                 store.send(.retryTapped)
             }
             .disabled(!store.canRetry)
-            .buttonStyle(.borderedProminent)
+            .font(DailyDevTypography.label)
+            .foregroundStyle(BrandPalette.surfaceWhite)
+            .padding(.horizontal, Layout.chipPaddingH)
+            .padding(.vertical, Layout.chipPaddingV)
+            .background(BrandPalette.green)
+            .clipShape(Capsule())
+            .opacity(store.canRetry ? 1 : 0.45)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
@@ -86,19 +131,23 @@ struct PostView: View {
                 Section {
                     HStack(spacing: 8) {
                         Image(systemName: "wifi.exclamationmark")
-                            .foregroundStyle(.orange)
+                            .font(.system(size: Layout.reconnectIconSize, weight: .semibold))
+                            .foregroundStyle(BrandPalette.green)
                         Text(store.message)
-                            .font(.footnote)
-                            .foregroundStyle(.secondary)
+                            .font(DailyDevTypography.bodySmallRegular)
+                            .foregroundStyle(BrandPalette.ink3)
                         Spacer()
                         if store.canRetry {
                             Button("재시도") {
                                 store.send(.retryTapped)
                             }
-                            .font(.caption)
+                            .font(DailyDevTypography.monoCaption)
+                            .foregroundStyle(BrandPalette.green)
                         }
                     }
-                    .padding(.vertical, 4)
+                    .padding(.vertical, Layout.listVerticalSpacing)
+                    .padding(.horizontal, Layout.listSidePadding)
+                    .background(BrandPalette.background)
                 }
             }
 
@@ -106,16 +155,21 @@ struct PostView: View {
                 Section {
                     VStack(alignment: .leading, spacing: 10) {
                         Text("선택한 필터에 맞는 글이 아직 없어요.")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                            .font(DailyDevTypography.bodySmallRegular)
+                            .foregroundStyle(BrandPalette.ink3)
                         if store.hasNext {
                             Button("더 불러오기") {
                                 store.send(.loadMoreTapped)
                             }
-                            .buttonStyle(.bordered)
+                            .font(DailyDevTypography.label)
+                            .foregroundStyle(BrandPalette.green)
+                            .padding(.horizontal, Layout.chipPaddingH)
+                            .padding(.vertical, Layout.chipPaddingV)
+                            .background(BrandPalette.surfaceSoft)
+                            .clipShape(Capsule())
                         }
                     }
-                    .padding(.vertical, 6)
+                    .padding(.vertical, Layout.listVerticalSpacing)
                 }
             }
 
@@ -125,20 +179,26 @@ struct PostView: View {
                 } label: {
                     VStack(alignment: .leading, spacing: 8) {
                         Text(article.blogName)
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .font(DailyDevTypography.monoCaption)
+                            .foregroundStyle(BrandPalette.green)
                         Text(article.title)
-                            .font(.body)
-                            .bold()
-                            .foregroundStyle(.primary)
+                            .font(DailyDevTypography.body)
+                            .foregroundStyle(BrandPalette.ink)
                         Text(formatPublishedDate(for: article))
-                            .font(.caption2)
-                            .foregroundStyle(.secondary)
+                            .font(DailyDevTypography.monoCaption)
+                            .foregroundStyle(BrandPalette.ink3)
                     }
-                    .padding(.vertical, 4)
+                    .padding(.vertical, Layout.listVerticalSpacing)
+                    .padding(.horizontal, Layout.listSidePadding)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(
+                        RoundedRectangle(cornerRadius: Layout.listItemCornerRadius)
+                            .fill(BrandPalette.surface)
+                    )
                 }
                 .buttonStyle(.plain)
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
                 .disabled(URL(string: article.articleLink) == nil)
                 .onAppear {
                     store.send(.rowAppeared(article.id))
@@ -149,41 +209,47 @@ struct PostView: View {
                 HStack {
                     Spacer()
                     ProgressView()
+                        .tint(BrandPalette.green)
                     Spacer()
                 }
-                .padding(.vertical, 8)
+                .padding(.vertical, Layout.sectionSpacing)
             }
         }
         .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .listRowSpacing(Layout.listItemGap)
     }
 
     private var filterBar: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
+            HStack(spacing: Layout.chipSpacing) {
                 ForEach(store.filterChips) { chip in
                     filterChip(for: chip)
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
+        .padding(.horizontal, Layout.filterBarPaddingH)
+        .padding(.vertical, Layout.filterBarPaddingV)
         }
-        .background(Color(.systemBackground))
+        .background(BrandPalette.background)
     }
 
     private func filterChip(for chip: PostFeature.State.FilterChip) -> some View {
         let isSelected = store.selectedFilterID == chip.id
-        let title = chip.title
 
         return Button {
             store.send(.filterSelected(chip.id))
         } label: {
-            Text(title)
-                .font(.subheadline.weight(.medium))
-                .foregroundStyle(isSelected ? Color.white : Color.primary)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .background(isSelected ? Color.accentColor : Color(.systemGray6))
+            Text(chip.title)
+                .font(DailyDevTypography.label)
+                .foregroundStyle(isSelected ? BrandPalette.surfaceWhite : BrandPalette.green)
+                .padding(.horizontal, Layout.chipPaddingH)
+                .padding(.vertical, Layout.chipPaddingV)
+                .background(isSelected ? BrandPalette.green : BrandPalette.surfaceSoft)
                 .clipShape(Capsule())
+                .overlay(
+                    Capsule()
+                        .stroke(isSelected ? BrandPalette.green : BrandPalette.surfaceOutline, lineWidth: 1)
+                )
         }
         .buttonStyle(.plain)
     }
