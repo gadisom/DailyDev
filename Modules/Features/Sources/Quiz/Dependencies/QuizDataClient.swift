@@ -2,6 +2,7 @@ import Foundation
 #if os(iOS)
 import ComposableArchitecture
 import Data
+import Domain
 import Entity
 import SwiftUI
 
@@ -16,10 +17,11 @@ public struct QuizDataClient: Sendable {
 private enum QuizDataClientKey: DependencyKey {
     static let liveValue: QuizDataClient = {
         let repository = QuizSupabaseRepository()
+        let fetchQuizBankUseCase = FetchQuizBankUseCase(repository: repository)
 
         return QuizDataClient(
             fetchQuizBank: {
-                let (categoryRows, questionRows) = try await repository.fetchQuizBank()
+                let (categoryRows, questionRows) = try await fetchQuizBankUseCase.execute()
 
                 return categoryRows
                     .compactMap { row in

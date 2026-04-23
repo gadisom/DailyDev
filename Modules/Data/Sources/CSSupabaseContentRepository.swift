@@ -1,7 +1,8 @@
 import Entity
 import Foundation
+import Domain
 
-public actor CSSupabaseContentRepository {
+public actor CSSupabaseContentRepository: CSContentRepository {
     private let client: SupabaseRequesting
 
     public init(

@@ -1,5 +1,6 @@
 import ComposableArchitecture
 import Data
+import Domain
 import Entity
 import Foundation
 
@@ -19,14 +20,16 @@ public struct CSContentClient: Sendable {
 private enum CSContentClientKey: DependencyKey {
     static let liveValue: CSContentClient = {
         let repository = CSSupabaseContentRepository()
+        let fetchCategoriesUseCase = FetchCSCategoriesUseCase(repository: repository)
+        let fetchCategoryContentUseCase = FetchCSCategoryContentUseCase(repository: repository)
 
         return CSContentClient(
             fetchCategories: {
-                try await repository.fetchCategories()
+                try await fetchCategoriesUseCase.execute()
                     .sorted { $0.displayOrder < $1.displayOrder }
             },
             fetchCategoryContent: { categorySlug in
-                try await repository.fetchCategoryContent(categorySlug: categorySlug)
+                try await fetchCategoryContentUseCase.execute(categorySlug: categorySlug)
             }
         )
     }()

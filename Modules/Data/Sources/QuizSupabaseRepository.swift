@@ -1,6 +1,7 @@
 import Foundation
+import Domain
 
-public actor QuizSupabaseRepository {
+public actor QuizSupabaseRepository: QuizRepository {
     private let client: SupabaseRequesting
 
     public init(
