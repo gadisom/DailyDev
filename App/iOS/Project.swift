@@ -35,7 +35,8 @@ let project = Project(
                     "CFBundleName": "DailyDev",
                     "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_sWMT0op09LVNmJpnHYY6wg_ZIy-bHMV",
                     "SUPABASE_ANON_KEY": "",
-                    "UILaunchScreen": [:]
+                    "UILaunchScreen": [:],
+                    "ITSAppUsesNonExemptEncryption": false
                 ]
             ),
             sources: ["Sources/**"],
