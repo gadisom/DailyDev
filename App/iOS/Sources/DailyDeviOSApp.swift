@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 import ComposableArchitecture
 import Core
 import Features
@@ -18,6 +19,11 @@ struct DailyDeviOSApp: App {
         initialState: PostFeature.State()
     ) {
         PostFeature()
+    }
+    private let savedStore = Store(
+        initialState: SavedFeature.State()
+    ) {
+        SavedFeature()
     }
 
     var body: some Scene {
@@ -41,25 +47,15 @@ struct DailyDeviOSApp: App {
                     Text("Post")
                 }
 
-                NavigationStack {
-                    VStack(spacing: 12) {
-                        Image(systemName: "person.crop.circle")
-                            .font(.system(size: 34))
-                            .foregroundStyle(.secondary)
-                        Text("Profile")
-                            .font(.headline)
-                            .foregroundStyle(.secondary)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color(.systemGroupedBackground))
-                }
+                SavedScene(store: savedStore)
                 .tabItem {
-                    Image(systemName: "person.crop.circle")
-                    Text("Profile")
+                    Image(systemName: "bookmark.fill")
+                    Text("Saved")
                 }
             }
             .accentColor(BrandPalette.green)
             .tint(BrandPalette.green)
         }
+        .modelContainer(for: [SavedConcept.self, SavedQuizQuestion.self, SavedPost.self])
     }
 }

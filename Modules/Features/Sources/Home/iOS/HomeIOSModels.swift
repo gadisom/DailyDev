@@ -1,5 +1,6 @@
 #if os(iOS)
 import SwiftUI
+import DesignSystem
 
 struct LessonCharacteristic: Identifiable {
     let id: String
@@ -43,16 +44,6 @@ struct ChapterRow: Identifiable {
         "point.3.filled.connected.trianglepath.dotted",
         "square.grid.2x2"
     ]
-
-    static let defaults: [ChapterRow] = [
-        ChapterRow(id: "arrays", title: "Arrays", icon: "tablecells"),
-        ChapterRow(id: "linked-lists", title: "Linked Lists", icon: "link"),
-        ChapterRow(id: "stacks", title: "Stacks", icon: "square.stack.3d.up"),
-        ChapterRow(id: "queues", title: "Queues", icon: "line.3.horizontal"),
-        ChapterRow(id: "trees", title: "Trees", icon: "point.3.connected.trianglepath.dotted"),
-        ChapterRow(id: "graphs", title: "Graphs", icon: "point.3.filled.connected.trianglepath.dotted"),
-        ChapterRow(id: "hash-tables", title: "Hash Tables", icon: "square.grid.2x2")
-    ]
 }
 
 struct CurriculumCard: Identifiable {
@@ -60,90 +51,90 @@ struct CurriculumCard: Identifiable {
         let icon: String
         let iconBackground: Color
         let iconColor: Color
+        let englishName: String
+        let sortOrder: Int
     }
 
     let id: String
     let categoryID: String?
     let title: String
+    let englishName: String
     let tags: [String]
     let icon: String
     let iconBackground: Color
     let iconColor: Color
 
-    static let styles: [Style] = [
-        Style(
-            icon: "square.grid.3x3",
-            iconBackground: Color(red: 0.94, green: 0.97, blue: 1.0),
-            iconColor: Color(red: 0.17, green: 0.39, blue: 0.92)
+    // Slug-based mapping: identical icons/colors to the quiz tab
+    private static let slugStyleMap: [(keywords: [String], style: Style)] = [
+        (
+            ["datastructure", "data-struct", "자료구조"],
+            Style(
+                icon: "square.grid.3x3",
+                iconBackground: BrandPalette.curriculumBlueBackground,
+                iconColor: BrandPalette.curriculumBlueText,
+                englishName: "Data Structures",
+                sortOrder: 1
+            )
         ),
-        Style(
-            icon: "sum",
-            iconBackground: Color(red: 1.0, green: 0.98, blue: 0.92),
-            iconColor: Color(red: 0.88, green: 0.52, blue: 0.0)
+        (
+            ["algo", "알고리즘"],
+            Style(
+                icon: "sum",
+                iconBackground: BrandPalette.curriculumOrangeBackground,
+                iconColor: BrandPalette.curriculumOrangeText,
+                englishName: "Algorithms",
+                sortOrder: 2
+            )
         ),
-        Style(
-            icon: "terminal",
-            iconBackground: Color(red: 0.98, green: 0.96, blue: 1.0),
-            iconColor: Color(red: 0.58, green: 0.26, blue: 0.91)
+        (
+            ["operating", "운영체제"],
+            Style(
+                icon: "terminal",
+                iconBackground: BrandPalette.curriculumPurpleBackground,
+                iconColor: BrandPalette.curriculumPurpleText,
+                englishName: "Operating System",
+                sortOrder: 3
+            )
         ),
-        Style(
-            icon: "cylinder",
-            iconBackground: Color(red: 0.93, green: 0.99, blue: 0.96),
-            iconColor: Color(red: 0.05, green: 0.62, blue: 0.43)
+        (
+            ["database", "데이터베이스"],
+            Style(
+                icon: "cylinder",
+                iconBackground: BrandPalette.curriculumGreenBackground,
+                iconColor: BrandPalette.curriculumGreenText,
+                englishName: "Database",
+                sortOrder: 4
+            )
         ),
-        Style(
-            icon: "point.3.filled.connected.trianglepath.dotted",
-            iconBackground: Color(red: 1.0, green: 0.95, blue: 0.96),
-            iconColor: Color(red: 0.93, green: 0.13, blue: 0.36)
-        )
+        (
+            ["network", "네트워크"],
+            Style(
+                icon: "point.3.filled.connected.trianglepath.dotted",
+                iconBackground: BrandPalette.curriculumRedBackground,
+                iconColor: BrandPalette.curriculumRedText,
+                englishName: "Network",
+                sortOrder: 5
+            )
+        ),
     ]
 
-    static let defaults: [CurriculumCard] = [
-        CurriculumCard(
-            id: "data-structures",
-            categoryID: nil,
-            title: "Data Structures",
-            tags: [],
-            icon: styles[0].icon,
-            iconBackground: styles[0].iconBackground,
-            iconColor: styles[0].iconColor
-        ),
-        CurriculumCard(
-            id: "algorithms",
-            categoryID: nil,
-            title: "Algorithms",
-            tags: [],
-            icon: styles[1].icon,
-            iconBackground: styles[1].iconBackground,
-            iconColor: styles[1].iconColor
-        ),
-        CurriculumCard(
-            id: "operating-systems",
-            categoryID: nil,
-            title: "Operating Systems",
-            tags: [],
-            icon: styles[2].icon,
-            iconBackground: styles[2].iconBackground,
-            iconColor: styles[2].iconColor
-        ),
-        CurriculumCard(
-            id: "databases",
-            categoryID: nil,
-            title: "Databases",
-            tags: [],
-            icon: styles[3].icon,
-            iconBackground: styles[3].iconBackground,
-            iconColor: styles[3].iconColor
-        ),
-        CurriculumCard(
-            id: "networking",
-            categoryID: nil,
-            title: "Networking",
-            tags: [],
-            icon: styles[4].icon,
-            iconBackground: styles[4].iconBackground,
-            iconColor: styles[4].iconColor
-        )
-    ]
+    // Fallback cycle (for slugs that don't match any keyword)
+    static let styles: [Style] = slugStyleMap.map(\.style)
+
+    static func styleFor(slug: String) -> Style? {
+        // Normalize: lowercase + remove separators
+        let id = slug
+            .lowercased()
+            .replacingOccurrences(of: "-", with: "")
+            .replacingOccurrences(of: "_", with: "")
+            .replacingOccurrences(of: " ", with: "")
+        return slugStyleMap.first { entry in
+            entry.keywords.contains { id.contains($0) }
+        }?.style
+    }
+
+    static func sortOrder(for slug: String) -> Int {
+        styleFor(slug: slug)?.sortOrder ?? 99
+    }
 }
 #endif

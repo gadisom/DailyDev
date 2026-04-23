@@ -34,19 +34,25 @@ enum HomeIOSPresentationBuilder {
         selectedCategoryID: String?,
         selectedContent: CSCategoryContent?
     ) -> [CurriculumCard] {
-        let sortedCategories = categories.sorted { $0.displayOrder < $1.displayOrder }
+        guard !categories.isEmpty else { return [] }
 
-        guard !sortedCategories.isEmpty else {
-            return CurriculumCard.defaults
+        // Sort: known slugs first (by fixed sortOrder), unknown slugs last (by displayOrder)
+        let sorted = categories.sorted { a, b in
+            let oa = CurriculumCard.sortOrder(for: a.id)
+            let ob = CurriculumCard.sortOrder(for: b.id)
+            if oa != ob { return oa < ob }
+            return a.displayOrder < b.displayOrder
         }
 
-        return sortedCategories.enumerated().map { index, category in
-            let style = CurriculumCard.styles[index % CurriculumCard.styles.count]
+        return sorted.enumerated().map { index, category in
+            let style = CurriculumCard.styleFor(slug: category.id)
+                     ?? CurriculumCard.styles[index % CurriculumCard.styles.count]
 
             return CurriculumCard(
                 id: category.id,
                 categoryID: category.id,
                 title: category.title,
+                englishName: style.englishName,
                 tags: cardTags(
                     categoryID: category.id,
                     selectedCategoryID: selectedCategoryID,
@@ -67,16 +73,16 @@ enum HomeIOSPresentationBuilder {
         isLoading: Bool,
         errorMessage: String?
     ) -> HomeTopicPresentation {
-        let categoryTitle = categories.first(where: { $0.id == categoryID })?.title ?? "Data Structures"
-        let content = selectedCategoryID == categoryID ? selectedContent : nil
+        let categoryTitle = categories.first(where: { $0.id == categoryID })?.title ?? ""
+        let content = isLoading && selectedCategoryID == categoryID ? nil : (selectedCategoryID == categoryID ? selectedContent : nil)
         let chapterRows = chapterRows(from: content)
 
         let summaryText = topicSummaryText(from: content)
         let pagesCount = pagesCountText(from: content)
-        let diagramCount = content.map { "\($0.subcategories.count)" } ?? "24"
+        let diagramCount = content.map { "\($0.subcategories.count)" } ?? "0"
         let algorithmCount = content.map {
             "\($0.subcategories.reduce(0) { $0 + $1.items.count })"
-        } ?? "12"
+        } ?? "0"
 
         return HomeTopicPresentation(
             titleForHero: splitTitle(categoryTitle),
@@ -108,7 +114,7 @@ enum HomeIOSPresentationBuilder {
             if let chapterRow = chapterRows.first(where: { $0.id == subcategoryID }) {
                 return chapterRow.title
             }
-            return "Lesson"
+            return ""
         }()
 
         let lessonNumber: Int = {
@@ -124,7 +130,7 @@ enum HomeIOSPresentationBuilder {
         let lessonBadgeText = categories
             .first(where: { $0.id == categoryID })?
             .title
-            .uppercased() ?? "LESSON"
+            .uppercased() ?? "학습"
 
         let selectedStudyItem = selectedSubcategory?.items
             .sorted(by: { $0.displayOrder < $1.displayOrder })
@@ -307,14 +313,14 @@ enum HomeIOSPresentationBuilder {
                 .first,
             !firstItem.summary.isEmpty
         else {
-            return "Data structures are specialized formats for organizing, processing, retrieving, and storing data. They are the fundamental building blocks of efficient software, determining how information is navigated and manipulated across memory."
-        }
+        return ""
+    }
 
         return firstItem.summary
     }
 
     private static func pagesCountText(from content: CSCategoryContent?) -> String {
-        guard let content else { return "142" }
+        guard let content else { return "0" }
 
         let pages = content.subcategories.reduce(0) { result, subcategory in
             result + max(subcategory.items.count * 2, 1)
@@ -323,10 +329,10 @@ enum HomeIOSPresentationBuilder {
     }
 
     private static func chapterRows(from content: CSCategoryContent?) -> [ChapterRow] {
-        guard let content else { return ChapterRow.defaults }
+        guard let content else { return [] }
 
         let sorted = content.subcategories.sorted(by: { $0.displayOrder < $1.displayOrder })
-        guard !sorted.isEmpty else { return ChapterRow.defaults }
+        guard !sorted.isEmpty else { return [] }
 
         return sorted.enumerated().map { index, subcategory in
             ChapterRow(

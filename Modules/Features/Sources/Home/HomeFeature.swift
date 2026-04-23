@@ -18,6 +18,7 @@ public struct HomeFeature {
         public var selectedContent: CSCategoryContent?
         public var isLoading: Bool
         public var errorMessage: String?
+        public var hasLoadedInitialData: Bool
 
         public init(
             platform: Platform,
@@ -30,6 +31,7 @@ public struct HomeFeature {
             self.selectedContent = nil
             self.isLoading = false
             self.errorMessage = nil
+            self.hasLoadedInitialData = false
         }
     }
 
@@ -54,6 +56,10 @@ public struct HomeFeature {
                 return .none
 
             case .task:
+                guard !state.hasLoadedInitialData else {
+                    return .none
+                }
+
                 state.isLoading = true
                 state.errorMessage = nil
                 return .run { send in
@@ -68,6 +74,7 @@ public struct HomeFeature {
             case let .categoriesLoaded(.success(categories)):
                 state.categories = categories
                 state.isLoading = false
+                state.hasLoadedInitialData = true
 
                 guard let first = categories.first else {
                     return .none
@@ -87,6 +94,7 @@ public struct HomeFeature {
                 }
 
                 state.selectedCategoryID = categoryID
+                state.selectedContent = nil
                 state.isLoading = true
                 state.errorMessage = nil
 

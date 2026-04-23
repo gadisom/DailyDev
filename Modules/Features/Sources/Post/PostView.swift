@@ -1,11 +1,14 @@
 import ComposableArchitecture
 import Entity
 import SwiftUI
+import SwiftData
 import DesignSystem
 
 struct PostView: View {
     @Bindable var store: StoreOf<PostFeature>
     @Environment(\.openURL) private var openURL
+    @Environment(\.modelContext) private var modelContext
+    @Query private var savedPosts: [SavedPost]
 
     private enum Layout {
         static let sectionSpacing: CGFloat = Spacing.sm
@@ -42,15 +45,8 @@ struct PostView: View {
                 }
             }
             .background(BrandPalette.background.ignoresSafeArea())
-            .navigationTitle("")
+            .navigationTitle("Tech Posts")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Tech Posts")
-                        .font(DailyDevTypography.title3)
-                        .foregroundStyle(BrandPalette.green)
-                }
-            }
             .toolbarBackground(BrandPalette.background, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarColorScheme(.light, for: .navigationBar)
@@ -200,6 +196,26 @@ struct PostView: View {
                 .listRowBackground(Color.clear)
                 .listRowSeparator(.hidden)
                 .disabled(URL(string: article.articleLink) == nil)
+                .swipeActions(edge: .leading) {
+                    let isSaved = savedPosts.contains { $0.articleID == article.id }
+                    if isSaved {
+                        Button {
+                            if let existing = savedPosts.first(where: { $0.articleID == article.id }) {
+                                modelContext.delete(existing)
+                            }
+                        } label: {
+                            Label("저장 취소", systemImage: "bookmark.slash")
+                        }
+                        .tint(.orange)
+                    } else {
+                        Button {
+                            modelContext.insert(SavedPost(from: article))
+                        } label: {
+                            Label("저장", systemImage: "bookmark")
+                        }
+                        .tint(BrandPalette.green)
+                    }
+                }
                 .onAppear {
                     store.send(.rowAppeared(article.id))
                 }

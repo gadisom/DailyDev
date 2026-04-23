@@ -1,5 +1,6 @@
 #if os(iOS)
 import SwiftUI
+import SwiftData
 import ComposableArchitecture
 import DesignSystem
 
@@ -8,6 +9,29 @@ struct HomeLessonDetailView: View {
     let categoryID: String
     let subcategoryID: String
     let onSelectNextLesson: (String) -> Void
+
+    @Environment(\.modelContext) private var modelContext
+    @Query private var savedConcepts: [SavedConcept]
+
+    private enum Layout {
+        static let rootGap: CGFloat = Spacing.section
+        static let horizontalPadding: CGFloat = Spacing.xl
+        static let verticalPadding: CGFloat = 40
+        static let sectionGap: CGFloat = Spacing.xl
+        static let keypointSectionGap: CGFloat = Spacing.xxl
+        static let pointSpacing: CGFloat = 8
+        static let imageGap: CGFloat = Spacing.sm
+        static let imageHeight: CGFloat = 220
+        static let imageCardSpacing: CGFloat = Spacing.xs
+        static let cardHeaderPadding: CGFloat = Spacing.md
+        static let checklistRowPadding: CGFloat = Spacing.md
+        static let checklistCornerRadius: CGFloat = Radius.md
+        static let checklistBorderRadius: CGFloat = Radius.sm
+        static let nextLessonPadding: CGFloat = Spacing.xxl
+        static let pillWidth: CGFloat = 48
+        static let pillHeight: CGFloat = 4
+        static let badgeRadius: CGFloat = Radius.pill
+    }
 
     init(
         store: StoreOf<HomeFeature>,
@@ -23,7 +47,7 @@ struct HomeLessonDetailView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 48) {
+            VStack(alignment: .leading, spacing: Layout.rootGap) {
                 lessonHeaderSection
                 orderedContentSection
 
@@ -31,20 +55,20 @@ struct HomeLessonDetailView: View {
                     nextLessonButton(nextLesson)
                 }
             }
-            .padding(.horizontal, 24)
-            .padding(.top, 40)
-            .padding(.bottom, 40)
+            .padding(.horizontal, Layout.horizontalPadding)
+            .padding(.top, Layout.verticalPadding)
+            .padding(.bottom, Layout.verticalPadding)
             .frame(maxWidth: 512, alignment: .leading)
         }
-        .background(Color.white.ignoresSafeArea())
+        .background(BrandPalette.background.ignoresSafeArea())
         .navigationTitle(presentation.lessonTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button {} label: {
-                    Image(systemName: "bookmark")
+                Button { toggleBookmark() } label: {
+                    Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
                 }
-                .tint(Color(red: 0.39, green: 0.45, blue: 0.55))
+                .tint(isBookmarked ? BrandPalette.green : BrandPalette.ink3)
             }
         }
         .task {
@@ -64,9 +88,28 @@ struct HomeLessonDetailView: View {
         )
     }
 
+    private var isBookmarked: Bool {
+        savedConcepts.contains { $0.conceptID == subcategoryID }
+    }
+
+    private func toggleBookmark() {
+        if let existing = savedConcepts.first(where: { $0.conceptID == subcategoryID }) {
+            modelContext.delete(existing)
+        } else {
+            let concept = SavedConcept(
+                conceptID: subcategoryID,
+                title: presentation.lessonTitle,
+                categoryID: categoryID,
+                categoryTitle: presentation.lessonBadgeText,
+                summary: presentation.definitionHeadline
+            )
+            modelContext.insert(concept)
+        }
+    }
+
     @ViewBuilder
     private var orderedContentSection: some View {
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading, spacing: Layout.sectionGap) {
             ForEach(Array(presentation.contentBlocks.enumerated()), id: \.element.id) { index, block in
                 lessonContentBlockView(block)
 
@@ -96,35 +139,35 @@ struct HomeLessonDetailView: View {
     }
 
     private func definitionBlock(items: [String]) -> some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: Spacing.md) {
             DailyDevSectionTitle("DEFINITION")
 
             ForEach(Array(items.enumerated()), id: \.offset) { _, item in
                 Text(item)
-                    .font(.system(size: 16, weight: .regular))
+                    .font(DailyDevTypography.body16)
                     .lineSpacing(7)
-                    .foregroundStyle(Color(red: 0.28, green: 0.34, blue: 0.41))
+                    .foregroundStyle(BrandPalette.ink2)
             }
         }
     }
 
     private func keyPointsBlock(items: [String]) -> some View {
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading, spacing: Layout.sectionGap) {
             DailyDevSectionTitle("KEY CHARACTERISTICS")
 
-            VStack(alignment: .leading, spacing: 32) {
+            VStack(alignment: .leading, spacing: Layout.keypointSectionGap) {
                 ForEach(Array(items.enumerated()), id: \.offset) { index, point in
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: Layout.pointSpacing) {
                         let number = index + 1 < 10 ? "0\(index + 1)" : "\(index + 1)"
 
                         Text("POINT \(number)")
-                            .font(.system(size: 16, weight: .bold))
-                            .foregroundStyle(Color(red: 0.06, green: 0.09, blue: 0.16))
+                            .font(DailyDevTypography.title16)
+                            .foregroundStyle(BrandPalette.ink)
 
                         Text(point)
-                            .font(.system(size: 14, weight: .regular))
+                            .font(DailyDevTypography.bodySmall)
                             .lineSpacing(6)
-                            .foregroundStyle(Color(red: 0.28, green: 0.34, blue: 0.41))
+                            .foregroundStyle(BrandPalette.ink2)
                     }
                 }
             }
@@ -132,7 +175,7 @@ struct HomeLessonDetailView: View {
     }
 
     private func imageBlock(urls: [URL]) -> some View {
-        VStack(spacing: 12) {
+        VStack(spacing: Layout.imageGap) {
             ForEach(Array(urls.enumerated()), id: \.offset) { _, imageURL in
                 AsyncImage(url: imageURL) { phase in
                     switch phase {
@@ -142,14 +185,14 @@ struct HomeLessonDetailView: View {
                             .interpolation(.high)
                             .scaledToFit()
                             .frame(maxWidth: .infinity)
-                            .frame(height: 220)
+                            .frame(height: Layout.imageHeight)
                     case .failure:
                         EmptyView()
                     case .empty:
                         ProgressView()
                             .frame(maxWidth: .infinity)
-                            .frame(height: 220)
-                            .tint(Color(red: 0.0, green: 0.35, blue: 0.74))
+                            .frame(height: Layout.imageHeight)
+                            .tint(BrandPalette.green)
                     @unknown default:
                         EmptyView()
                     }
@@ -159,31 +202,30 @@ struct HomeLessonDetailView: View {
     }
 
     private func genericTextBlock(items: [String]) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: Layout.imageCardSpacing) {
             ForEach(Array(items.enumerated()), id: \.offset) { _, item in
                 Text(item)
-                    .font(.system(size: 15, weight: .regular))
+                    .font(DailyDevTypography.body)
                     .lineSpacing(6)
-                    .foregroundStyle(Color(red: 0.24, green: 0.30, blue: 0.38))
+                    .foregroundStyle(BrandPalette.ink2)
             }
         }
     }
 
     private var lessonHeaderSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            
+        VStack(alignment: .leading, spacing: Spacing.md) {
             Text(presentation.lessonBadgeText)
-                .font(.system(size: 11, weight: .semibold))
+                .font(DailyDevTypography.labelSmall)
                 .tracking(1.1)
-                .foregroundStyle(Color(red: 0.0, green: 0.35, blue: 0.74))
-    
-            Text(presentation.lessonTitle)
-                .font(.system(size: 50, weight: .bold, design: .rounded))
-                .foregroundStyle(Color(red: 0.06, green: 0.09, blue: 0.16))
+                .foregroundStyle(BrandPalette.green)
 
-            RoundedRectangle(cornerRadius: 999)
-                .fill(Color(red: 0.0, green: 0.35, blue: 0.74))
-                .frame(width: 48, height: 4)
+            Text(presentation.lessonTitle)
+                .font(DailyDevTypography.displayRoundedLarge)
+                .foregroundStyle(BrandPalette.ink)
+
+            RoundedRectangle(cornerRadius: Layout.badgeRadius)
+                .fill(BrandPalette.green)
+                .frame(width: Layout.pillWidth, height: Layout.pillHeight)
         }
     }
 
@@ -194,25 +236,25 @@ struct HomeLessonDetailView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("NEXT LESSON")
-                        .font(.system(size: 10, weight: .bold))
+                        .font(DailyDevTypography.captionBold)
                         .tracking(2)
-                        .foregroundStyle(Color(red: 0.58, green: 0.64, blue: 0.72))
+                        .foregroundStyle(BrandPalette.ink3)
 
                     Text(nextLesson.title)
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundStyle(Color(red: 0.06, green: 0.09, blue: 0.16))
+                        .font(DailyDevTypography.title20)
+                        .foregroundStyle(BrandPalette.ink)
                 }
 
                 Spacer()
 
                 Image(systemName: "arrow.right")
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundStyle(Color(red: 0.0, green: 0.35, blue: 0.74))
+                    .font(DailyDevTypography.title20)
+                    .foregroundStyle(BrandPalette.green)
             }
-            .padding(24)
+            .padding(Layout.nextLessonPadding)
             .overlay {
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color(red: 0.89, green: 0.91, blue: 0.94), lineWidth: 1)
+                RoundedRectangle(cornerRadius: Layout.checklistBorderRadius)
+                    .stroke(BrandPalette.line, lineWidth: 1)
             }
         }
         .buttonStyle(.plain)
@@ -221,43 +263,43 @@ struct HomeLessonDetailView: View {
     private func checklistCard(title: String, items: [String]) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(title)
-                .font(.system(size: 12, weight: .bold))
+                .font(DailyDevTypography.label)
                 .tracking(0.8)
-                .foregroundStyle(Color(red: 0.39, green: 0.45, blue: 0.55))
-                .padding(16)
+                .foregroundStyle(BrandPalette.ink3)
+                .padding(Layout.cardHeaderPadding)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color(red: 0.97, green: 0.98, blue: 0.99))
+                .background(BrandPalette.surfaceAlt)
 
             ForEach(Array(items.enumerated()), id: \.offset) { index, item in
                 HStack(alignment: .top, spacing: 12) {
                     Text("\(index + 1)")
-                        .font(.system(size: 12, weight: .bold, design: .monospaced))
-                        .foregroundStyle(Color(red: 0.0, green: 0.35, blue: 0.74))
+                        .font(DailyDevTypography.monoBold12)
+                        .foregroundStyle(BrandPalette.green)
 
                     Text(item)
-                        .font(.system(size: 14, weight: .regular))
+                        .font(DailyDevTypography.bodySmall)
                         .lineSpacing(5)
-                        .foregroundStyle(Color(red: 0.12, green: 0.16, blue: 0.23))
+                        .foregroundStyle(BrandPalette.ink)
                 }
-                .padding(16)
+                .padding(Layout.checklistRowPadding)
                 .overlay(alignment: .top) {
                     if index > 0 {
-                        Divider().background(Color(red: 0.97, green: 0.98, blue: 0.99))
+                        Divider().background(BrandPalette.line)
                     }
                 }
             }
         }
-        .background(Color.white)
+        .background(BrandPalette.surface)
         .overlay {
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color(red: 0.95, green: 0.96, blue: 0.98), lineWidth: 1)
+            RoundedRectangle(cornerRadius: Layout.checklistCornerRadius)
+                .stroke(BrandPalette.line, lineWidth: 1)
         }
-        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .clipShape(RoundedRectangle(cornerRadius: Layout.checklistCornerRadius))
     }
 
     private var separator: some View {
         Rectangle()
-            .fill(Color(red: 0.95, green: 0.96, blue: 0.98))
+            .fill(BrandPalette.line)
             .frame(height: 1)
     }
 }

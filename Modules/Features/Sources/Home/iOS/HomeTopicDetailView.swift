@@ -9,6 +9,21 @@ struct HomeTopicDetailView: View {
     let categoryID: String
     let onSelectLesson: (String) -> Void
 
+    private enum Layout {
+        static let screenMargin: CGFloat = Spacing.screenEdge
+        static let bottomPadding: CGFloat = Spacing.section
+        static let headerBottomSpacing: CGFloat = 2
+        static let loadingTextTopPadding: CGFloat = Spacing.sm
+        static let errorTopPadding: CGFloat = Spacing.sm - Spacing.xxs
+        static let chapterBadgeWidth: CGFloat = 36
+        static let chapterBadgeHeight: CGFloat = 36
+        static let chapterBadgeCornerRadius: CGFloat = Radius.sm
+        static let chapterRowSpacing: CGFloat = 14
+        static let chapterRowPadding: CGFloat = Spacing.md
+        static let chapterTitleFont = DailyDevTypography.monoLabel10
+        static let chapterNumberFont = DailyDevTypography.mono
+    }
+
     init(
         store: StoreOf<HomeFeature>,
         categoryID: String,
@@ -20,15 +35,18 @@ struct HomeTopicDetailView: View {
     }
 
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 48) {
-                tableOfContentsSection
+        ZStack {
+            BrandPalette.background.ignoresSafeArea()
+
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 0) {
+                    tocSection
+                        .padding(.horizontal, Layout.screenMargin)
+                        .padding(.top, Layout.screenMargin)
+                }
+                .padding(.bottom, Layout.bottomPadding)
             }
-            .padding(.horizontal, 24)
-            .padding(.top, 24)
-            .padding(.bottom, 32)
         }
-        .background(BrandPalette.background.ignoresSafeArea())
         .navigationTitle(navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
         .task {
@@ -37,6 +55,8 @@ struct HomeTopicDetailView: View {
             }
         }
     }
+
+    // MARK: - Data
 
     private var presentation: HomeTopicPresentation {
         HomeIOSPresentationBuilder.topic(
@@ -50,79 +70,106 @@ struct HomeTopicDetailView: View {
     }
 
     private var navigationTitle: String {
-        store.categories.first(where: { $0.id == categoryID })?.title ?? "Computer Science"
+        store.categories.first(where: { $0.id == categoryID })?.title ?? "카테고리"
     }
 
-    private var tableOfContentsSection: some View {
-        VStack(alignment: .leading, spacing: 24) {
+    // MARK: - Table of contents
+
+    private var tocSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text("TABLE OF CONTENTS")
-                    .font(.system(size: 14, weight: .semibold))
-                    .tracking(1.4)
-                    .foregroundStyle(Color(red: 0.36, green: 0.37, blue: 0.39))
+                Text("Table of Contents")
+                    .font(DailyDevTypography.labelSmall)
+                    .tracking(1.2)
+                    .textCase(.uppercase)
+                    .foregroundStyle(BrandPalette.ink3)
 
                 Spacer()
 
                 Text("\(presentation.chapterRows.count) Chapters")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(Color(red: 0.26, green: 0.28, blue: 0.33))
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 4)
-                    .background(
-                        Capsule().fill(Color(red: 0.91, green: 0.91, blue: 0.93))
-                    )
+                    .font(DailyDevTypography.label)
+                    .foregroundStyle(BrandPalette.ink2)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, Spacing.xxs / 2)
+                    .background(BrandPalette.surfaceAlt)
+                    .clipShape(Capsule())
             }
-            .padding(.horizontal, 8)
+            .padding(.bottom, Layout.headerBottomSpacing)
 
             if presentation.isCategoryLoading {
-                ProgressView("불러오는 중")
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                HStack(spacing: 8) {
+                    ProgressView()
+                        .tint(BrandPalette.green)
+                    Text("불러오는 중")
+                        .font(DailyDevTypography.bodySmallRegular)
+                        .foregroundStyle(BrandPalette.ink3)
+                }
+                .padding(.top, Layout.loadingTextTopPadding)
             }
 
-            VStack(spacing: 12) {
-                ForEach(presentation.chapterRows) { row in
-                    Button {
-                        onSelectLesson(row.id)
-                    } label: {
-                        chapterRow(row)
-                    }
-                    .buttonStyle(.plain)
+            if !presentation.isCategoryLoading && presentation.chapterRows.isEmpty && store.errorMessage == nil {
+                Text("하위 목차가 없습니다.")
+                    .font(DailyDevTypography.bodySmallRegular)
+                    .foregroundStyle(BrandPalette.ink3)
+            }
+
+            ForEach(Array(presentation.chapterRows.enumerated()), id: \.element.id) { index, row in
+                Button {
+                    onSelectLesson(row.id)
+                } label: {
+                    chapterRow(row, index: index)
                 }
+                .buttonStyle(ScaleButtonStyle())
             }
 
             if let message = presentation.categoryErrorMessage {
                 Text(message)
-                    .font(.system(size: 13, weight: .regular))
-                    .foregroundStyle(.red)
+                    .font(DailyDevTypography.bodySmallRegular)
+                    .foregroundStyle(BrandPalette.danger)
+                    .padding(.top, Layout.errorTopPadding)
             }
         }
     }
 
-    private func chapterRow(_ row: ChapterRow) -> some View {
-        HStack(spacing: 16) {
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color(red: 0.97, green: 0.98, blue: 0.99))
-                .frame(width: 48, height: 48)
-                .overlay {
-                    Image(systemName: row.icon)
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundStyle(Color(red: 0.38, green: 0.44, blue: 0.53))
-                }
+    private func chapterRow(_ row: ChapterRow, index: Int) -> some View {
+        let num = String(format: "%02d", index + 1)
 
-            Text(row.title)
-                .font(.system(size: 16, weight: .bold))
-                .foregroundStyle(Color(red: 0.10, green: 0.11, blue: 0.12))
+        return HStack(spacing: Layout.chapterRowSpacing) {
+
+            // Chapter number badge
+            Text(num)
+                .font(Layout.chapterNumberFont)
+                .foregroundStyle(BrandPalette.ink3)
+                .frame(width: Layout.chapterBadgeWidth, height: Layout.chapterBadgeHeight)
+                .background(BrandPalette.surfaceAlt)
+                .clipShape(RoundedRectangle(cornerRadius: Layout.chapterBadgeCornerRadius))
+
+            // Labels
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Chapter \(num)")
+                    .font(Layout.chapterTitleFont)
+                    .tracking(0.4)
+                    .textCase(.uppercase)
+                    .foregroundStyle(BrandPalette.ink4)
+
+                Text(row.title)
+                    .font(DailyDevTypography.label)
+                    .foregroundStyle(BrandPalette.ink)
+            }
 
             Spacer()
 
             Image(systemName: "chevron.right")
-                .font(.system(size: 11, weight: .semibold))
-                .foregroundStyle(Color(red: 0.76, green: 0.79, blue: 0.85))
+                .font(DailyDevTypography.label)
+                .foregroundStyle(BrandPalette.ink4)
         }
-        .padding(17)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(Layout.chapterRowPadding)
+        .background(BrandPalette.surface)
+        .clipShape(RoundedRectangle(cornerRadius: Radius.card))
+        .overlay(
+            RoundedRectangle(cornerRadius: Radius.card)
+                .stroke(BrandPalette.line, lineWidth: 1)
+        )
     }
 }
-
 #endif
