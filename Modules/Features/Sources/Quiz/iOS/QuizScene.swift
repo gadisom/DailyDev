@@ -2,6 +2,7 @@
 import ComposableArchitecture
 import SwiftUI
 import DesignSystem
+import Entity
 
 // MARK: - Entry point (public)
 

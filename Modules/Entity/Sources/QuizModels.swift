@@ -1,44 +1,102 @@
-#if os(iOS)
 import SwiftUI
+import Foundation
 
 // MARK: - Models
 
-enum QuizQuestionType: Hashable {
+public enum QuizQuestionType: String, Hashable {
     case mcq, ox, fill
 }
 
-struct QuizQuestion: Identifiable, Equatable {
-    let id: Int
-    let type: QuizQuestionType
-    let question: String
-    let choices: [String]
-    let correctIndex: Int      // MCQ 정답 인덱스 (-1 = MCQ 아님)
-    let oxAnswer: String       // "O" | "X" | ""
-    let fillAnswer: String     // 빈칸 정답 | ""
-    let explanation: String
-    let concept: String
-    let tag: String
+public struct QuizQuestion: Identifiable, Equatable {
+    public let id: Int
+    public let type: QuizQuestionType
+    public let question: String
+    public let choices: [String]
+    public let correctIndex: Int      // MCQ 정답 인덱스 (-1 = MCQ 아님)
+    public let oxAnswer: String       // "O" | "X" | ""
+    public let fillAnswer: String     // 빈칸 정답 | ""
+    public let explanation: String
+    public let concept: String
+    public let tag: String
+
+    public init(
+        id: Int,
+        type: QuizQuestionType,
+        question: String,
+        choices: [String],
+        correctIndex: Int,
+        oxAnswer: String,
+        fillAnswer: String,
+        explanation: String,
+        concept: String,
+        tag: String
+    ) {
+        self.id = id
+        self.type = type
+        self.question = question
+        self.choices = choices
+        self.correctIndex = correctIndex
+        self.oxAnswer = oxAnswer
+        self.fillAnswer = fillAnswer
+        self.explanation = explanation
+        self.concept = concept
+        self.tag = tag
+    }
 }
 
-struct QuizSet: Equatable {
-    let chapter: String
-    let chapterNum: String
-    let discipline: String
-    let questions: [QuizQuestion]
-    let passingScore: Int
-    var allowsEarlyExit: Bool = false
+public struct QuizSet: Equatable {
+    public let chapter: String
+    public let chapterNum: String
+    public let discipline: String
+    public let questions: [QuizQuestion]
+    public let passingScore: Int
+    public var allowsEarlyExit: Bool = false
+
+    public init(
+        chapter: String,
+        chapterNum: String,
+        discipline: String,
+        questions: [QuizQuestion],
+        passingScore: Int,
+        allowsEarlyExit: Bool = false
+    ) {
+        self.chapter = chapter
+        self.chapterNum = chapterNum
+        self.discipline = discipline
+        self.questions = questions
+        self.passingScore = passingScore
+        self.allowsEarlyExit = allowsEarlyExit
+    }
 }
 
-struct QuizCategory: Identifiable {
-    let id: String
-    let name: String
-    let englishName: String
-    let icon: String
-    let iconColor: Color
-    let iconBackground: Color
-    let questions: [QuizQuestion]
+public struct QuizCategory: Identifiable {
+    public let id: String
+    public let name: String
+    public let englishName: String
+    public let icon: String
+    public let iconColor: Color
+    public let iconBackground: Color
+    public let questions: [QuizQuestion]
 
-    var questionsByType: [(label: String, tag: String, items: [QuizQuestion])] {
+    public init(
+        id: String,
+        name: String,
+        englishName: String,
+        icon: String,
+        iconColor: Color,
+        iconBackground: Color,
+        questions: [QuizQuestion]
+    ) {
+        self.id = id
+        self.name = name
+        self.englishName = englishName
+        self.icon = icon
+        self.iconColor = iconColor
+        self.iconBackground = iconBackground
+        self.questions = questions
+    }
+
+    public var questionsByType: [(label: String, tag: String, items: [QuizQuestion])] {
         let mcq  = questions.filter { $0.type == .mcq }
         let ox   = questions.filter { $0.type == .ox }
         let fill = questions.filter { $0.type == .fill }
@@ -49,11 +107,132 @@ struct QuizCategory: Identifiable {
         return out
     }
 
-    func toQuizSet() -> QuizSet {
+    public func toQuizSet() -> QuizSet {
         QuizSet(chapter: name, chapterNum: "—", discipline: name,
                 questions: questions, passingScore: 80)
     }
 }
+// MARK: - Quiz Bank
+
+public let quizBank: [QuizCategory] = [
+    QuizCategory(
+        id: "data-structures",
+        name: "자료구조",
+        englishName: "Data Structures",
+        icon: "square.grid.3x3",
+        iconColor: Color(red: 0.17, green: 0.39, blue: 0.92),
+        iconBackground: Color(red: 0.94, green: 0.97, blue: 1.0),
+        questions: dsQuestions
+    ),
+    QuizCategory(
+        id: "algorithms",
+        name: "알고리즘",
+        englishName: "Algorithms",
+        icon: "sum",
+        iconColor: Color(red: 0.88, green: 0.52, blue: 0.0),
+        iconBackground: Color(red: 1.0, green: 0.98, blue: 0.92),
+        questions: algoQuestions
+    ),
+    QuizCategory(
+        id: "operating-systems",
+        name: "운영체제",
+        englishName: "Operating System",
+        icon: "terminal",
+        iconColor: Color(red: 0.58, green: 0.26, blue: 0.91),
+        iconBackground: Color(red: 0.98, green: 0.96, blue: 1.0),
+        questions: osQuestions
+    ),
+    QuizCategory(
+        id: "databases",
+        name: "데이터베이스",
+        englishName: "Database",
+        icon: "cylinder",
+        iconColor: Color(red: 0.05, green: 0.62, blue: 0.43),
+        iconBackground: Color(red: 0.93, green: 0.99, blue: 0.96),
+        questions: dbQuestions
+    ),
+    QuizCategory(
+        id: "networking",
+        name: "네트워크",
+        englishName: "Network",
+        icon: "point.3.filled.connected.trianglepath.dotted",
+        iconColor: Color(red: 0.93, green: 0.13, blue: 0.36),
+        iconBackground: Color(red: 1.0, green: 0.95, blue: 0.96),
+        questions: netQuestions
+    ),
+]
+
+// MARK: - Legacy (기존 플로우 호환)
+
+public let dummyQuizSet = quizBank[0].toQuizSet()
+
+public struct WrongNoteItem: Identifiable {
+    public let id = UUID()
+    public let chapterNum: String
+    public let chapter: String
+    public let question: String
+    public let tag: String
+    public let type: String
+    public let relativeDate: String
+    public let wrongCount: Int
+
+    public init(
+        chapterNum: String,
+        chapter: String,
+        question: String,
+        tag: String,
+        type: String,
+        relativeDate: String,
+        wrongCount: Int
+    ) {
+        self.chapterNum = chapterNum
+        self.chapter = chapter
+        self.question = question
+        self.tag = tag
+        self.type = type
+        self.relativeDate = relativeDate
+        self.wrongCount = wrongCount
+    }
+}
+
+public let dummyWrongNotes: [WrongNoteItem] = [
+    WrongNoteItem(
+        chapterNum: "01",
+        chapter: "자료구조",
+        question: "동적 배열의 append는 평균 ___ 시간으로 동작한다.",
+        tag: "Amortized",
+        type: "빈칸",
+        relativeDate: "3일 전",
+        wrongCount: 2
+    ),
+    WrongNoteItem(
+        chapterNum: "03",
+        chapter: "데이터베이스",
+        question: "해시 충돌을 해결하는 체이닝과 오픈 어드레싱의 차이는?",
+        tag: "Collision",
+        type: "객관식",
+        relativeDate: "1주 전",
+        wrongCount: 1
+    ),
+    WrongNoteItem(
+        chapterNum: "02",
+        chapter: "알고리즘",
+        question: "DFS 구현에 더 적합한 자료구조는 큐이다.",
+        tag: "DFS/BFS",
+        type: "OX",
+        relativeDate: "2주 전",
+        wrongCount: 3
+    ),
+    WrongNoteItem(
+        chapterNum: "04",
+        chapter: "운영체제",
+        question: "교착상태 발생 조건 중 선점 가능이 포함된다.",
+        tag: "Deadlock",
+        type: "OX",
+        relativeDate: "2주 전",
+        wrongCount: 1
+    ),
+]
 
 // MARK: - Question Banks
 
@@ -290,84 +469,3 @@ private let netQuestions: [QuizQuestion] = [
                  explanation: "DNS(Domain Name System)는 사람이 읽기 쉬운 도메인을 컴퓨터가 사용하는 IP로 변환합니다.",
                  concept: "DNS", tag: "역할"),
 ]
-
-// MARK: - Quiz Bank
-
-let quizBank: [QuizCategory] = [
-    QuizCategory(
-        id: "data-structures",
-        name: "자료구조",
-        englishName: "Data Structures",
-        icon: "square.grid.3x3",
-        iconColor: Color(red: 0.17, green: 0.39, blue: 0.92),
-        iconBackground: Color(red: 0.94, green: 0.97, blue: 1.0),
-        questions: dsQuestions
-    ),
-    QuizCategory(
-        id: "algorithms",
-        name: "알고리즘",
-        englishName: "Algorithms",
-        icon: "sum",
-        iconColor: Color(red: 0.88, green: 0.52, blue: 0.0),
-        iconBackground: Color(red: 1.0, green: 0.98, blue: 0.92),
-        questions: algoQuestions
-    ),
-    QuizCategory(
-        id: "operating-systems",
-        name: "운영체제",
-        englishName: "Operating System",
-        icon: "terminal",
-        iconColor: Color(red: 0.58, green: 0.26, blue: 0.91),
-        iconBackground: Color(red: 0.98, green: 0.96, blue: 1.0),
-        questions: osQuestions
-    ),
-    QuizCategory(
-        id: "databases",
-        name: "데이터베이스",
-        englishName: "Database",
-        icon: "cylinder",
-        iconColor: Color(red: 0.05, green: 0.62, blue: 0.43),
-        iconBackground: Color(red: 0.93, green: 0.99, blue: 0.96),
-        questions: dbQuestions
-    ),
-    QuizCategory(
-        id: "networking",
-        name: "네트워크",
-        englishName: "Network",
-        icon: "point.3.filled.connected.trianglepath.dotted",
-        iconColor: Color(red: 0.93, green: 0.13, blue: 0.36),
-        iconBackground: Color(red: 1.0, green: 0.95, blue: 0.96),
-        questions: netQuestions
-    ),
-]
-
-// MARK: - Legacy (기존 플로우 호환)
-
-let dummyQuizSet = quizBank[0].toQuizSet()
-
-struct WrongNoteItem: Identifiable {
-    let id = UUID()
-    let chapterNum: String
-    let chapter: String
-    let question: String
-    let tag: String
-    let type: String
-    let relativeDate: String
-    let wrongCount: Int
-}
-
-let dummyWrongNotes: [WrongNoteItem] = [
-    WrongNoteItem(chapterNum: "01", chapter: "자료구조",
-                  question: "동적 배열의 append는 평균 ___ 시간으로 동작한다.",
-                  tag: "Amortized", type: "빈칸", relativeDate: "3일 전", wrongCount: 2),
-    WrongNoteItem(chapterNum: "03", chapter: "데이터베이스",
-                  question: "해시 충돌을 해결하는 체이닝과 오픈 어드레싱의 차이는?",
-                  tag: "Collision", type: "객관식", relativeDate: "1주 전", wrongCount: 1),
-    WrongNoteItem(chapterNum: "02", chapter: "알고리즘",
-                  question: "DFS 구현에 더 적합한 자료구조는 큐이다.",
-                  tag: "DFS/BFS", type: "OX", relativeDate: "2주 전", wrongCount: 3),
-    WrongNoteItem(chapterNum: "04", chapter: "운영체제",
-                  question: "교착상태 발생 조건 중 선점 가능이 포함된다.",
-                  tag: "Deadlock", type: "OX", relativeDate: "2주 전", wrongCount: 1),
-]
-#endif

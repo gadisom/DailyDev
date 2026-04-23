@@ -1,6 +1,7 @@
 #if os(iOS)
 import SwiftUI
 import DesignSystem
+import Entity
 
 // MARK: - Random Quiz Setup
 

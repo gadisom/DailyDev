@@ -1,5 +1,6 @@
 #if os(iOS)
 import ComposableArchitecture
+import Entity
 
 @Reducer
 public struct QuizFeature {
@@ -24,6 +25,12 @@ public struct QuizFeature {
             self.phase = phase
             self.categories = categories
             self.hasLoadedInitialData = hasLoadedInitialData
+        }
+
+        public static func == (lhs: State, rhs: State) -> Bool {
+            lhs.phase == rhs.phase
+                && lhs.hasLoadedInitialData == rhs.hasLoadedInitialData
+                && lhs.categories.map(\.id) == rhs.categories.map(\.id)
         }
     }
 

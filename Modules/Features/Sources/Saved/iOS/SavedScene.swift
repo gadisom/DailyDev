@@ -3,6 +3,7 @@ import SwiftUI
 import SwiftData
 import DesignSystem
 import ComposableArchitecture
+import Entity
 
 // MARK: - Entry
 

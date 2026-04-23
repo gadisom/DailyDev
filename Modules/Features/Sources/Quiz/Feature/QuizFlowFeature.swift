@@ -1,5 +1,6 @@
 #if os(iOS)
 import ComposableArchitecture
+import Entity
 
 @Reducer
 public struct QuizFlowFeature {
@@ -32,7 +33,7 @@ public struct QuizFlowFeature {
         case done
     }
 
-    var body: some ReducerOf<Self> {
+    public var body: some ReducerOf<Self> {
         BindingReducer()
         Reduce { state, action in
             switch action {

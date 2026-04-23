@@ -2,6 +2,7 @@ import Foundation
 #if os(iOS)
 import ComposableArchitecture
 import Data
+import Entity
 import SwiftUI
 
 public struct QuizDataClient: Sendable {

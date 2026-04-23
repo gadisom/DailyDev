@@ -3,6 +3,7 @@ import SwiftUI
 import SwiftData
 import ComposableArchitecture
 import DesignSystem
+import Entity
 
 // MARK: - Flow coordinator
 

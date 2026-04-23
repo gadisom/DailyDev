@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		537BD094F76303A4DF66AB35 /* QuizModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A7E40BA240B7486D734425 /* QuizModels.swift */; };
 		6BCB3FB78B0EAE3E014471B0 /* CSCategoriesIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE4BC10F042F7B322D96361 /* CSCategoriesIndex.swift */; };
 		7DDDF8D073EA8953D13A95C2 /* CSCategoryContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0437A0ABEEE05BBD1F85AF /* CSCategoryContent.swift */; };
 		B17B90DFB8C857FBE38BD184 /* PostArticleModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCDFAC8704F05A4CE6C1A1F /* PostArticleModels.swift */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		0C0437A0ABEEE05BBD1F85AF /* CSCategoryContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSCategoryContent.swift; sourceTree = "<group>"; };
 		2BCDFAC8704F05A4CE6C1A1F /* PostArticleModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostArticleModels.swift; sourceTree = "<group>"; };
+		43A7E40BA240B7486D734425 /* QuizModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizModels.swift; sourceTree = "<group>"; };
 		6D3D722D8A39C97CE4035A34 /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EE4BC10F042F7B322D96361 /* CSCategoriesIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSCategoriesIndex.swift; sourceTree = "<group>"; };
 		C5009FA2E4EDDE9341215205 /* CSCategoryDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSCategoryDefinition.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				0C0437A0ABEEE05BBD1F85AF /* CSCategoryContent.swift */,
 				C5009FA2E4EDDE9341215205 /* CSCategoryDefinition.swift */,
 				2BCDFAC8704F05A4CE6C1A1F /* PostArticleModels.swift */,
+				43A7E40BA240B7486D734425 /* QuizModels.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				7DDDF8D073EA8953D13A95C2 /* CSCategoryContent.swift in Sources */,
 				B8E65675BF79C8FA30B4A7EA /* CSCategoryDefinition.swift in Sources */,
 				B17B90DFB8C857FBE38BD184 /* PostArticleModels.swift in Sources */,
+				537BD094F76303A4DF66AB35 /* QuizModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
