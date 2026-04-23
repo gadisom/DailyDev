@@ -16,21 +16,16 @@ protocol PostArticleNetworkServing: Sendable {
 }
 
 struct PostArticleNetworkClient: PostArticleNetworkServing {
-    private let session: URLSession
-    private let decoder: JSONDecoder
     private let baseURL: URL
+    private let transport: any HTTPRequestExecuting
+    private let decoder: JSONDecoder
 
     init(
         baseURL: URL = PostNetworkDefaults.baseURL,
-        session: URLSession = {
-            let configuration = URLSessionConfiguration.default
-            configuration.timeoutIntervalForRequest = PostNetworkDefaults.requestTimeout
-            configuration.timeoutIntervalForResource = PostNetworkDefaults.resourceTimeout
-            return URLSession(configuration: configuration)
-        }()
+        transport: any HTTPRequestExecuting = URLSessionHTTPClient.shared
     ) {
         self.baseURL = baseURL
-        self.session = session
+        self.transport = transport
 
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -56,23 +51,7 @@ struct PostArticleNetworkClient: PostArticleNetworkServing {
 
         return try await withExponentialRetry {
             do {
-                let (data, response) = try await session.data(for: request)
-
-                guard let httpResponse = response as? HTTPURLResponse else {
-                    throw PostContentError.transport(message: "유효하지 않은 응답입니다.")
-                }
-
-                let envelope = try decoder.decode(PostArticlesAPIEnvelope.self, from: data)
-
-                if envelope.resultType.uppercased() == "SUCCESS" {
-                    return envelope
-                }
-
-                throw mapHTTPFailure(
-                    statusCode: httpResponse.statusCode,
-                    errorCode: envelope.errorMessage?.code,
-                    message: envelope.errorMessage?.message
-                )
+                return try await requestArticles(request: request)
             } catch let error as PostContentError {
                 throw error
             } catch let error as URLError {
@@ -86,6 +65,25 @@ struct PostArticleNetworkClient: PostArticleNetworkServing {
                 throw PostContentError.transport(message: error.localizedDescription)
             }
         }
+    }
+
+    private func requestArticles(request: URLRequest) async throws -> PostArticlesAPIEnvelope {
+        let (data, response) = try await transport.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw PostContentError.transport(message: "유효하지 않은 응답입니다.")
+        }
+
+        let envelope = try decoder.decode(PostArticlesAPIEnvelope.self, from: data)
+
+        if envelope.resultType.uppercased() == "SUCCESS" {
+            return envelope
+        }
+
+        throw mapHTTPFailure(
+            statusCode: httpResponse.statusCode,
+            errorCode: envelope.errorMessage?.code,
+            message: envelope.errorMessage?.message
+        )
     }
 
     private func mapHTTPFailure(statusCode: Int, errorCode: String?, message: String?) -> PostContentError {
@@ -224,44 +222,4 @@ public actor PostArticleRepository: PostResourceRepository {
         }
         return .serverError(message: errorPayload?.message)
     }
-}
-
-struct PostArticlesAPIEnvelope: Decodable {
-    let resultType: String
-    let data: PostArticlesPayload?
-    let errorMessage: PostAPIErrorPayload?
-}
-
-struct PostArticlesPayload: Decodable {
-    let data: [PostArticleEntry]
-    let hasNext: Bool
-    let nextCursor: Int64?
-}
-
-struct PostArticleEntry: Decodable {
-    let article: PostAPIDomainArticle
-    let blog: PostAPIDomainBlog
-}
-
-struct PostAPIDomainArticle: Decodable {
-    let id: Int64
-    let blogId: Int64
-    let title: String
-    let link: String
-    let guid: String?
-    let pubDate: Int64
-    let views: Int
-}
-
-struct PostAPIDomainBlog: Decodable {
-    let id: Int64
-    let link: String
-    let name: String
-    let logoUrl: String?
-    let rssLink: String?
-}
-
-struct PostAPIErrorPayload: Decodable {
-    let code: String?
-    let message: String?
 }

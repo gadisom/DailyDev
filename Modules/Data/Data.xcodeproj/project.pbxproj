@@ -8,8 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0036CA9687A1403C0CEF107C /* Entity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E08F6B1066EF03598856C1A /* Entity.framework */; };
+		352AD78EB3B606E57F0FD47B /* SupabaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38279D34E65692B9CC48CD3E /* SupabaseClient.swift */; };
+		5F9E986969B5CBFE44E868B0 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F8F7A1FD5C363584F77988 /* HTTPClient.swift */; };
 		67EF3C7FF2DD5DBB5E4A0B9B /* PostArticleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FE3449766EDE1E26266CFF /* PostArticleRepository.swift */; };
 		901ACA7B98089AB702ADA830 /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FAA1459D11CCE724C34195 /* Domain.framework */; };
+		A6D6334584126C7B3A793C21 /* PostModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC224029704408853C736CAC /* PostModels.swift */; };
+		B01BE57AF4027AA694F7286E /* QuizModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6778D516A35F747004411F9B /* QuizModels.swift */; };
+		B87A3256BA5BCB26B4D1E97E /* CSContentModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A24D944C08B3AD7A050BDB /* CSContentModels.swift */; };
+		D0756E494F531881DD4CFE6A /* QuizSupabaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8163F5907EC4A764FF2EAC3 /* QuizSupabaseRepository.swift */; };
 		DE5B00BC35650E686F27CD32 /* CSSupabaseContentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B355FFE9B7015815FC513AEA /* CSSupabaseContentRepository.swift */; };
 		F148039B5F91592C5380466A /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6799EBC84F4DBDEDB6C2FB0 /* Core.framework */; };
 /* End PBXBuildFile section */
@@ -30,11 +36,17 @@
 /* Begin PBXFileReference section */
 		033B57EACF093CA22F91EAB9 /* Data-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Data-Info.plist"; sourceTree = "<group>"; };
 		06FAA1459D11CCE724C34195 /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		38279D34E65692B9CC48CD3E /* SupabaseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseClient.swift; sourceTree = "<group>"; };
+		42F8F7A1FD5C363584F77988 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		42FE3449766EDE1E26266CFF /* PostArticleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostArticleRepository.swift; sourceTree = "<group>"; };
+		48A24D944C08B3AD7A050BDB /* CSContentModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSContentModels.swift; sourceTree = "<group>"; };
 		4E75197C294DE74F5162FAA7 /* Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6778D516A35F747004411F9B /* QuizModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizModels.swift; sourceTree = "<group>"; };
 		9E08F6B1066EF03598856C1A /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B355FFE9B7015815FC513AEA /* CSSupabaseContentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSSupabaseContentRepository.swift; sourceTree = "<group>"; };
 		E6799EBC84F4DBDEDB6C2FB0 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8163F5907EC4A764FF2EAC3 /* QuizSupabaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSupabaseRepository.swift; sourceTree = "<group>"; };
+		FC224029704408853C736CAC /* PostModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,10 +101,32 @@
 		C590795A2658F92D49B27E8D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				E9A2778152368EC94F479F54 /* Models */,
+				C964E22F0F1D644DF0BADFEF /* Networking */,
 				B355FFE9B7015815FC513AEA /* CSSupabaseContentRepository.swift */,
 				42FE3449766EDE1E26266CFF /* PostArticleRepository.swift */,
+				E8163F5907EC4A764FF2EAC3 /* QuizSupabaseRepository.swift */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		C964E22F0F1D644DF0BADFEF /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				42F8F7A1FD5C363584F77988 /* HTTPClient.swift */,
+				38279D34E65692B9CC48CD3E /* SupabaseClient.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		E9A2778152368EC94F479F54 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				48A24D944C08B3AD7A050BDB /* CSContentModels.swift */,
+				FC224029704408853C736CAC /* PostModels.swift */,
+				6778D516A35F747004411F9B /* QuizModels.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		EF3121301A12FEB266E0B923 /* Project */ = {
@@ -172,7 +206,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE5B00BC35650E686F27CD32 /* CSSupabaseContentRepository.swift in Sources */,
+				B87A3256BA5BCB26B4D1E97E /* CSContentModels.swift in Sources */,
+				A6D6334584126C7B3A793C21 /* PostModels.swift in Sources */,
+				B01BE57AF4027AA694F7286E /* QuizModels.swift in Sources */,
+				5F9E986969B5CBFE44E868B0 /* HTTPClient.swift in Sources */,
+				352AD78EB3B606E57F0FD47B /* SupabaseClient.swift in Sources */,
 				67EF3C7FF2DD5DBB5E4A0B9B /* PostArticleRepository.swift in Sources */,
+				D0756E494F531881DD4CFE6A /* QuizSupabaseRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
