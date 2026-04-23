@@ -43,7 +43,7 @@ extension DependencyValues {
 }
 
 private extension QuizCategory {
-    init(row: QuizCategoryRow, questions: [QuizQuestion]) {
+    init(row: QuizCategoryDTO, questions: [QuizQuestion]) {
         self.init(
             id: row.id,
             name: row.name,
@@ -57,7 +57,7 @@ private extension QuizCategory {
 }
 
 private extension QuizQuestion {
-    init?(row: QuizQuestionRow) {
+    init?(row: QuizQuestionDTO) {
         guard let type = QuizQuestionType(rawString: row.type) else {
             return nil
         }

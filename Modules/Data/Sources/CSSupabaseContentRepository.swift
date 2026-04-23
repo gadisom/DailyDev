@@ -52,7 +52,7 @@ public actor CSSupabaseContentRepository {
             .compactMap { Self.normalizedTitle($0.categoryTitle) }
             .first ?? Self.prettyTitle(from: categorySlug)
 
-        var grouped: [String: [ContentItemRow]] = [:]
+        var grouped: [String: [CSContentItemDTO]] = [:]
         var subcategoryOrder: [String: Int] = [:]
         var subcategoryTitles: [String: String] = [:]
 
@@ -117,7 +117,7 @@ public actor CSSupabaseContentRepository {
         )
     }
 
-    private func fetchCategoryRows() async throws -> [CategoryRow] {
+    private func fetchCategoryRows() async throws -> [CSCategoryDTO] {
         do {
             return try await request(
                 path: "content_items",
@@ -142,7 +142,7 @@ public actor CSSupabaseContentRepository {
         }
     }
 
-    private func fetchContentRows(categorySlug: String) async throws -> [ContentItemRow] {
+    private func fetchContentRows(categorySlug: String) async throws -> [CSContentItemDTO] {
         do {
             return try await request(
                 path: "content_items",

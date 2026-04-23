@@ -1,21 +1,21 @@
-struct PostArticlesAPIEnvelope: Decodable {
+struct PostArticlesAPIEnvelopeDTO: Decodable {
     let resultType: String
-    let data: PostArticlesPayload?
-    let errorMessage: PostAPIErrorPayload?
+    let data: PostArticlesPayloadDTO?
+    let errorMessage: PostAPIErrorPayloadDTO?
 }
 
-struct PostArticlesPayload: Decodable {
-    let data: [PostArticleEntry]
+struct PostArticlesPayloadDTO: Decodable {
+    let data: [PostArticleEntryDTO]
     let hasNext: Bool
     let nextCursor: Int64?
 }
 
-struct PostArticleEntry: Decodable {
-    let article: PostAPIDomainArticle
-    let blog: PostAPIDomainBlog
+struct PostArticleEntryDTO: Decodable {
+    let article: PostAPIDomainArticleDTO
+    let blog: PostAPIDomainBlogDTO
 }
 
-struct PostAPIDomainArticle: Decodable {
+struct PostAPIDomainArticleDTO: Decodable {
     let id: Int64
     let blogId: Int64
     let title: String
@@ -25,7 +25,7 @@ struct PostAPIDomainArticle: Decodable {
     let views: Int
 }
 
-struct PostAPIDomainBlog: Decodable {
+struct PostAPIDomainBlogDTO: Decodable {
     let id: Int64
     let link: String
     let name: String
@@ -33,7 +33,7 @@ struct PostAPIDomainBlog: Decodable {
     let rssLink: String?
 }
 
-struct PostAPIErrorPayload: Decodable {
+struct PostAPIErrorPayloadDTO: Decodable {
     let code: String?
     let message: String?
 }

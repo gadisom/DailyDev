@@ -12,7 +12,7 @@ private enum PostNetworkDefaults {
 }
 
 protocol PostArticleNetworkServing: Sendable {
-    func fetchArticles(cursor: Int64?) async throws -> PostArticlesAPIEnvelope
+    func fetchArticles(cursor: Int64?) async throws -> PostArticlesAPIEnvelopeDTO
 }
 
 struct PostArticleNetworkClient: PostArticleNetworkServing {
@@ -32,7 +32,7 @@ struct PostArticleNetworkClient: PostArticleNetworkServing {
         self.decoder = decoder
     }
 
-    func fetchArticles(cursor: Int64?) async throws -> PostArticlesAPIEnvelope {
+    func fetchArticles(cursor: Int64?) async throws -> PostArticlesAPIEnvelopeDTO {
         var components = URLComponents(
             url: baseURL.appendingPathComponent("v1/articles"),
             resolvingAgainstBaseURL: false
@@ -67,13 +67,13 @@ struct PostArticleNetworkClient: PostArticleNetworkServing {
         }
     }
 
-    private func requestArticles(request: URLRequest) async throws -> PostArticlesAPIEnvelope {
+    private func requestArticles(request: URLRequest) async throws -> PostArticlesAPIEnvelopeDTO {
         let (data, response) = try await transport.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse else {
             throw PostContentError.transport(message: "유효하지 않은 응답입니다.")
         }
 
-        let envelope = try decoder.decode(PostArticlesAPIEnvelope.self, from: data)
+        let envelope = try decoder.decode(PostArticlesAPIEnvelopeDTO.self, from: data)
 
         if envelope.resultType.uppercased() == "SUCCESS" {
             return envelope
@@ -196,7 +196,7 @@ public actor PostArticleRepository: PostResourceRepository {
         )
     }
 
-    private func mapResultTypeFailure(errorPayload: PostAPIErrorPayload?) -> PostContentError {
+    private func mapResultTypeFailure(errorPayload: PostAPIErrorPayloadDTO?) -> PostContentError {
         let errorCode = errorPayload?.code
         if let errorCode {
             switch errorCode {

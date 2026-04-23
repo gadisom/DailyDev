@@ -1,13 +1,13 @@
 import Entity
 import Foundation
 
-struct CategoryRow: Decodable {
+struct CSCategoryDTO: Decodable {
     let categorySlug: String
     let categoryTitle: String?
     let displayOrder: Int
 }
 
-struct ContentItemRow: Decodable {
+struct CSContentItemDTO: Decodable {
     let categoryTitle: String?
     let subcategorySlug: String
     let subcategoryTitle: String?

@@ -9,13 +9,13 @@ public actor QuizSupabaseRepository {
         self.client = client
     }
 
-    public func fetchQuizBank() async throws -> (categories: [QuizCategoryRow], questions: [QuizQuestionRow]) {
+    public func fetchQuizBank() async throws -> (categories: [QuizCategoryDTO], questions: [QuizQuestionDTO]) {
         async let cats = fetchCategories()
         async let qs = fetchQuestions()
         return try await (cats, qs)
     }
 
-    private func fetchCategories() async throws -> [QuizCategoryRow] {
+    private func fetchCategories() async throws -> [QuizCategoryDTO] {
         do {
             return try await request(
                 path: "quiz_categories",
@@ -26,7 +26,7 @@ public actor QuizSupabaseRepository {
         }
     }
 
-    private func fetchQuestions() async throws -> [QuizQuestionRow] {
+    private func fetchQuestions() async throws -> [QuizQuestionDTO] {
         do {
             return try await request(
                 path: "quiz_questions",

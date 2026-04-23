@@ -1,4 +1,4 @@
-public struct QuizCategoryRow: Decodable, Sendable {
+public struct QuizCategoryDTO: Decodable, Sendable {
     public let id: String
     public let name: String
     public let englishName: String
@@ -7,7 +7,7 @@ public struct QuizCategoryRow: Decodable, Sendable {
     public let iconBgColor: String
 }
 
-public struct QuizQuestionRow: Decodable, Sendable {
+public struct QuizQuestionDTO: Decodable, Sendable {
     public let id: Int
     public let categoryId: String
     public let type: String
