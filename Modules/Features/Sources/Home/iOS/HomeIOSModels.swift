@@ -51,14 +51,12 @@ struct CurriculumCard: Identifiable {
         let icon: String
         let iconBackground: Color
         let iconColor: Color
-        let englishName: String
         let sortOrder: Int
     }
 
     let id: String
     let categoryID: String?
     let title: String
-    let englishName: String
     let tags: [String]
     let icon: String
     let iconBackground: Color
@@ -72,7 +70,6 @@ struct CurriculumCard: Identifiable {
                 icon: "square.grid.3x3",
                 iconBackground: BrandPalette.curriculumBlueBackground,
                 iconColor: BrandPalette.curriculumBlueText,
-                englishName: "Data Structures",
                 sortOrder: 1
             )
         ),
@@ -82,7 +79,6 @@ struct CurriculumCard: Identifiable {
                 icon: "sum",
                 iconBackground: BrandPalette.curriculumOrangeBackground,
                 iconColor: BrandPalette.curriculumOrangeText,
-                englishName: "Algorithms",
                 sortOrder: 2
             )
         ),
@@ -92,7 +88,6 @@ struct CurriculumCard: Identifiable {
                 icon: "terminal",
                 iconBackground: BrandPalette.curriculumPurpleBackground,
                 iconColor: BrandPalette.curriculumPurpleText,
-                englishName: "Operating System",
                 sortOrder: 3
             )
         ),
@@ -102,7 +97,6 @@ struct CurriculumCard: Identifiable {
                 icon: "cylinder",
                 iconBackground: BrandPalette.curriculumGreenBackground,
                 iconColor: BrandPalette.curriculumGreenText,
-                englishName: "Database",
                 sortOrder: 4
             )
         ),
@@ -112,7 +106,6 @@ struct CurriculumCard: Identifiable {
                 icon: "point.3.filled.connected.trianglepath.dotted",
                 iconBackground: BrandPalette.curriculumRedBackground,
                 iconColor: BrandPalette.curriculumRedText,
-                englishName: "Network",
                 sortOrder: 5
             )
         ),

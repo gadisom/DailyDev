@@ -151,9 +151,6 @@ private struct QuizHubView: View {
                 Text(category.name)
                     .font(.system(size: 14.5, weight: .semibold))
                     .foregroundStyle(BrandPalette.ink)
-                Text(category.englishName)
-                    .font(.system(size: 11, weight: .medium, design: .monospaced))
-                    .foregroundStyle(BrandPalette.ink3)
             }
 
             Spacer()

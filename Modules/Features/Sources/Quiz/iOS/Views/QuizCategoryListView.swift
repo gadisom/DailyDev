@@ -25,10 +25,6 @@ struct QuizCategoryListView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 14))
 
                         VStack(alignment: .leading, spacing: 3) {
-                            Text(category.englishName.uppercased())
-                                .font(.system(size: 10, weight: .bold, design: .monospaced))
-                                .tracking(1.2)
-                                .foregroundStyle(BrandPalette.ink3)
                             Text(category.name)
                                 .font(.system(size: 22, weight: .bold))
                                 .foregroundStyle(BrandPalette.ink)

@@ -49,7 +49,6 @@ private extension QuizCategory {
         self.init(
             id: row.id,
             name: row.name,
-            englishName: row.englishName,
             icon: row.icon,
             iconColor: Color(quizHexString: row.iconColor),
             iconBackground: Color(quizHexString: row.iconBgColor),

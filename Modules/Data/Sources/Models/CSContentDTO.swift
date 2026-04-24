@@ -9,10 +9,8 @@ struct CSCategoryDTO: Decodable {
 
 struct CSContentItemDTO: Decodable {
     let categoryTitle: String?
-    let subcategorySlug: String
     let subcategoryTitle: String?
     let slug: String
-    let title: String
     let summary: String?
     let blocks: [JSONDictionary]
     let relatedItemIds: [String]?

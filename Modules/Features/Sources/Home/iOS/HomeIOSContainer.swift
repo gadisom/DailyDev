@@ -127,9 +127,6 @@ struct HomeIOSContainer: View {
                 Text(card.title)
                     .font(.system(size: 14.5, weight: .semibold))
                     .foregroundStyle(BrandPalette.ink)
-                Text(card.englishName)
-                    .font(.system(size: 11, weight: .medium, design: .monospaced))
-                    .foregroundStyle(BrandPalette.ink3)
             }
 
             Spacer()

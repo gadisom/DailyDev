@@ -52,7 +52,6 @@ enum HomeIOSPresentationBuilder {
                 id: category.id,
                 categoryID: category.id,
                 title: category.title,
-                englishName: style.englishName,
                 tags: cardTags(
                     categoryID: category.id,
                     selectedCategoryID: selectedCategoryID,

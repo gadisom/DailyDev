@@ -72,7 +72,6 @@ public struct QuizSet: Equatable {
 public struct QuizCategory: Identifiable {
     public let id: String
     public let name: String
-    public let englishName: String
     public let icon: String
     public let iconColor: Color
     public let iconBackground: Color
@@ -81,7 +80,6 @@ public struct QuizCategory: Identifiable {
     public init(
         id: String,
         name: String,
-        englishName: String,
         icon: String,
         iconColor: Color,
         iconBackground: Color,
@@ -89,7 +87,6 @@ public struct QuizCategory: Identifiable {
     ) {
         self.id = id
         self.name = name
-        self.englishName = englishName
         self.icon = icon
         self.iconColor = iconColor
         self.iconBackground = iconBackground
@@ -118,7 +115,6 @@ public let quizBank: [QuizCategory] = [
     QuizCategory(
         id: "data-structures",
         name: "자료구조",
-        englishName: "Data Structures",
         icon: "square.grid.3x3",
         iconColor: Color(red: 0.17, green: 0.39, blue: 0.92),
         iconBackground: Color(red: 0.94, green: 0.97, blue: 1.0),
@@ -127,7 +123,6 @@ public let quizBank: [QuizCategory] = [
     QuizCategory(
         id: "algorithms",
         name: "알고리즘",
-        englishName: "Algorithms",
         icon: "sum",
         iconColor: Color(red: 0.88, green: 0.52, blue: 0.0),
         iconBackground: Color(red: 1.0, green: 0.98, blue: 0.92),
@@ -136,7 +131,6 @@ public let quizBank: [QuizCategory] = [
     QuizCategory(
         id: "operating-systems",
         name: "운영체제",
-        englishName: "Operating System",
         icon: "terminal",
         iconColor: Color(red: 0.58, green: 0.26, blue: 0.91),
         iconBackground: Color(red: 0.98, green: 0.96, blue: 1.0),
@@ -145,7 +139,6 @@ public let quizBank: [QuizCategory] = [
     QuizCategory(
         id: "databases",
         name: "데이터베이스",
-        englishName: "Database",
         icon: "cylinder",
         iconColor: Color(red: 0.05, green: 0.62, blue: 0.43),
         iconBackground: Color(red: 0.93, green: 0.99, blue: 0.96),
@@ -154,7 +147,6 @@ public let quizBank: [QuizCategory] = [
     QuizCategory(
         id: "networking",
         name: "네트워크",
-        englishName: "Network",
         icon: "point.3.filled.connected.trianglepath.dotted",
         iconColor: Color(red: 0.93, green: 0.13, blue: 0.36),
         iconBackground: Color(red: 1.0, green: 0.95, blue: 0.96),

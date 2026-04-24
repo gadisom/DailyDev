@@ -58,11 +58,11 @@ public actor CSSupabaseContentRepository: CSContentRepository {
         var subcategoryTitles: [String: String] = [:]
 
         for row in rows {
-            grouped[row.subcategorySlug, default: []].append(row)
-            let existing = subcategoryOrder[row.subcategorySlug]
-            subcategoryOrder[row.subcategorySlug] = min(existing ?? row.displayOrder, row.displayOrder)
-            if let title = Self.normalizedTitle(row.subcategoryTitle), subcategoryTitles[row.subcategorySlug] == nil {
-                subcategoryTitles[row.subcategorySlug] = title
+            grouped[row.slug, default: []].append(row)
+            let existing = subcategoryOrder[row.slug]
+            subcategoryOrder[row.slug] = min(existing ?? row.displayOrder, row.displayOrder)
+            if let title = Self.normalizedTitle(row.subcategoryTitle), subcategoryTitles[row.slug] == nil {
+                subcategoryTitles[row.slug] = title
             }
         }
 
@@ -72,17 +72,17 @@ public actor CSSupabaseContentRepository: CSContentRepository {
                     if lhs.displayOrder != rhs.displayOrder {
                         return lhs.displayOrder < rhs.displayOrder
                     }
-                    return lhs.title.localizedCompare(rhs.title) == .orderedAscending
+                    return (lhs.subcategoryTitle ?? "").localizedCompare(rhs.subcategoryTitle ?? "") == .orderedAscending
                 }
 
                 let items = sortedRows.enumerated().map { index, row -> CSStudyItem in
                     let parsed = Self.parseBlocks(row.blocks)
                     let summary = row.summary?.trimmingCharacters(in: .whitespacesAndNewlines)
-                    let fallbackSummary = parsed.definitionBody.first ?? parsed.body.first ?? row.title
+                    let fallbackSummary = parsed.definitionBody.first ?? parsed.body.first ?? row.subcategoryTitle ?? ""
 
                     return CSStudyItem(
                         id: row.slug,
-                        title: row.title,
+                        title: row.subcategoryTitle ?? Self.prettyTitle(from: row.slug),
                         displayOrder: row.displayOrder == 0 ? index + 1 : row.displayOrder,
                         imageUrls: parsed.imageURLs,
                         imageUrl: parsed.imageURL,
@@ -150,7 +150,7 @@ public actor CSSupabaseContentRepository: CSContentRepository {
                 queryItems: [
                     .init(
                         name: "select",
-                        value: "category_slug,category_title,subcategory_slug,subcategory_title,slug,title,summary,blocks,related_item_ids,keywords,display_order"
+                        value: "category_slug,category_title,subcategory_title,slug,summary,blocks,related_item_ids,keywords,display_order"
                     ),
                     .init(name: "is_published", value: "eq.true"),
                     .init(name: "category_slug", value: "eq.\(categorySlug)"),
@@ -166,7 +166,7 @@ public actor CSSupabaseContentRepository: CSContentRepository {
                 queryItems: [
                     .init(
                         name: "select",
-                        value: "category_slug,subcategory_slug,slug,title,summary,blocks,related_item_ids,keywords,display_order"
+                        value: "category_slug,slug,summary,blocks,related_item_ids,keywords,display_order"
                     ),
                     .init(name: "is_published", value: "eq.true"),
                     .init(name: "category_slug", value: "eq.\(categorySlug)"),

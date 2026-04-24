@@ -74,6 +74,23 @@ public struct SupabaseClient: SupabaseRequesting {
         }
 
         guard (200...299).contains(httpResponse.statusCode) else {
+            #if DEBUG
+            let bodyPreview = String(data: data, encoding: .utf8)?
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+                .prefix(1200)
+            let headerPreview = httpResponse.allHeaderFields
+                .compactMap { key, value in
+                    "\(key): \(value)"
+                }
+                .joined(separator: ", ")
+            print("""
+            [SupabaseClient] ❌ request failed
+            status: \(httpResponse.statusCode)
+            url: \(url.absoluteString)
+            headers: \(headerPreview)
+            body: \(bodyPreview ?? "<non-utf8-body>")
+            """)
+            #endif
             throw SupabaseClientError.invalidStatusCode(httpResponse.statusCode)
         }
 
