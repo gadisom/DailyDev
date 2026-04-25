@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0683D7D0B76E6A291B64A9B1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E745A74AC3E402803D2E1E0E /* AppCoordinator.swift */; };
 		15A41E004A71C19406355548 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B58E2A3FFC4EAD8B252DC07 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4DFF445F8B47427C034BA091 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8C2234DC4F42CDBBCAD900F /* Assets.xcassets */; };
 		52D7445AD20C5389AFC6C804 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 4B8C76AA11048480435B74B8 /* Dependencies */; };
@@ -57,6 +58,7 @@
 		9A6666AB4A3039C8D3F1F5C8 /* DailyDeviOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDeviOSApp.swift; sourceTree = "<group>"; };
 		C741F7C29C5290CF9209083D /* TuistBundle+DailyDeviOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+DailyDeviOS.swift"; sourceTree = "<group>"; };
 		DBEEEA08AFA86E3BE9B818FD /* Features.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Features.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E745A74AC3E402803D2E1E0E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		F8C2234DC4F42CDBBCAD900F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 		9A53461327ACFB42B41A94FE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				E745A74AC3E402803D2E1E0E /* AppCoordinator.swift */,
 				9A6666AB4A3039C8D3F1F5C8 /* DailyDeviOSApp.swift */,
 			);
 			path = Sources;
@@ -232,6 +235,7 @@
 			files = (
 				E8B1DE2D1207C064D596F491 /* TuistAssets+DailyDeviOS.swift in Sources */,
 				B64AC1A9987CB82156AB4A97 /* TuistBundle+DailyDeviOS.swift in Sources */,
+				0683D7D0B76E6A291B64A9B1 /* AppCoordinator.swift in Sources */,
 				D2A5388820358FEF9C708B40 /* DailyDeviOSApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

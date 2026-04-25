@@ -7,12 +7,10 @@ import Entity
 // MARK: - Entry point (public)
 
 public struct QuizScene: View {
-    @State private var store: StoreOf<QuizFeature>
+    private let store: StoreOf<QuizFeature>
 
-    public init() {
-        _store = State(wrappedValue: Store(
-            initialState: QuizFeature.State()
-        ) { QuizFeature() })
+    public init(store: StoreOf<QuizFeature>) {
+        self.store = store
     }
 
     public var body: some View {

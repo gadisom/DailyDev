@@ -3,15 +3,15 @@ import DesignSystem
 import Entity
 import SwiftUI
 
-struct QuizCategoryUIModel: Identifiable {
-    let id: String
-    let name: String
-    let icon: String
-    let iconColor: Color
-    let iconBackground: Color
-    let questions: [QuizQuestion]
+public struct QuizCategoryUIModel: Identifiable {
+    public let id: String
+    public let name: String
+    public let icon: String
+    public let iconColor: Color
+    public let iconBackground: Color
+    public let questions: [QuizQuestion]
 
-    init(
+    public init(
         id: String,
         name: String,
         icon: String,
@@ -27,7 +27,7 @@ struct QuizCategoryUIModel: Identifiable {
         self.questions = questions
     }
 
-    init(_ category: QuizCategory) {
+    public init(_ category: QuizCategory) {
         self.init(
             id: category.id,
             name: category.name,
@@ -38,7 +38,7 @@ struct QuizCategoryUIModel: Identifiable {
         )
     }
 
-    var questionsByType: [(label: String, tag: String, items: [QuizQuestion])] {
+    public var questionsByType: [(label: String, tag: String, items: [QuizQuestion])] {
         let mcq = questions.filter { $0.type == .mcq }
         let ox = questions.filter { $0.type == .ox }
         let fill = questions.filter { $0.type == .fill }
@@ -49,7 +49,7 @@ struct QuizCategoryUIModel: Identifiable {
         return out
     }
 
-    func toQuizSet() -> QuizSet {
+    public func toQuizSet() -> QuizSet {
         QuizSet(
             chapter: name,
             chapterNum: "—",

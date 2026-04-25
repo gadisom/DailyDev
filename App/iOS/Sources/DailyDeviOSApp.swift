@@ -5,27 +5,6 @@ import Core
 import Features
 import DesignSystem
 
-@MainActor
-final class AppCoordinator: ObservableObject {
-    enum MainTab: Hashable {
-        case home
-        case quiz
-        case post
-        case saved
-    }
-
-    @Published var selectedTab: MainTab = .home
-    @Published var homeNavigationPath: [HomeRoute] = []
-
-    func navigateToSavedConcept(categoryID: String, conceptID: String) {
-        homeNavigationPath = [
-            .category(categoryID),
-            .lesson(categoryID: categoryID, subcategoryID: conceptID)
-        ]
-        selectedTab = .home
-    }
-}
-
 @main
 struct DailyDeviOSApp: App {
     @StateObject private var coordinator = AppCoordinator()
@@ -37,6 +16,11 @@ struct DailyDeviOSApp: App {
         )
     ) {
         HomeFeature()
+    }
+    private let quizStore = Store(
+        initialState: QuizFeature.State()
+    ) {
+        QuizFeature()
     }
     private let postStore = Store(
         initialState: PostFeature.State()
@@ -57,20 +41,20 @@ struct DailyDeviOSApp: App {
                         Image(systemName: "house.fill")
                         Text("Home")
                     }
-                    .tag(AppCoordinator.MainTab.home)
+                .tag(AppCoordinator.MainTab.home)
 
-                QuizScene()
-                .tabItem {
-                    Image(systemName: "questionmark.circle")
-                    Text("Quiz")
-                }
+                QuizScene(store: quizStore)
+                    .tabItem {
+                        Image(systemName: "questionmark.circle")
+                        Text("Quiz")
+                    }
                     .tag(AppCoordinator.MainTab.quiz)
 
                 PostScene(store: postStore)
-                .tabItem {
-                    Image(systemName: "doc.text")
-                    Text("Post")
-                }
+                    .tabItem {
+                        Image(systemName: "doc.text")
+                        Text("Post")
+                    }
                     .tag(AppCoordinator.MainTab.post)
 
                 SavedScene(
