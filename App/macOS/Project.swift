@@ -17,6 +17,15 @@ let project = Project(
             requirement: .upToNextMajor(from: "1.7.0")
         )
     ],
+    settings: .settings(
+        base: [
+            "DEVELOPMENT_TEAM": "U6NUHA5DNR",
+            "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
+            "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS": "YES",
+            "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOL_FRAMEWORKS": "SwiftUI AppKit",
+            "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "YES"
+        ]
+    ),
     targets: [
         .target(
             name: "DailyDevMacOS",
@@ -40,7 +49,16 @@ let project = Project(
                 .package(product: "ComposableArchitecture"),
                 .package(product: "Dependencies"),
                 .package(product: "CasePaths"),
+                ],
+            settings: .settings(
+                base: [
+                    "CODE_SIGN_STYLE": "Automatic",
+                    "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
+                    "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS": "YES",
+                    "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOL_FRAMEWORKS": "SwiftUI AppKit",
+                    "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "YES"
                 ]
+            )
         )
     ]
 )

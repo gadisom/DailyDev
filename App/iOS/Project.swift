@@ -21,6 +21,15 @@ let project = Project(
             requirement: .upToNextMajor(from: "1.1.0")
         )
     ],
+    settings: .settings(
+        base: [
+            "DEVELOPMENT_TEAM": "U6NUHA5DNR",
+            "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
+            "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS": "YES",
+            "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOL_FRAMEWORKS": "SwiftUI UIKit",
+            "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "YES"
+        ]
+    ),
     targets: [
         .target(
             name: "DailyDeviOS",
@@ -53,7 +62,10 @@ let project = Project(
             settings: .settings(
                 base: [
                     "CODE_SIGN_STYLE": "Automatic",
-                    "DEVELOPMENT_TEAM": "U6NUHA5DNR"
+                    "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
+                    "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS": "YES",
+                    "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOL_FRAMEWORKS": "SwiftUI UIKit",
+                    "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "YES"
                 ]
             )
         )

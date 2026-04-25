@@ -25,6 +25,14 @@ let project = Project(
             requirement: .upToNextMajor(from: "1.1.0")
         )
     ],
+    settings: .settings(
+        base: [
+            "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
+            "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS": "YES",
+            "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOL_FRAMEWORKS": "SwiftUI UIKit AppKit",
+            "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "YES"
+        ]
+    ),
     targets: [
         .target(
             name: "Features",
@@ -48,7 +56,18 @@ let project = Project(
                 .package(product: "CasePaths"),
                 .package(product: "Perception"),
                 .package(product: "IdentifiedCollections"),
-            ]
+            ],
+            settings: .settings(
+                base: [
+                    "ENABLE_MODULE_VERIFIER": "YES",
+                    "MODULE_VERIFIER_SUPPORTED_LANGUAGES": "objective-c objective-c++",
+                    "MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS": "gnu11 gnu++14",
+                    "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
+                    "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS": "YES",
+                    "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOL_FRAMEWORKS": "SwiftUI UIKit AppKit",
+                    "ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS": "YES"
+                ]
+            )
         )
     ]
 )
