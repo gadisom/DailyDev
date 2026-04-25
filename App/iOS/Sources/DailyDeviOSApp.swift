@@ -36,7 +36,10 @@ struct DailyDeviOSApp: App {
     var body: some Scene {
         WindowGroup {
             TabView(selection: $coordinator.selectedTab) {
-                HomeScene(store: homeStore, navigationPath: $coordinator.homeNavigationPath)
+                HomeScene(
+                    store: homeStore,
+                    navigationRequest: $coordinator.homeNavigationRequest
+                )
                     .tabItem {
                         Image(systemName: "house.fill")
                         Text("Home")

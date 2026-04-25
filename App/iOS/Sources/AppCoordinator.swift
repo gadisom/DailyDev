@@ -11,13 +11,13 @@ final class AppCoordinator: ObservableObject {
     }
 
     @Published var selectedTab: MainTab = .home
-    @Published var homeNavigationPath: [HomeRoute] = []
+    @Published var homeNavigationRequest: HomeNavigationRequest?
 
     func navigateToSavedConcept(categoryID: String, conceptID: String) {
-        homeNavigationPath = [
-            .category(categoryID),
-            .lesson(categoryID: categoryID, subcategoryID: conceptID)
-        ]
+        homeNavigationRequest = HomeNavigationRequest(
+            categoryID: categoryID,
+            subcategoryID: conceptID
+        )
         selectedTab = .home
     }
 }

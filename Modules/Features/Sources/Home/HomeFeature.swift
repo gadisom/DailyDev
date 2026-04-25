@@ -7,6 +7,16 @@ public enum HomeRoute: Hashable {
     case lesson(categoryID: String, subcategoryID: String)
 }
 
+public struct HomeNavigationRequest: Equatable {
+    public let categoryID: String
+    public let subcategoryID: String?
+
+    public init(categoryID: String, subcategoryID: String? = nil) {
+        self.categoryID = categoryID
+        self.subcategoryID = subcategoryID
+    }
+}
+
 @Reducer
 public struct HomeFeature {
     @ObservableState

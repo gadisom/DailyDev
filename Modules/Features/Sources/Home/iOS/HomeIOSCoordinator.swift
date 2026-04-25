@@ -7,13 +7,16 @@ import Entity
 struct HomeIOSCoordinator: View {
     @Bindable var store: StoreOf<HomeFeature>
     @Binding var path: [HomeRoute]
+    @Binding var navigationRequest: HomeNavigationRequest?
 
     init(
         store: StoreOf<HomeFeature>,
-        path: Binding<[HomeRoute]> = .constant([])
+        path: Binding<[HomeRoute]> = .constant([]),
+        navigationRequest: Binding<HomeNavigationRequest?> = .constant(nil)
     ) {
         self.store = store
         self._path = path
+        self._navigationRequest = navigationRequest
     }
 
     var body: some View {
@@ -40,6 +43,16 @@ struct HomeIOSCoordinator: View {
                     }
                 }
             }
+        }
+        .onChange(of: navigationRequest) { _, next in
+            guard let next = next else { return }
+            path.removeAll()
+            store.send(.categorySelected(next.categoryID))
+            path.append(.category(next.categoryID))
+            if let subcategoryID = next.subcategoryID {
+                path.append(.lesson(categoryID: next.categoryID, subcategoryID: subcategoryID))
+            }
+            self.navigationRequest = nil
         }
     }
 }
