@@ -41,6 +41,11 @@ public struct SavedFeature {
         case fullQuizDismissed
         case questionTapped(Int)
         case questionDismissed
+        case delegate(Delegate)
+
+        public enum Delegate: Sendable {
+            case selectConcept(categoryID: String, conceptID: String)
+        }
     }
 
     public init() {}
@@ -73,6 +78,9 @@ public struct SavedFeature {
 
             case .questionDismissed:
                 state.selectedQuestionID = nil
+                return .none
+
+            case .delegate:
                 return .none
             }
         }

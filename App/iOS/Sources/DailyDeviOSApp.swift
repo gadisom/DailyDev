@@ -7,68 +7,44 @@ import DesignSystem
 
 @main
 struct DailyDeviOSApp: App {
-    @StateObject private var coordinator = AppCoordinator()
-
-    private let homeStore = Store(
-        initialState: HomeFeature.State(
-            platform: .iOS,
-            environment: AppEnvironment()
-        )
-    ) {
-        HomeFeature()
-    }
-    private let quizStore = Store(
-        initialState: QuizFeature.State()
-    ) {
-        QuizFeature()
-    }
-    private let postStore = Store(
-        initialState: PostFeature.State()
-    ) {
-        PostFeature()
-    }
-    private let savedStore = Store(
-        initialState: SavedFeature.State()
-    ) {
-        SavedFeature()
+    @State private var store = Store(initialState: AppFeature.State()) {
+        AppFeature()
     }
 
     var body: some Scene {
         WindowGroup {
-            TabView(selection: $coordinator.selectedTab) {
+            @Bindable var store = store
+            TabView(selection: $store.selectedTab) {
                 HomeScene(
-                    store: homeStore,
-                    navigationRequest: $coordinator.homeNavigationRequest
+                    store: store.scope(state: \.home, action: \.home),
+                    navigationRequest: $store.homeNavigationRequest
                 )
-                    .tabItem {
-                        Image(systemName: "house.fill")
-                        Text("Home")
-                    }
-                .tag(AppCoordinator.MainTab.home)
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Home")
+                }
+                .tag(AppFeature.MainTab.home)
 
-                QuizScene(store: quizStore)
+                QuizScene(store: store.scope(state: \.quiz, action: \.quiz))
                     .tabItem {
                         Image(systemName: "questionmark.circle")
                         Text("Quiz")
                     }
-                    .tag(AppCoordinator.MainTab.quiz)
+                    .tag(AppFeature.MainTab.quiz)
 
-                PostScene(store: postStore)
+                PostScene(store: store.scope(state: \.post, action: \.post))
                     .tabItem {
                         Image(systemName: "doc.text")
                         Text("Post")
                     }
-                    .tag(AppCoordinator.MainTab.post)
+                    .tag(AppFeature.MainTab.post)
 
-                SavedScene(
-                    store: savedStore,
-                    onSelectConcept: coordinator.navigateToSavedConcept(categoryID:conceptID:)
-                )
-                .tabItem {
-                    Image(systemName: "bookmark.fill")
-                    Text("Saved")
-                }
-                    .tag(AppCoordinator.MainTab.saved)
+                SavedScene(store: store.scope(state: \.saved, action: \.saved))
+                    .tabItem {
+                        Image(systemName: "bookmark.fill")
+                        Text("Saved")
+                    }
+                    .tag(AppFeature.MainTab.saved)
             }
             .accentColor(BrandPalette.green)
             .tint(BrandPalette.green)
