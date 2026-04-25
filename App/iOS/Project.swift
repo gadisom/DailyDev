@@ -49,7 +49,13 @@ let project = Project(
                 .package(product: "Dependencies"),
                 .package(product: "CasePaths"),
                 .package(product: "IdentifiedCollections"),
-            ]
+            ],
+            settings: .settings(
+                base: [
+                    "CODE_SIGN_STYLE": "Automatic",
+                    "DEVELOPMENT_TEAM": "U6NUHA5DNR"
+                ]
+            )
         )
     ]
 )
