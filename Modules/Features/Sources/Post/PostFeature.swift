@@ -119,6 +119,7 @@ public struct PostFeature {
     }
 
     @Dependency(\.postContentClient) var postContentClient
+    @Dependency(\.analyticsClient) var analyticsClient
 
     public init() {}
 
@@ -130,16 +131,25 @@ public struct PostFeature {
                 return .send(._load(reset: true))
 
             case .refreshRequested:
-                return .send(._load(reset: true))
+                return .merge(
+                    .run { _ in
+                        await analyticsClient.track(.postRefreshTapped)
+                    },
+                    .send(._load(reset: true))
+                )
 
             case .retryTapped:
+                let trackRetry: Effect<Action> = .run { _ in
+                    await analyticsClient.track(.postRetryTapped)
+                }
+
                 if state.articles.isEmpty {
-                    return .send(._load(reset: true))
+                    return .merge(trackRetry, .send(._load(reset: true)))
                 }
                 if state.hasNext {
-                    return .send(._load(reset: false))
+                    return .merge(trackRetry, .send(._load(reset: false)))
                 }
-                return .send(._load(reset: true))
+                return .merge(trackRetry, .send(._load(reset: true)))
 
             case let .rowAppeared(articleID):
                 guard !state.isLoading else { return .none }
@@ -149,14 +159,23 @@ public struct PostFeature {
 
             case let .filterSelected(filterID):
                 state.selectedFilterID = filterID
-                if state.visibleArticles.isEmpty && state.hasNext && !state.isLoading && !state.articles.isEmpty {
-                    return .send(._load(reset: false))
+                let trackFilter: Effect<Action> = .run { _ in
+                    await analyticsClient.track(.postFilterSelected(filterID: filterID))
                 }
-                return .none
+
+                if state.visibleArticles.isEmpty && state.hasNext && !state.isLoading && !state.articles.isEmpty {
+                    return .merge(trackFilter, .send(._load(reset: false)))
+                }
+                return trackFilter
 
             case .loadMoreTapped:
                 guard state.hasNext, !state.isLoading else { return .none }
-                return .send(._load(reset: false))
+                return .merge(
+                    .run { _ in
+                        await analyticsClient.track(.postLoadMoreTapped)
+                    },
+                    .send(._load(reset: false))
+                )
 
             case let ._load(reset):
                 guard !state.isLoading else { return .none }

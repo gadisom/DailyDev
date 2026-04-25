@@ -42,6 +42,7 @@ public struct QuizFeature {
     }
 
     @Dependency(\.quizDataClient) private var quizDataClient
+    @Dependency(\.analyticsClient) private var analyticsClient
 
     public init() {}
 
@@ -68,6 +69,8 @@ public struct QuizFeature {
             case .refreshTapped:
                 state.phase = .loading
                 return .run { send in
+                    await analyticsClient.track(.quizRefreshTapped)
+
                     do {
                         let categories = try await quizDataClient.fetchQuizBank()
                         await send(.categoriesLoaded(.success(categories)))

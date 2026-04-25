@@ -34,6 +34,8 @@ struct QuizFlowFeature {
         case done
     }
 
+    @Dependency(\.analyticsClient) private var analyticsClient
+
     public var body: some ReducerOf<Self> {
         BindingReducer()
         Reduce { state, action in
@@ -51,7 +53,9 @@ struct QuizFlowFeature {
                 }
                 state.answers[q.id] = isCorrect ? "correct" : "wrong"
                 state.phase = .explain
-                return .none
+                return .run { _ in
+                    await analyticsClient.track(.quizAnswerSubmitted(questionID: q.id, isCorrect: isCorrect))
+                }
 
             case .advanceAfterExplain:
                 if state.isLast {
@@ -91,7 +95,10 @@ struct QuizFlowFeature {
 
             case .done:
                 state.isDone = true
-                return .none
+                let correctCount = state.answers.values.filter { $0 == "correct" }.count
+                return .run { [total = state.total] _ in
+                    await analyticsClient.track(.quizCompleted(totalCount: total, correctCount: correctCount))
+                }
 
             case .binding:
                 return .none

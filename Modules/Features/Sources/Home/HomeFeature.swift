@@ -59,6 +59,7 @@ public struct HomeFeature {
     }
 
     @Dependency(\.csContentClient) var csContentClient
+    @Dependency(\.analyticsClient) var analyticsClient
 
     public init() {}
 
@@ -114,6 +115,8 @@ public struct HomeFeature {
                 state.errorMessage = nil
 
                 return .run { send in
+                    await analyticsClient.track(.homeCategorySelected(categoryID: categoryID))
+
                     do {
                         let content = try await csContentClient.fetchCategoryContent(category.id)
                         await send(.categoryContentLoaded(.success(content)))

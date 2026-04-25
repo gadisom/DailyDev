@@ -4,6 +4,8 @@ import Features
 
 @Reducer
 struct AppFeature {
+    @Dependency(\.analyticsClient) private var analyticsClient
+
     enum MainTab: Hashable {
         case home
         case quiz
@@ -15,6 +17,7 @@ struct AppFeature {
     struct State: Equatable {
         var selectedTab: MainTab = .home
         var homeNavigationRequest: HomeNavigationRequest?
+        var didTrackAppOpened = false
         var home: HomeFeature.State
         var quiz: QuizFeature.State
         var post: PostFeature.State
@@ -30,6 +33,7 @@ struct AppFeature {
 
     enum Action: BindableAction {
         case binding(BindingAction<State>)
+        case task
         case home(HomeFeature.Action)
         case quiz(QuizFeature.Action)
         case post(PostFeature.Action)
@@ -46,6 +50,31 @@ struct AppFeature {
 
         Reduce { state, action in
             switch action {
+            case .task:
+                guard !state.didTrackAppOpened else {
+                    return .none
+                }
+                state.didTrackAppOpened = true
+                return .run { _ in
+                    await analyticsClient.track(.appOpened)
+                }
+
+            case .binding(\.selectedTab):
+                let tabName: String
+                switch state.selectedTab {
+                case .home:
+                    tabName = "home"
+                case .quiz:
+                    tabName = "quiz"
+                case .post:
+                    tabName = "post"
+                case .saved:
+                    tabName = "saved"
+                }
+                return .run { _ in
+                    await analyticsClient.track(.tabSelected(tab: tabName))
+                }
+
             case .saved(.delegate(.selectConcept(let categoryID, let conceptID))):
                 state.homeNavigationRequest = HomeNavigationRequest(
                     categoryID: categoryID,

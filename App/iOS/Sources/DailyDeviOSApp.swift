@@ -48,6 +48,9 @@ struct DailyDeviOSApp: App {
             }
             .accentColor(BrandPalette.green)
             .tint(BrandPalette.green)
+            .task {
+                store.send(.task)
+            }
         }
         .modelContainer(for: [SavedConcept.self, SavedQuizQuestion.self, SavedPost.self])
     }

@@ -50,6 +50,8 @@ public struct SavedFeature {
 
     public init() {}
 
+    @Dependency(\.analyticsClient) private var analyticsClient
+
     public var body: some ReducerOf<Self> {
         BindingReducer()
 
@@ -60,12 +62,16 @@ public struct SavedFeature {
 
             case .tabTapped(let tab):
                 state.selectedTab = tab
-                return .none
+                return .run { _ in
+                    await analyticsClient.track(.savedTabSelected(tab: tab.rawValue))
+                }
 
             case .fullQuizTapped:
                 state.selectedQuestionID = nil
                 state.isFullQuizFlowPresented = true
-                return .none
+                return .run { _ in
+                    await analyticsClient.track(.savedFullQuizStarted)
+                }
 
             case .fullQuizDismissed:
                 state.isFullQuizFlowPresented = false
@@ -74,14 +80,18 @@ public struct SavedFeature {
             case .questionTapped(let questionID):
                 state.isFullQuizFlowPresented = false
                 state.selectedQuestionID = questionID
-                return .none
+                return .run { _ in
+                    await analyticsClient.track(.savedQuizOpened(questionID: questionID))
+                }
 
             case .questionDismissed:
                 state.selectedQuestionID = nil
                 return .none
 
-            case .delegate:
-                return .none
+            case .delegate(.selectConcept(let categoryID, let conceptID)):
+                return .run { _ in
+                    await analyticsClient.track(.savedConceptOpened(categoryID: categoryID, conceptID: conceptID))
+                }
             }
         }
     }

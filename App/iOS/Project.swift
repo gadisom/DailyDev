@@ -42,6 +42,7 @@ let project = Project(
                 with: [
                     "CFBundleDisplayName": "DailyDev",
                     "CFBundleName": "DailyDev",
+                    "AMPLITUDE_API_KEY": "00dec6feb4467f881551bbaee76de617",
                     "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_sWMT0op09LVNmJpnHYY6wg_ZIy-bHMV",
                     "SUPABASE_ANON_KEY": "",
                     "UILaunchScreen": [:],

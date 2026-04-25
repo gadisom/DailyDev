@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53DE60073AF5716A9584D9E0 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0915FF3D2E8A2EE8BC9C915A /* AnalyticsEvent.swift */; };
 		61E5C97F94E0844943CB342D /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE59B4F178DF5B68A884DB /* AppEnvironment.swift */; };
+		7C2CD83D70A33FD85DA08660 /* AnalyticsValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8345BDC93926D0E731AFE72 /* AnalyticsValue.swift */; };
+		B837477F7E5BFCA38A656270 /* AnalyticsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D47FED676441782F9D4E18 /* AnalyticsClient.swift */; };
+		E7494D59CF3A2D7FFFEE3DA2 /* AmplitudeUnified in Frameworks */ = {isa = PBXBuildFile; productRef = 3DD2F0FF56EAF53C253F3FE1 /* AmplitudeUnified */; };
+		FBEDF01382284545CCD03237 /* AmplitudeAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3D63A3252C15D39D6A0818 /* AmplitudeAnalyticsService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,9 +29,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0915FF3D2E8A2EE8BC9C915A /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		26BDD2D3E7FED8CDE9A52F46 /* Core-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Core-Info.plist"; sourceTree = "<group>"; };
 		2B0FA7F85F3573FB522F9478 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EBE59B4F178DF5B68A884DB /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		B8345BDC93926D0E731AFE72 /* AnalyticsValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsValue.swift; sourceTree = "<group>"; };
+		D6D47FED676441782F9D4E18 /* AnalyticsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsClient.swift; sourceTree = "<group>"; };
+		DF3D63A3252C15D39D6A0818 /* AmplitudeAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeAnalyticsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7494D59CF3A2D7FFFEE3DA2 /* AmplitudeUnified in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,9 +74,21 @@
 			);
 			sourceTree = "<group>";
 		};
+		7C2E9196984207040583DD5D /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				DF3D63A3252C15D39D6A0818 /* AmplitudeAnalyticsService.swift */,
+				D6D47FED676441782F9D4E18 /* AnalyticsClient.swift */,
+				0915FF3D2E8A2EE8BC9C915A /* AnalyticsEvent.swift */,
+				B8345BDC93926D0E731AFE72 /* AnalyticsValue.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
 		81104ECEC5CD1B0F5111557B /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				7C2E9196984207040583DD5D /* Analytics */,
 				8EBE59B4F178DF5B68A884DB /* AppEnvironment.swift */,
 			);
 			path = Sources;
@@ -107,6 +129,7 @@
 			);
 			name = Core;
 			packageProductDependencies = (
+				3DD2F0FF56EAF53C253F3FE1 /* AmplitudeUnified */,
 			);
 			productName = Core;
 			productReference = 2B0FA7F85F3573FB522F9478 /* Core.framework */;
@@ -132,6 +155,9 @@
 				en,
 			);
 			mainGroup = 62824534F75515F48E8114A7;
+			packageReferences = (
+				89FA4415137F6CC2A4F3CC4C /* XCRemoteSwiftPackageReference "AmplitudeUnified-Swift" */,
+			);
 			productRefGroup = 250C62EE12DB56ECEBB473C3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -156,6 +182,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBEDF01382284545CCD03237 /* AmplitudeAnalyticsService.swift in Sources */,
+				B837477F7E5BFCA38A656270 /* AnalyticsClient.swift in Sources */,
+				53DE60073AF5716A9584D9E0 /* AnalyticsEvent.swift in Sources */,
+				7C2CD83D70A33FD85DA08660 /* AnalyticsValue.swift in Sources */,
 				61E5C97F94E0844943CB342D /* AppEnvironment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,6 +431,24 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		89FA4415137F6CC2A4F3CC4C /* XCRemoteSwiftPackageReference "AmplitudeUnified-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/amplitude/AmplitudeUnified-Swift";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3DD2F0FF56EAF53C253F3FE1 /* AmplitudeUnified */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AmplitudeUnified;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 83ADD9484DDC11E75E9F182F /* Project object */;
 }
