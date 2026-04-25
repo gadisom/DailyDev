@@ -6,7 +6,7 @@ import Entity
 // MARK: - Random Quiz Setup
 
 struct QuizRandomSetupView: View {
-    let categories: [QuizCategory]
+    let categories: [QuizCategoryUIModel]
 
     @State private var selectedCategories: Set<String> = []
     @State private var selectedTypes: Set<QuizQuestionType> = [.mcq, .ox, .fill]
@@ -190,7 +190,7 @@ struct QuizRandomSetupView: View {
 
     // MARK: - Sub-views
 
-    private func categoryToggleRow(_ category: QuizCategory) -> some View {
+    private func categoryToggleRow(_ category: QuizCategoryUIModel) -> some View {
         let on = selectedCategories.contains(category.id)
         return Button {
             if on { selectedCategories.remove(category.id) }

@@ -14,12 +14,12 @@ public struct QuizFeature {
         }
 
         public var phase: Phase
-        public var categories: [QuizCategory]
+        public var categories: [QuizCategoryUIModel]
         public var hasLoadedInitialData: Bool
 
         public init(
             phase: Phase = .loading,
-            categories: [QuizCategory] = [],
+            categories: [QuizCategoryUIModel] = [],
             hasLoadedInitialData: Bool = false
         ) {
             self.phase = phase
@@ -38,7 +38,7 @@ public struct QuizFeature {
         case binding(BindingAction<State>)
         case task
         case refreshTapped
-        case categoriesLoaded(Result<[QuizCategory], Error>)
+        case categoriesLoaded(Result<[QuizCategoryUIModel], Error>)
     }
 
     @Dependency(\.quizDataClient) private var quizDataClient

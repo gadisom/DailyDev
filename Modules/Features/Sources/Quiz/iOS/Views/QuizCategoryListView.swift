@@ -6,7 +6,7 @@ import Entity
 // MARK: - Category Question List
 
 struct QuizCategoryListView: View {
-    let category: QuizCategory
+    let category: QuizCategoryUIModel
 
     var body: some View {
         ZStack {

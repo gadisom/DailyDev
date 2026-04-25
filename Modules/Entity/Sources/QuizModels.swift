@@ -1,4 +1,3 @@
-import SwiftUI
 import Foundation
 
 // MARK: - Models
@@ -73,23 +72,23 @@ public struct QuizCategory: Identifiable {
     public let id: String
     public let name: String
     public let icon: String
-    public let iconColor: Color
-    public let iconBackground: Color
+    public let iconColorHex: String
+    public let iconBackgroundHex: String
     public let questions: [QuizQuestion]
 
     public init(
         id: String,
         name: String,
         icon: String,
-        iconColor: Color,
-        iconBackground: Color,
+        iconColorHex: String,
+        iconBackgroundHex: String,
         questions: [QuizQuestion]
     ) {
         self.id = id
         self.name = name
         self.icon = icon
-        self.iconColor = iconColor
-        self.iconBackground = iconBackground
+        self.iconColorHex = iconColorHex
+        self.iconBackgroundHex = iconBackgroundHex
         self.questions = questions
     }
 
@@ -116,40 +115,40 @@ public let quizBank: [QuizCategory] = [
         id: "data-structures",
         name: "자료구조",
         icon: "square.grid.3x3",
-        iconColor: Color(red: 0.17, green: 0.39, blue: 0.92),
-        iconBackground: Color(red: 0.94, green: 0.97, blue: 1.0),
+        iconColorHex: "2B63EA",
+        iconBackgroundHex: "EFF7FF",
         questions: dsQuestions
     ),
     QuizCategory(
         id: "algorithms",
         name: "알고리즘",
         icon: "sum",
-        iconColor: Color(red: 0.88, green: 0.52, blue: 0.0),
-        iconBackground: Color(red: 1.0, green: 0.98, blue: 0.92),
+        iconColorHex: "E08400",
+        iconBackgroundHex: "FFFAEB",
         questions: algoQuestions
     ),
     QuizCategory(
         id: "operating-systems",
         name: "운영체제",
         icon: "terminal",
-        iconColor: Color(red: 0.58, green: 0.26, blue: 0.91),
-        iconBackground: Color(red: 0.98, green: 0.96, blue: 1.0),
+        iconColorHex: "942AE8",
+        iconBackgroundHex: "F9F5FF",
         questions: osQuestions
     ),
     QuizCategory(
         id: "databases",
         name: "데이터베이스",
         icon: "cylinder",
-        iconColor: Color(red: 0.05, green: 0.62, blue: 0.43),
-        iconBackground: Color(red: 0.93, green: 0.99, blue: 0.96),
+        iconColorHex: "0D9E6E",
+        iconBackgroundHex: "EDF9F5",
         questions: dbQuestions
     ),
     QuizCategory(
         id: "networking",
         name: "네트워크",
         icon: "point.3.filled.connected.trianglepath.dotted",
-        iconColor: Color(red: 0.93, green: 0.13, blue: 0.36),
-        iconBackground: Color(red: 1.0, green: 0.95, blue: 0.96),
+        iconColorHex: "ED215C",
+        iconBackgroundHex: "FFF2F5",
         questions: netQuestions
     ),
 ]

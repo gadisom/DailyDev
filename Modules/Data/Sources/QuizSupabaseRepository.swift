@@ -1,5 +1,6 @@
 import Foundation
 import Domain
+import Entity
 
 public actor QuizSupabaseRepository: QuizRepository {
     private let client: SupabaseRequesting
@@ -10,10 +11,18 @@ public actor QuizSupabaseRepository: QuizRepository {
         self.client = client
     }
 
-    public func fetchQuizBank() async throws -> (categories: [QuizCategoryDTO], questions: [QuizQuestionDTO]) {
+    public func fetchQuizBank() async throws -> [QuizCategory] {
         async let cats = fetchCategories()
         async let qs = fetchQuestions()
-        return try await (cats, qs)
+        let (categoryRows, questionRows) = try await (cats, qs)
+
+        return categoryRows.compactMap { categoryRow in
+            let questions = questionRows
+                .filter { $0.categoryId == categoryRow.id }
+                .compactMap(QuizQuestion.init)
+
+            return QuizCategory(dto: categoryRow, questions: questions)
+        }
     }
 
     private func fetchCategories() async throws -> [QuizCategoryDTO] {
@@ -63,6 +72,37 @@ public actor QuizSupabaseRepository: QuizRepository {
         }
 
         return .decodingFailed(error.localizedDescription)
+    }
+}
+
+private extension QuizCategory {
+    init?(dto: QuizCategoryDTO, questions: [QuizQuestion]) {
+        self.init(
+            id: dto.id,
+            name: dto.name,
+            icon: dto.icon,
+            iconColorHex: dto.iconColor,
+            iconBackgroundHex: dto.iconBgColor,
+            questions: questions
+        )
+    }
+}
+
+private extension QuizQuestion {
+    init?(_ dto: QuizQuestionDTO) {
+        guard let type = QuizQuestionType(rawValue: dto.type) else { return nil }
+        self.init(
+            id: dto.id,
+            type: type,
+            question: dto.question,
+            choices: dto.choices,
+            correctIndex: dto.correctIndex,
+            oxAnswer: dto.oxAnswer,
+            fillAnswer: dto.fillAnswer,
+            explanation: dto.explanation,
+            concept: dto.concept,
+            tag: dto.tag
+        )
     }
 }
 

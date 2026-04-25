@@ -138,7 +138,7 @@ private struct QuizHubView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    private func categoryRow(_ category: QuizCategory) -> some View {
+    private func categoryRow(_ category: QuizCategoryUIModel) -> some View {
         HStack(spacing: 14) {
             Image(systemName: category.icon)
                 .font(.system(size: 16, weight: .semibold))
