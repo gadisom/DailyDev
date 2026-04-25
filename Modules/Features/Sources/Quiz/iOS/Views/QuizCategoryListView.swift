@@ -96,10 +96,14 @@ struct QuizCategoryListView: View {
     }
 
     private func singleQuizSet(_ question: QuizQuestion) -> QuizSet {
-        let start = category.questions.firstIndex(where: { $0.id == question.id }) ?? 0
-        let qs = Array(category.questions[start...])
-        return QuizSet(chapter: category.name, chapterNum: "—", discipline: category.name,
-                       questions: qs, passingScore: 80, allowsEarlyExit: true)
+        return QuizSet(
+            chapter: category.name,
+            chapterNum: "—",
+            discipline: category.name,
+            questions: [question],
+            passingScore: 80,
+            allowsEarlyExit: true
+        )
     }
 
     private func typeSection(ko: String, en: String, count: Int) -> some View {
