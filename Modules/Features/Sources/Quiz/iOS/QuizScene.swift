@@ -9,8 +9,10 @@ import Entity
 public struct QuizScene: View {
     @State private var store: StoreOf<QuizFeature>
 
-    public init(store: StoreOf<QuizFeature> = Store(initialState: QuizFeature.State()) { QuizFeature() }) {
-        _store = State(wrappedValue: store)
+    public init() {
+        _store = State(wrappedValue: Store(
+            initialState: QuizFeature.State()
+        ) { QuizFeature() })
     }
 
     public var body: some View {

@@ -11,3 +11,10 @@ DerivedData/
 # Tuist generated
 Tuist/
 
+# Additional local artifacts
+*.xcresult
+*.log
+.swiftpm
+study/.DS_Store
+study/.gitkeep
+

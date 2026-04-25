@@ -3,21 +3,21 @@ import ComposableArchitecture
 import Entity
 
 @Reducer
-public struct QuizFeature {
+struct QuizFeature {
     @ObservableState
-    public struct State: Equatable {
-        public enum Phase: Equatable {
+    struct State: Equatable {
+        enum Phase: Equatable {
             case idle
             case loading
             case content
             case error(String)
         }
 
-        public var phase: Phase
-        public var categories: [QuizCategoryUIModel]
-        public var hasLoadedInitialData: Bool
+        var phase: Phase
+        var categories: [QuizCategoryUIModel]
+        var hasLoadedInitialData: Bool
 
-        public init(
+        init(
             phase: Phase = .loading,
             categories: [QuizCategoryUIModel] = [],
             hasLoadedInitialData: Bool = false
@@ -27,14 +27,14 @@ public struct QuizFeature {
             self.hasLoadedInitialData = hasLoadedInitialData
         }
 
-        public static func == (lhs: State, rhs: State) -> Bool {
+        static func == (lhs: State, rhs: State) -> Bool {
             lhs.phase == rhs.phase
                 && lhs.hasLoadedInitialData == rhs.hasLoadedInitialData
                 && lhs.categories.map(\.id) == rhs.categories.map(\.id)
         }
     }
 
-    public enum Action: BindableAction, Sendable {
+    enum Action: BindableAction, Sendable {
         case binding(BindingAction<State>)
         case task
         case refreshTapped
@@ -43,9 +43,9 @@ public struct QuizFeature {
 
     @Dependency(\.quizDataClient) private var quizDataClient
 
-    public init() {}
+    init() {}
 
-    public var body: some ReducerOf<Self> {
+    var body: some ReducerOf<Self> {
         BindingReducer()
 
         Reduce { state, action in

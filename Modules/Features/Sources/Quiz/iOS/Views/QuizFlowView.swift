@@ -9,9 +9,11 @@ import Entity
 
 struct QuizFlowView: View {
     @State private var store: StoreOf<QuizFlowFeature>
+    let quizSet: QuizSet
     @Environment(\.dismiss) private var dismiss
 
     init(quizSet: QuizSet) {
+        self.quizSet = quizSet
         _store = State(wrappedValue: Store(
             initialState: QuizFlowFeature.State(quizSet: quizSet)
         ) { QuizFlowFeature() })
@@ -27,6 +29,8 @@ struct QuizFlowView: View {
             case .question:
                 QuizQuestionView(
                     question: store.current,
+                    quizSet: store.quizSet,
+                    answers: store.answers,
                     index: store.currentIndex,
                     total: store.total,
                     categoryName: store.quizSet.chapter,
@@ -38,9 +42,12 @@ struct QuizFlowView: View {
             case .explain:
                 QuizExplainView(
                     question: store.current,
+                    quizSet: store.quizSet,
+                    answers: store.answers,
                     userAnswer: store.answers[store.current.id],
                     index: store.currentIndex,
                     total: store.total,
+                    categoryName: store.quizSet.chapter,
                     allowsEarlyExit: store.quizSet.allowsEarlyExit,
                     onNext: { store.send(.advanceAfterExplain) },
                     onEarlyFinish: { store.send(.earlyFinish) }
@@ -61,6 +68,12 @@ struct QuizFlowView: View {
         .onChange(of: store.isDone) { _, isDone in
             if isDone { dismiss() }
         }
+        .onAppear {
+            store.send(.reset(quizSet))
+        }
+        .onChange(of: quizSet) { _ in
+            store.send(.reset(quizSet))
+        }
     }
 }
 
@@ -68,6 +81,8 @@ struct QuizFlowView: View {
 
 struct QuizQuestionView: View {
     let question: QuizQuestion
+    let quizSet: QuizSet
+    let answers: [Int: String]
     let index: Int
     let total: Int
     let categoryName: String
@@ -94,11 +109,12 @@ struct QuizQuestionView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            progressBar
-                .padding(.horizontal, 20)
-                .padding(.top, 8)
-                .padding(.bottom, 24)
-
+            if total > 1 {
+                progressBar
+                    .padding(.horizontal, 20)
+                    .padding(.top, 8)
+                    .padding(.bottom, 24)
+            }
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 0) {
                     // Type + tag chips
@@ -150,9 +166,7 @@ struct QuizQuestionView: View {
             HStack(spacing: 3) {
                 ForEach(0..<total, id: \.self) { i in
                     RoundedRectangle(cornerRadius: 2)
-                        .fill(i < index ? BrandPalette.green
-                              : i == index ? BrandPalette.banana
-                              : BrandPalette.surfaceAlt)
+                        .fill(progressColor(at: i))
                         .frame(height: 6)
                 }
             }
@@ -167,6 +181,26 @@ struct QuizQuestionView: View {
                     .foregroundStyle(isBookmarked ? BrandPalette.green : BrandPalette.ink3)
             }
             .buttonStyle(.plain)
+        }
+    }
+
+    private func progressColor(at barIndex: Int) -> Color {
+        if barIndex == index {
+            return BrandPalette.banana
+        }
+
+        guard barIndex >= 0, barIndex < quizSet.questions.count else {
+            return BrandPalette.surfaceAlt
+        }
+
+        let qid = quizSet.questions[barIndex].id
+        switch answers[qid] {
+        case "correct":
+            return BrandPalette.green
+        case "wrong":
+            return BrandPalette.danger
+        default:
+            return BrandPalette.surfaceAlt
         }
     }
 
@@ -283,23 +317,32 @@ struct QuizQuestionView: View {
 
 struct QuizExplainView: View {
     let question: QuizQuestion
+    let quizSet: QuizSet
+    let answers: [Int: String]
     let userAnswer: String?
     let index: Int
     let total: Int
+    let categoryName: String
     let allowsEarlyExit: Bool
     let onNext: () -> Void
     let onEarlyFinish: () -> Void
 
+    @Environment(\.modelContext) private var modelContext
+    @Query private var savedQuestions: [SavedQuizQuestion]
+
     private var isCorrect: Bool { userAnswer == "correct" }
     private var isLast: Bool { index == total - 1 }
+    private var isSaved: Bool { savedQuestions.contains { $0.questionID == question.id } }
 
     var body: some View {
         VStack(spacing: 0) {
-            // Progress
-            progressBar
-                .padding(.horizontal, 20)
-                .padding(.top, 8)
-                .padding(.bottom, 24)
+            if total > 1 {
+                // Progress
+                progressBar
+                    .padding(.horizontal, 20)
+                    .padding(.top, 8)
+                    .padding(.bottom, 24)
+            }
 
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 0) {
@@ -452,6 +495,21 @@ struct QuizExplainView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 34)
         }
+        .toolbar {
+            if total == 1 {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        toggleSavedQuestion()
+                    } label: {
+                        Label(
+                            isSaved ? "저장됨" : "저장",
+                            systemImage: isSaved ? "bookmark.fill" : "bookmark"
+                        )
+                    }
+                    .tint(isSaved ? BrandPalette.green : BrandPalette.ink3)
+                }
+            }
+        }
     }
 
     private var progressBar: some View {
@@ -459,7 +517,7 @@ struct QuizExplainView: View {
             HStack(spacing: 3) {
                 ForEach(0..<total, id: \.self) { i in
                     RoundedRectangle(cornerRadius: 2)
-                        .fill(i <= index ? BrandPalette.green : BrandPalette.surfaceAlt)
+                        .fill(progressColor(at: i))
                         .frame(height: 6)
                 }
             }
@@ -468,6 +526,55 @@ struct QuizExplainView: View {
                 .foregroundStyle(BrandPalette.ink2)
                 .frame(minWidth: 30, alignment: .trailing)
         }
+    }
+
+    private func progressColor(at barIndex: Int) -> Color {
+        if barIndex == index {
+            return BrandPalette.banana
+        }
+
+        guard barIndex >= 0, barIndex < quizSet.questions.count else {
+            return BrandPalette.surfaceAlt
+        }
+
+        let qid = quizSet.questions[barIndex].id
+        switch answers[qid] {
+        case "correct":
+            return BrandPalette.green
+        case "wrong":
+            return BrandPalette.danger
+        default:
+            return BrandPalette.surfaceAlt
+        }
+    }
+
+    private func toggleSavedQuestion() {
+        if let existing = savedQuestions.first(where: { $0.questionID == question.id }) {
+            modelContext.delete(existing)
+            return
+        }
+
+        let typeStr: String = {
+            switch question.type {
+            case .mcq: return "mcq"
+            case .ox: return "ox"
+            case .fill: return "fill"
+            }
+        }()
+
+        modelContext.insert(SavedQuizQuestion(
+            questionID: question.id,
+            question: question.question,
+            questionType: typeStr,
+            choices: question.choices,
+            correctIndex: question.correctIndex,
+            oxAnswer: question.oxAnswer,
+            fillAnswer: question.fillAnswer,
+            explanation: question.explanation,
+            concept: question.concept,
+            tag: question.tag,
+            categoryName: categoryName
+        ))
     }
 }
 
@@ -484,10 +591,10 @@ struct QuizResultView: View {
     @Query private var savedQuestions: [SavedQuizQuestion]
 
     private var answeredQuestions: [QuizQuestion] { quizSet.questions.filter { answers[$0.id] != nil } }
+    private var wrongQuestions: [QuizQuestion] { answeredQuestions.filter { answers[$0.id] == "wrong" } }
     private var correctCount: Int { answers.values.filter { $0 == "correct" }.count }
     private var total: Int { answeredQuestions.count }
     private var score: Int { total == 0 ? 0 : Int(round(Double(correctCount) / Double(total) * 100)) }
-    private var passed: Bool { score >= quizSet.passingScore }
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -511,7 +618,7 @@ struct QuizResultView: View {
                     }
                     .padding(.top, 16)
 
-                    Text("\(correctCount) / \(total) 정답 · \(passed ? "합격" : "불합격")")
+                    Text("\(correctCount) / \(total) 정답")
                         .font(.system(size: 13, weight: .medium))
                         .foregroundStyle(.white.opacity(0.85))
                         .padding(.top, 4)
@@ -542,6 +649,63 @@ struct QuizResultView: View {
                 )
                 .padding(.horizontal, 24)
                 .padding(.top, 20)
+
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack {
+                        Text("오답 저장")
+                            .font(.system(size: 11, weight: .bold))
+                            .tracking(1.2)
+                            .textCase(.uppercase)
+                            .foregroundStyle(BrandPalette.ink3)
+                        Spacer()
+                        Text("선택된 문제: \(selectedWrongIDs.count)")
+                            .font(.system(size: 11, weight: .semibold, design: .monospaced))
+                            .foregroundStyle(BrandPalette.ink4)
+                    }
+
+                    if wrongQuestions.isEmpty {
+                        HStack {
+                            Image(systemName: "checkmark.seal")
+                                .font(.system(size: 14, weight: .bold))
+                            Text("오답이 없습니다. 저장할 문제가 없어요.")
+                                .font(.system(size: 13, weight: .medium))
+                            Spacer()
+                        }
+                        .foregroundStyle(BrandPalette.ink4)
+                        .padding(.horizontal, 16)
+                        .frame(height: 52)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(BrandPalette.surface)
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
+                        .overlay(RoundedRectangle(cornerRadius: 14)
+                            .stroke(BrandPalette.line, lineWidth: 1))
+                    } else {
+                        Button {
+                            saveSelectedWrong()
+                        } label: {
+                            HStack {
+                                Image(systemName: "bookmark.fill")
+                                    .font(.system(size: 14, weight: .bold))
+                                Text("오답 저장 (\(selectedWrongIDs.count))")
+                                    .font(.system(size: 15, weight: .bold))
+                                Spacer()
+                                Image(systemName: "arrow.right")
+                                    .font(.system(size: 16, weight: .semibold))
+                            }
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 18)
+                            .frame(height: 52)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(BrandPalette.green)
+                            .clipShape(RoundedRectangle(cornerRadius: 14))
+                        }
+                        .buttonStyle(ScaleButtonStyle())
+                        .disabled(selectedWrongIDs.isEmpty)
+                        .opacity(selectedWrongIDs.isEmpty ? 0.5 : 1)
+                    }
+                }
+                .padding(.horizontal, 24)
+                .padding(.top, 16)
 
                 // Review
                 VStack(alignment: .leading, spacing: 8) {
@@ -609,25 +773,6 @@ struct QuizResultView: View {
 
                 // Actions
                 VStack(spacing: 10) {
-                    if !selectedWrongIDs.isEmpty {
-                        Button { saveSelectedWrong() } label: {
-                            HStack {
-                                Image(systemName: "bookmark.fill")
-                                    .font(.system(size: 14, weight: .bold))
-                                Text("오답 저장 (\(selectedWrongIDs.count))")
-                                    .font(.system(size: 15, weight: .bold))
-                                Spacer()
-                                Image(systemName: "arrow.right")
-                                    .font(.system(size: 16, weight: .semibold))
-                            }
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 18)
-                            .frame(height: 52)
-                            .background(BrandPalette.green)
-                            .clipShape(RoundedRectangle(cornerRadius: 14))
-                        }
-                        .buttonStyle(ScaleButtonStyle())
-                    }
                     ctaButton("틀린 문제만 다시 풀기", enabled: true, style: .dark, action: onRetryWrong)
                     ctaButton("완료", enabled: true, style: .outline, action: onDone)
                 }
