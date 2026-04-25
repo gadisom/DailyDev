@@ -9,18 +9,23 @@ import Entity
 
 public struct SavedScene: View {
     private let store: StoreOf<SavedFeature>
+    private let onSelectConcept: (String, String) -> Void
 
     public init(store: StoreOf<SavedFeature> = Store(
         initialState: SavedFeature.State()
     ) {
         SavedFeature()
-    }) {
+    }, onSelectConcept: @escaping (String, String) -> Void = { _, _ in }) {
         self.store = store
+        self.onSelectConcept = onSelectConcept
     }
 
     public var body: some View {
         NavigationStack {
-            SavedView(store: store)
+            SavedView(
+                store: store,
+                onSelectConcept: onSelectConcept
+            )
         }
     }
 }
@@ -30,13 +35,18 @@ public struct SavedScene: View {
 private struct SavedView: View {
     @Bindable private var store: StoreOf<SavedFeature>
     @Environment(\.modelContext) private var modelContext
+    private let onSelectConcept: (String, String) -> Void
 
     @Query(sort: \SavedConcept.savedAt, order: .reverse) private var concepts: [SavedConcept]
     @Query(sort: \SavedQuizQuestion.savedAt, order: .reverse) private var questions: [SavedQuizQuestion]
     @Query(sort: \SavedPost.savedAt, order: .reverse) private var posts: [SavedPost]
 
-    init(store: StoreOf<SavedFeature>) {
+    init(
+        store: StoreOf<SavedFeature>,
+        onSelectConcept: @escaping (String, String) -> Void
+    ) {
         _store = Bindable(wrappedValue: store)
+        self.onSelectConcept = onSelectConcept
     }
 
     var body: some View {
@@ -172,8 +182,13 @@ private struct SavedView: View {
                 )
             } else {
                 List {
-                    ForEach(concepts) { item in
-                        conceptRow(item)
+                ForEach(concepts) { item in
+                        Button {
+                            onSelectConcept(item.categoryID, item.conceptID)
+                        } label: {
+                            conceptRow(item)
+                        }
+                        .buttonStyle(.plain)
                             .listRowBackground(Color.clear)
                             .listRowSeparator(.hidden)
                             .listRowInsets(EdgeInsets(top: 4, leading: 24, bottom: 4, trailing: 24))

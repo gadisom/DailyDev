@@ -2,6 +2,11 @@ import ComposableArchitecture
 import Core
 import Entity
 
+public enum HomeRoute: Hashable {
+    case category(String)
+    case lesson(categoryID: String, subcategoryID: String)
+}
+
 @Reducer
 public struct HomeFeature {
     @ObservableState
