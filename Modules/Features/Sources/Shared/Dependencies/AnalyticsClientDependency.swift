@@ -2,7 +2,7 @@ import ComposableArchitecture
 import Core
 
 private enum AnalyticsClientKey: DependencyKey {
-    static let liveValue = AnalyticsClient.live()
+    static let liveValue = AnalyticsClient.noop
     static let testValue = AnalyticsClient.noop
 }
 

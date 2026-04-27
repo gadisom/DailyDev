@@ -23,6 +23,10 @@ let project = Project(
         .remote(
             url: "https://github.com/pointfreeco/swift-identified-collections",
             requirement: .upToNextMajor(from: "1.1.0")
+        ),
+        .remote(
+            url: "https://github.com/pointfreeco/xctest-dynamic-overlay",
+            requirement: .upToNextMajor(from: "1.9.0")
         )
     ],
     settings: .settings(
@@ -56,6 +60,8 @@ let project = Project(
                 .package(product: "CasePaths"),
                 .package(product: "Perception"),
                 .package(product: "IdentifiedCollections"),
+                .package(product: "IssueReporting"),
+                .package(product: "XCTestDynamicOverlay"),
             ],
             settings: .settings(
                 base: [

@@ -183,10 +183,12 @@ public struct PostFeature {
 
                 if reset {
                     state.phase = .loading
+                    state.articles = []
                     state.hasNext = false
                     state.message = ""
                     state.nextCursor = nil
                     state.canRetry = false
+                    state.selectedFilterID = State.allFilterID
                 }
 
                 let cursor = reset ? nil : state.nextCursor

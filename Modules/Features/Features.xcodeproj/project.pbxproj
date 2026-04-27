@@ -20,6 +20,7 @@
 		44BB883DC3D584301A3BB217 /* QuizPresentationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13EF69E0DA8832A0871688F /* QuizPresentationModels.swift */; };
 		451C554843F9B38E6C06F439 /* AnalyticsClientDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDB9BD48E1B87A70BEC1969 /* AnalyticsClientDependency.swift */; };
 		4A47D4971915BE111757F957 /* Perception in Frameworks */ = {isa = PBXBuildFile; productRef = AA9A57A910C55737CE7C2810 /* Perception */; };
+		4BB4D28396EE490B7F2713F2 /* IssueReporting in Frameworks */ = {isa = PBXBuildFile; productRef = 8E113C952F48A565B25657D6 /* IssueReporting */; };
 		5334A2316C65AE5F5A911986 /* PostContentClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C354A036A39AA6BB793C36B /* PostContentClient.swift */; };
 		566266BD1589BA06FAA5128D /* CSContentClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81E1946F23F1D348C01986F /* CSContentClient.swift */; };
 		56F39FAAD24C7AE4708B5DC3 /* DesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FFBE7A108F18E4BC72024CC /* DesignSystem.framework */; };
@@ -34,6 +35,7 @@
 		9DA9B07B92457A99BAC4FA22 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = B49279EC525B29F7AD534C60 /* IdentifiedCollections */; };
 		BBBFC3F5BA62E4F38AB08181 /* SavedScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A021EB08FDF0355B44D2F49 /* SavedScene.swift */; };
 		BBF2BEDFD69EB32C1EBE494E /* PostScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BEDD9AE7B81D7FB999737F /* PostScene.swift */; };
+		BDED58A0224A7BB9C6927DC7 /* XCTestDynamicOverlay in Frameworks */ = {isa = PBXBuildFile; productRef = 0D45E4F16CDDABB970F10542 /* XCTestDynamicOverlay */; };
 		C0B823BECFE9AE06F9BDEEAB /* QuizFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16FCADFE2FC79622647887 /* QuizFlowView.swift */; };
 		C605DE21773F3438241687F4 /* QuizRandomSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E195205DD28B43F9092E54E9 /* QuizRandomSetupView.swift */; };
 		C6ED607B0D080FE092784FDA /* QuizFlowFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEB0BF21691C309D6EDC40A /* QuizFlowFeature.swift */; };
@@ -113,6 +115,8 @@
 				1BBBEBCDDDCE9720E25D2B6E /* CasePaths in Frameworks */,
 				4A47D4971915BE111757F957 /* Perception in Frameworks */,
 				9DA9B07B92457A99BAC4FA22 /* IdentifiedCollections in Frameworks */,
+				4BB4D28396EE490B7F2713F2 /* IssueReporting in Frameworks */,
+				BDED58A0224A7BB9C6927DC7 /* XCTestDynamicOverlay in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +363,8 @@
 				863CFA92628D08FB0B92EDF5 /* CasePaths */,
 				AA9A57A910C55737CE7C2810 /* Perception */,
 				B49279EC525B29F7AD534C60 /* IdentifiedCollections */,
+				8E113C952F48A565B25657D6 /* IssueReporting */,
+				0D45E4F16CDDABB970F10542 /* XCTestDynamicOverlay */,
 			);
 			productName = Features;
 			productReference = DA836247ACFC66DB8F6AC46D /* Features.framework */;
@@ -390,6 +396,7 @@
 				9D0300393D2409AFBFC22E88 /* XCRemoteSwiftPackageReference "swift-dependencies" */,
 				F36DC4B70670BA830F568E1E /* XCRemoteSwiftPackageReference "swift-identified-collections" */,
 				0AE88E71668380324151D28D /* XCRemoteSwiftPackageReference "swift-perception" */,
+				F9FC21FBAC6F4DB500D6674E /* XCRemoteSwiftPackageReference "xctest-dynamic-overlay" */,
 			);
 			productRefGroup = 17B1BBDDC4C99DACE8CC2DDD /* Products */;
 			projectDirPath = "";
@@ -729,9 +736,21 @@
 				minimumVersion = 1.1.0;
 			};
 		};
+		F9FC21FBAC6F4DB500D6674E /* XCRemoteSwiftPackageReference "xctest-dynamic-overlay" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/xctest-dynamic-overlay";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0D45E4F16CDDABB970F10542 /* XCTestDynamicOverlay */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = XCTestDynamicOverlay;
+		};
 		5768E189BFB5611B93F398A1 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ComposableArchitecture;
@@ -739,6 +758,10 @@
 		863CFA92628D08FB0B92EDF5 /* CasePaths */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CasePaths;
+		};
+		8E113C952F48A565B25657D6 /* IssueReporting */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IssueReporting;
 		};
 		AA9A57A910C55737CE7C2810 /* Perception */ = {
 			isa = XCSwiftPackageProductDependency;

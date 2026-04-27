@@ -38,14 +38,14 @@ enum HomeIOSPresentationBuilder {
 
         // Sort: known slugs first (by fixed sortOrder), unknown slugs last (by displayOrder)
         let sorted = categories.sorted { a, b in
-            let oa = CurriculumCard.sortOrder(for: a.id)
-            let ob = CurriculumCard.sortOrder(for: b.id)
+            let oa = CurriculumCard.sortOrder(for: a.id, title: a.title)
+            let ob = CurriculumCard.sortOrder(for: b.id, title: b.title)
             if oa != ob { return oa < ob }
             return a.displayOrder < b.displayOrder
         }
 
         return sorted.enumerated().map { index, category in
-            let style = CurriculumCard.styleFor(slug: category.id)
+            let style = CurriculumCard.styleFor(id: category.id, title: category.title)
                      ?? CurriculumCard.styles[index % CurriculumCard.styles.count]
 
             return CurriculumCard(

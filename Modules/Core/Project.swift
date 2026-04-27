@@ -3,12 +3,7 @@ import ProjectDescription
 let project = Project(
     name: "Core",
     organizationName: "DailyDev",
-    packages: [
-        .remote(
-            url: "https://github.com/amplitude/AmplitudeUnified-Swift",
-            requirement: .upToNextMinor(from: "0.0.3")
-        )
-    ],
+    packages: [],
     settings: .settings(
         base: [
             "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
@@ -28,9 +23,7 @@ let project = Project(
                 macOS: "14.0"
             ),
             sources: ["Sources/**"],
-            dependencies: [
-                .package(product: "AmplitudeUnified")
-            ],
+            dependencies: [],
             settings: .settings(
                 base: [
                     "ENABLE_MODULE_VERIFIER": "YES",

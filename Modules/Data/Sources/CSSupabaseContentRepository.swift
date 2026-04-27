@@ -12,28 +12,15 @@ public actor CSSupabaseContentRepository: CSContentRepository {
     }
 
     public func fetchCategories() async throws -> [CSCategoryDefinition] {
-        let rows = try await fetchCategoryRows()
-        var categoryMap: [String: (order: Int, title: String?)] = [:]
-        for row in rows {
-            if let current = categoryMap[row.categorySlug] {
-                categoryMap[row.categorySlug] = (
-                    order: min(current.order, row.displayOrder),
-                    title: current.title ?? Self.normalizedTitle(row.categoryTitle)
-                )
-            } else {
-                categoryMap[row.categorySlug] = (
-                    order: row.displayOrder,
-                    title: Self.normalizedTitle(row.categoryTitle)
-                )
-            }
-        }
+        let rows = try await fetchLearningCategoryRows()
 
-        return categoryMap
-            .map { slug, info in
-                CSCategoryDefinition(
-                    id: slug,
-                    title: info.title ?? Self.prettyTitle(from: slug),
-                    displayOrder: info.order
+        return rows
+            .map { row in
+                let categorySlug = Self.contentCategorySlug(for: row.id)
+                return CSCategoryDefinition(
+                    id: categorySlug,
+                    title: Self.normalizedTitle(row.name) ?? Self.prettyTitle(from: categorySlug),
+                    displayOrder: Self.categoryDisplayOrder(for: row.id)
                 )
             }
             .sorted {
@@ -43,7 +30,8 @@ public actor CSSupabaseContentRepository: CSContentRepository {
     }
 
     public func fetchCategoryContent(categorySlug: String) async throws -> CSCategoryContent {
-        let rows = try await fetchContentRows(categorySlug: categorySlug)
+        let result = try await fetchMatchingContentRows(categorySlug: categorySlug)
+        let rows = result.rows
 
         guard !rows.isEmpty else {
             throw CSSupabaseContentRepositoryError.categoryNotFound(categorySlug)
@@ -118,29 +106,25 @@ public actor CSSupabaseContentRepository: CSContentRepository {
         )
     }
 
-    private func fetchCategoryRows() async throws -> [CSCategoryDTO] {
-        do {
-            return try await request(
-                path: "content_items",
-                queryItems: [
-                    .init(name: "select", value: "category_slug,category_title,display_order"),
-                    .init(name: "is_published", value: "eq.true"),
-                    .init(name: "order", value: "display_order.asc"),
-                ]
-            )
-        } catch let error as SupabaseClientError {
-            guard case .invalidStatusCode = error else {
-                throw mapRequestError(error)
+    private func fetchLearningCategoryRows() async throws -> [CSLearningCategoryDTO] {
+        try await request(
+            path: "quiz_categories",
+            queryItems: [
+                .init(name: "select", value: "id,name"),
+                .init(name: "order", value: "id.asc"),
+            ]
+        )
+    }
+
+    private func fetchMatchingContentRows(categorySlug: String) async throws -> (slug: String, rows: [CSContentItemDTO]) {
+        for candidate in Self.contentSlugCandidates(for: categorySlug) {
+            let rows = try await fetchContentRows(categorySlug: candidate)
+            if !rows.isEmpty {
+                return (slug: candidate, rows: rows)
             }
-            return try await request(
-                path: "content_items",
-                queryItems: [
-                    .init(name: "select", value: "category_slug,display_order"),
-                    .init(name: "is_published", value: "eq.true"),
-                    .init(name: "order", value: "display_order.asc"),
-                ]
-            )
         }
+
+        return (slug: categorySlug, rows: [])
     }
 
     private func fetchContentRows(categorySlug: String) async throws -> [CSContentItemDTO] {
@@ -200,6 +184,79 @@ public actor CSSupabaseContentRepository: CSContentRepository {
             }
         }
         return error
+    }
+
+    private static func contentCategorySlug(for quizCategoryID: String) -> String {
+        switch normalizedSlug(quizCategoryID) {
+        case "datastructures":
+            return "data-structure"
+        case "operatingsystems":
+            return "operating-system"
+        case "databases":
+            return "database"
+        case "networking":
+            return "network"
+        default:
+            return quizCategoryID
+        }
+    }
+
+    private static func categoryDisplayOrder(for categoryID: String) -> Int {
+        switch normalizedSlug(categoryID) {
+        case "datastructure", "datastructures":
+            return 1
+        case "algorithm", "algorithms":
+            return 2
+        case "operatingsystem", "operatingsystems":
+            return 3
+        case "database", "databases":
+            return 4
+        case "network", "networking":
+            return 5
+        case "oop":
+            return 6
+        case "server":
+            return 7
+        case "ios":
+            return 8
+        case "android":
+            return 9
+        default:
+            return 99
+        }
+    }
+
+    private static func contentSlugCandidates(for categorySlug: String) -> [String] {
+        let normalized = normalizedSlug(categorySlug)
+        let aliases: [String]
+
+        switch normalized {
+        case "datastructure", "datastructures":
+            aliases = ["data-structure", "data-structures"]
+        case "operatingsystem", "operatingsystems":
+            aliases = ["operating-system", "operating-systems"]
+        case "database", "databases":
+            aliases = ["database", "databases"]
+        case "network", "networking":
+            aliases = ["network", "networking"]
+        default:
+            aliases = [categorySlug]
+        }
+
+        return ([categorySlug] + aliases).reduce(into: []) { result, slug in
+            if !result.contains(slug) {
+                result.append(slug)
+            }
+        }
+    }
+
+    private static func normalizedSlug(_ slug: String) -> String {
+        slug
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .lowercased()
+            .replacingOccurrences(of: "-", with: "")
+            .replacingOccurrences(of: "_", with: "")
+            .replacingOccurrences(of: " ", with: "")
     }
 
     private static func prettyTitle(from slug: String) -> String {

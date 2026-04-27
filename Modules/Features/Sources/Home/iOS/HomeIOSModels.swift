@@ -63,71 +63,26 @@ struct CurriculumCard: Identifiable {
     let iconColor: Color
 
     // Slug-based mapping: identical icons/colors to the quiz tab
-    private static let slugStyleMap: [(keywords: [String], style: Style)] = [
-        (
-            ["datastructure", "data-struct", "자료구조"],
-            Style(
-                icon: "square.grid.3x3",
-                iconBackground: BrandPalette.curriculumBlueBackground,
-                iconColor: BrandPalette.curriculumBlueText,
-                sortOrder: 1
-            )
-        ),
-        (
-            ["algo", "알고리즘"],
-            Style(
-                icon: "sum",
-                iconBackground: BrandPalette.curriculumOrangeBackground,
-                iconColor: BrandPalette.curriculumOrangeText,
-                sortOrder: 2
-            )
-        ),
-        (
-            ["operating", "운영체제"],
-            Style(
-                icon: "terminal",
-                iconBackground: BrandPalette.curriculumPurpleBackground,
-                iconColor: BrandPalette.curriculumPurpleText,
-                sortOrder: 3
-            )
-        ),
-        (
-            ["database", "데이터베이스"],
-            Style(
-                icon: "cylinder",
-                iconBackground: BrandPalette.curriculumGreenBackground,
-                iconColor: BrandPalette.curriculumGreenText,
-                sortOrder: 4
-            )
-        ),
-        (
-            ["network", "네트워크"],
-            Style(
-                icon: "point.3.filled.connected.trianglepath.dotted",
-                iconBackground: BrandPalette.curriculumRedBackground,
-                iconColor: BrandPalette.curriculumRedText,
-                sortOrder: 5
-            )
-        ),
-    ]
-
-    // Fallback cycle (for slugs that don't match any keyword)
-    static let styles: [Style] = slugStyleMap.map(\.style)
-
-    static func styleFor(slug: String) -> Style? {
-        // Normalize: lowercase + remove separators
-        let id = slug
-            .lowercased()
-            .replacingOccurrences(of: "-", with: "")
-            .replacingOccurrences(of: "_", with: "")
-            .replacingOccurrences(of: " ", with: "")
-        return slugStyleMap.first { entry in
-            entry.keywords.contains { id.contains($0) }
-        }?.style
+    private static func style(from style: LearningCategoryVisualStyle) -> Style {
+        Style(
+            icon: style.icon,
+            iconBackground: style.iconBackground,
+            iconColor: style.iconColor,
+            sortOrder: style.sortOrder
+        )
     }
 
-    static func sortOrder(for slug: String) -> Int {
-        styleFor(slug: slug)?.sortOrder ?? 99
+    // Fallback cycle (for slugs that don't match any keyword)
+    static let styles: [Style] = LearningCategoryVisualStyle.all.map { style(from: $0) }
+
+    static func styleFor(id: String, title: String? = nil) -> Style? {
+        LearningCategoryVisualStyle
+            .style(for: id, title: title)
+            .map(style(from:))
+    }
+
+    static func sortOrder(for id: String, title: String? = nil) -> Int {
+        styleFor(id: id, title: title)?.sortOrder ?? 99
     }
 }
 #endif

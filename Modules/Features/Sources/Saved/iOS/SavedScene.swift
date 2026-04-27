@@ -188,7 +188,7 @@ private struct SavedView: View {
     }
 
     private func conceptRow(_ item: SavedConcept) -> some View {
-        let style = CurriculumCard.styleFor(slug: item.categoryID)
+        let style = CurriculumCard.styleFor(id: item.categoryID, title: item.categoryTitle)
 
         return VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 10) {

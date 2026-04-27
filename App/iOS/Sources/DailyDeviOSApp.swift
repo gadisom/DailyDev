@@ -9,6 +9,8 @@ import DesignSystem
 struct DailyDeviOSApp: App {
     @State private var store = Store(initialState: AppFeature.State()) {
         AppFeature()
+    } withDependencies: {
+        $0.analyticsClient = .live()
     }
 
     var body: some Scene {
@@ -17,6 +19,7 @@ struct DailyDeviOSApp: App {
             TabView(selection: $store.selectedTab) {
                 HomeScene(
                     store: store.scope(state: \.home, action: \.home),
+                    navigationPath: $store.homeNavigationPath,
                     navigationRequest: $store.homeNavigationRequest
                 )
                 .tabItem {

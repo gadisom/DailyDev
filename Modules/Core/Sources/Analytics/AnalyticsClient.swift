@@ -17,19 +17,6 @@ public extension AnalyticsClient {
         setUserID: { _ in }
     )
 
-    static func live() -> AnalyticsClient {
-        let service = AmplitudeAnalyticsService()
-
-        return AnalyticsClient(
-            track: { event in
-                await service.track(event)
-            },
-            setUserID: { userID in
-                await service.setUserID(userID)
-            }
-        )
-    }
-
     func track(
         _ name: String,
         properties: [String: AnalyticsValue] = [:]

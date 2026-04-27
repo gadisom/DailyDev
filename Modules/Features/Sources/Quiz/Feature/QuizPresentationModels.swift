@@ -3,12 +3,13 @@ import DesignSystem
 import Entity
 import SwiftUI
 
-public struct QuizCategoryUIModel: Identifiable {
+public struct QuizCategoryUIModel: Identifiable, Sendable {
     public let id: String
     public let name: String
     public let icon: String
     public let iconColor: Color
     public let iconBackground: Color
+    public let sortOrder: Int
     public let questions: [QuizQuestion]
 
     public init(
@@ -17,6 +18,7 @@ public struct QuizCategoryUIModel: Identifiable {
         icon: String,
         iconColor: Color,
         iconBackground: Color,
+        sortOrder: Int = Int.max,
         questions: [QuizQuestion]
     ) {
         self.id = id
@@ -24,16 +26,19 @@ public struct QuizCategoryUIModel: Identifiable {
         self.icon = icon
         self.iconColor = iconColor
         self.iconBackground = iconBackground
+        self.sortOrder = sortOrder
         self.questions = questions
     }
 
     public init(_ category: QuizCategory) {
+        let style = LearningCategoryVisualStyle.style(for: category.id, title: category.name)
         self.init(
             id: category.id,
             name: category.name,
-            icon: category.icon,
-            iconColor: Color(hexString: category.iconColorHex),
-            iconBackground: Color(hexString: category.iconBackgroundHex),
+            icon: style?.icon ?? category.icon,
+            iconColor: style?.iconColor ?? Color(hexString: category.iconColorHex),
+            iconBackground: style?.iconBackground ?? Color(hexString: category.iconBackgroundHex),
+            sortOrder: style?.sortOrder ?? Int.max,
             questions: category.questions
         )
     }

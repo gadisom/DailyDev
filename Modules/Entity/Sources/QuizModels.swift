@@ -2,11 +2,11 @@ import Foundation
 
 // MARK: - Models
 
-public enum QuizQuestionType: String, Hashable {
+public enum QuizQuestionType: String, Hashable, Sendable {
     case mcq, ox, fill
 }
 
-public struct QuizQuestion: Identifiable, Equatable {
+public struct QuizQuestion: Identifiable, Equatable, Sendable {
     public let id: Int
     public let type: QuizQuestionType
     public let question: String
@@ -43,7 +43,7 @@ public struct QuizQuestion: Identifiable, Equatable {
     }
 }
 
-public struct QuizSet: Equatable {
+public struct QuizSet: Equatable, Sendable {
     public let chapter: String
     public let chapterNum: String
     public let discipline: String
@@ -68,7 +68,7 @@ public struct QuizSet: Equatable {
     }
 }
 
-public struct QuizCategory: Identifiable {
+public struct QuizCategory: Identifiable, Sendable {
     public let id: String
     public let name: String
     public let icon: String

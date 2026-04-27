@@ -7,19 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		049812D27B5310D1D1BAF432 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 847196E54B522131E6E1AA78 /* CasePaths */; };
+		049812D27B5310D1D1BAF432 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = ABFD859E62778B707FEB9A68 /* Dependencies */; };
 		112178E0C2958CE875254177 /* DesignSystem.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 033CB2256013A491A93DCF09 /* DesignSystem.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		15B3A9053E3399A6F53E2EBE /* Features.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 19D30606510C5400C66E0847 /* Features.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22976B03CCA1B39CF04DE04B /* Domain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 85BE6B4E832F21CE126268F5 /* Domain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3E37B5981B287D25D0EA0DA6 /* XCTestDynamicOverlay in Frameworks */ = {isa = PBXBuildFile; productRef = 8B095EFD54BBDFE5277DBF3B /* XCTestDynamicOverlay */; };
 		524BC41B7DD7F30940F1839E /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE1D134A0E647F58EB30F56 /* Core.framework */; };
 		5CC998181E8A2D87178DD9FC /* DesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 033CB2256013A491A93DCF09 /* DesignSystem.framework */; };
 		6BF3F91D509F04884EFD8D82 /* Entity.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BEDAE6D4AC72736263F58A /* Entity.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6C2C3104DD5599E5A4CBD538 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE1D134A0E647F58EB30F56 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6E58A0D353FE4B150A9F2B32 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = ABFD859E62778B707FEB9A68 /* Dependencies */; };
+		6E58A0D353FE4B150A9F2B32 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = AFEDA021A053269CFBF28B6A /* ComposableArchitecture */; };
 		8FD318A31BF7F4F927B33D9B /* Features.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D30606510C5400C66E0847 /* Features.framework */; };
 		B00F652184FEED7DE54C317B /* Data.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C9636677D290C6FEC6EFC8B2 /* Data.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B188C00BD00F75E1A4DD2788 /* DailyDevMacOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D212DCD6B6C2CBE8BFF7F10 /* DailyDevMacOSApp.swift */; };
-		EA2132490FA78CFCA16CE397 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = AFEDA021A053269CFBF28B6A /* ComposableArchitecture */; };
+		C9C554251893CFD719EAEE69 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 847196E54B522131E6E1AA78 /* CasePaths */; };
+		EA2132490FA78CFCA16CE397 /* AmplitudeSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7B0456FDF87429A4E0A18D83 /* AmplitudeSwift */; };
+		F782A234076C804FDA287046 /* IssueReporting in Frameworks */ = {isa = PBXBuildFile; productRef = 57660164D13EA59EE5E9559F /* IssueReporting */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,9 +64,12 @@
 				524BC41B7DD7F30940F1839E /* Core.framework in Frameworks */,
 				5CC998181E8A2D87178DD9FC /* DesignSystem.framework in Frameworks */,
 				8FD318A31BF7F4F927B33D9B /* Features.framework in Frameworks */,
-				EA2132490FA78CFCA16CE397 /* ComposableArchitecture in Frameworks */,
-				6E58A0D353FE4B150A9F2B32 /* Dependencies in Frameworks */,
-				049812D27B5310D1D1BAF432 /* CasePaths in Frameworks */,
+				EA2132490FA78CFCA16CE397 /* AmplitudeSwift in Frameworks */,
+				6E58A0D353FE4B150A9F2B32 /* ComposableArchitecture in Frameworks */,
+				049812D27B5310D1D1BAF432 /* Dependencies in Frameworks */,
+				C9C554251893CFD719EAEE69 /* CasePaths in Frameworks */,
+				F782A234076C804FDA287046 /* IssueReporting in Frameworks */,
+				3E37B5981B287D25D0EA0DA6 /* XCTestDynamicOverlay in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,9 +149,12 @@
 			);
 			name = DailyDevMacOS;
 			packageProductDependencies = (
+				7B0456FDF87429A4E0A18D83 /* AmplitudeSwift */,
 				AFEDA021A053269CFBF28B6A /* ComposableArchitecture */,
 				ABFD859E62778B707FEB9A68 /* Dependencies */,
 				847196E54B522131E6E1AA78 /* CasePaths */,
+				57660164D13EA59EE5E9559F /* IssueReporting */,
+				8B095EFD54BBDFE5277DBF3B /* XCTestDynamicOverlay */,
 			);
 			productName = DailyDevMacOS;
 			productReference = A02881E58F0D7A5ADE0C6F6B /* DailyDevMacOS.app */;
@@ -172,9 +181,11 @@
 			);
 			mainGroup = 987C3AE634511B5D7B21B2C7;
 			packageReferences = (
+				01021B701572CA926B823614 /* XCRemoteSwiftPackageReference "Amplitude-Swift" */,
 				C00DA01772BDECCBC1B21314 /* XCRemoteSwiftPackageReference "swift-case-paths" */,
 				9A34039B0E53D319E4C2C739 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				3591E15D3EC92082CD226E94 /* XCRemoteSwiftPackageReference "swift-dependencies" */,
+				A8584B0C5871B82FE61A861A /* XCRemoteSwiftPackageReference "xctest-dynamic-overlay" */,
 			);
 			productRefGroup = 6FBFA26B56F30718C37FE10C /* Products */;
 			projectDirPath = "";
@@ -413,6 +424,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		01021B701572CA926B823614 /* XCRemoteSwiftPackageReference "Amplitude-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/amplitude/Amplitude-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.18.1;
+			};
+		};
 		3591E15D3EC92082CD226E94 /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-dependencies";
@@ -429,6 +448,14 @@
 				minimumVersion = 1.25.0;
 			};
 		};
+		A8584B0C5871B82FE61A861A /* XCRemoteSwiftPackageReference "xctest-dynamic-overlay" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/xctest-dynamic-overlay";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.0;
+			};
+		};
 		C00DA01772BDECCBC1B21314 /* XCRemoteSwiftPackageReference "swift-case-paths" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-case-paths";
@@ -440,9 +467,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		57660164D13EA59EE5E9559F /* IssueReporting */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IssueReporting;
+		};
+		7B0456FDF87429A4E0A18D83 /* AmplitudeSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AmplitudeSwift;
+		};
 		847196E54B522131E6E1AA78 /* CasePaths */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CasePaths;
+		};
+		8B095EFD54BBDFE5277DBF3B /* XCTestDynamicOverlay */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = XCTestDynamicOverlay;
 		};
 		ABFD859E62778B707FEB9A68 /* Dependencies */ = {
 			isa = XCSwiftPackageProductDependency;

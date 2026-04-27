@@ -71,7 +71,7 @@ struct QuizFlowView: View {
         .onAppear {
             store.send(.reset(quizSet))
         }
-        .onChange(of: quizSet) { _ in
+        .onChange(of: quizSet) { _, _ in
             store.send(.reset(quizSet))
         }
     }

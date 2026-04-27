@@ -9,20 +9,25 @@
 /* Begin PBXBuildFile section */
 		0683D7D0B76E6A291B64A9B1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E745A74AC3E402803D2E1E0E /* AppCoordinator.swift */; };
 		15A41E004A71C19406355548 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B58E2A3FFC4EAD8B252DC07 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3AABE2BA7D7C8B901A014946 /* XCTestDynamicOverlay in Frameworks */ = {isa = PBXBuildFile; productRef = DFE4109E3AD6B726A57837D9 /* XCTestDynamicOverlay */; };
+		3DDDB7C9882E8464829893D5 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 136164CB889B8B31268FC41F /* IdentifiedCollections */; };
 		4DFF445F8B47427C034BA091 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8C2234DC4F42CDBBCAD900F /* Assets.xcassets */; };
-		52D7445AD20C5389AFC6C804 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 4B8C76AA11048480435B74B8 /* Dependencies */; };
+		52D7445AD20C5389AFC6C804 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 8629424AE30F2BB82136050D /* ComposableArchitecture */; };
 		58F26249843B15D6A503B2DC /* Features.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBEEEA08AFA86E3BE9B818FD /* Features.framework */; };
 		85F13A28E16FDA0775379A69 /* DesignSystem.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10D27FA7D0925A79AF2DC890 /* DesignSystem.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		897F3AACAF3F8C973449ADF1 /* DesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10D27FA7D0925A79AF2DC890 /* DesignSystem.framework */; };
-		A23F1FC5C1F389FA6A4D8836 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 136164CB889B8B31268FC41F /* IdentifiedCollections */; };
+		A23F1FC5C1F389FA6A4D8836 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 15F2012FE010B3065ABFE41D /* CasePaths */; };
 		AF587F78C8C7CC26F255D732 /* Entity.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7F6D2B8A72DA801D1ECEDB /* Entity.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B64AC1A9987CB82156AB4A97 /* TuistBundle+DailyDeviOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F7C29C5290CF9209083D /* TuistBundle+DailyDeviOS.swift */; };
 		B7197C1EC12F2BC6162154DF /* Domain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 17C689B8D3B3407522CA994D /* Domain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C2E43C82F85AC7E166F02AE1 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 8629424AE30F2BB82136050D /* ComposableArchitecture */; };
+		BC2CF678B7765939D3B68610 /* IssueReporting in Frameworks */ = {isa = PBXBuildFile; productRef = CBC59023EB12541B069AA62E /* IssueReporting */; };
+		C2E43C82F85AC7E166F02AE1 /* AmplitudeSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 354BD8877D9B138D0BCB5C0B /* AmplitudeSwift */; };
+		C669B2B84BAB22C32EFC6419 /* AnalyticsClient+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2A18F4AF728BF8ED1487D5 /* AnalyticsClient+Live.swift */; };
 		C942BEDB8726578F81DF60DA /* Data.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02BD5F64CD54E453FF3EFBC7 /* Data.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CD8666178915BDDAA1C488C8 /* AmplitudeAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A76D7BEB5C19A389BB4E03 /* AmplitudeAnalyticsService.swift */; };
 		CF36621E9B0000AD8BFB58EC /* Features.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBEEEA08AFA86E3BE9B818FD /* Features.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2A5388820358FEF9C708B40 /* DailyDeviOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6666AB4A3039C8D3F1F5C8 /* DailyDeviOSApp.swift */; };
-		E551B1F7FD2326BB426DCE83 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 15F2012FE010B3065ABFE41D /* CasePaths */; };
+		E551B1F7FD2326BB426DCE83 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 4B8C76AA11048480435B74B8 /* Dependencies */; };
 		E8B1DE2D1207C064D596F491 /* TuistAssets+DailyDeviOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63313E7F1C53A9654A5D478F /* TuistAssets+DailyDeviOS.swift */; };
 		F29E8322FE072F3F45E4D524 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B58E2A3FFC4EAD8B252DC07 /* Core.framework */; };
 /* End PBXBuildFile section */
@@ -50,7 +55,9 @@
 		02BD5F64CD54E453FF3EFBC7 /* Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		10D27FA7D0925A79AF2DC890 /* DesignSystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DesignSystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		17C689B8D3B3407522CA994D /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E2A18F4AF728BF8ED1487D5 /* AnalyticsClient+Live.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnalyticsClient+Live.swift"; sourceTree = "<group>"; };
 		49FEABAAA91EBF41BFF13A9A /* DailyDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50A76D7BEB5C19A389BB4E03 /* AmplitudeAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeAnalyticsService.swift; sourceTree = "<group>"; };
 		63313E7F1C53A9654A5D478F /* TuistAssets+DailyDeviOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+DailyDeviOS.swift"; sourceTree = "<group>"; };
 		67E5B8D0CB054A489E33D692 /* DailyDeviOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DailyDeviOS-Info.plist"; sourceTree = "<group>"; };
 		8A7F6D2B8A72DA801D1ECEDB /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,16 +77,28 @@
 				F29E8322FE072F3F45E4D524 /* Core.framework in Frameworks */,
 				897F3AACAF3F8C973449ADF1 /* DesignSystem.framework in Frameworks */,
 				58F26249843B15D6A503B2DC /* Features.framework in Frameworks */,
-				C2E43C82F85AC7E166F02AE1 /* ComposableArchitecture in Frameworks */,
-				52D7445AD20C5389AFC6C804 /* Dependencies in Frameworks */,
-				E551B1F7FD2326BB426DCE83 /* CasePaths in Frameworks */,
-				A23F1FC5C1F389FA6A4D8836 /* IdentifiedCollections in Frameworks */,
+				C2E43C82F85AC7E166F02AE1 /* AmplitudeSwift in Frameworks */,
+				52D7445AD20C5389AFC6C804 /* ComposableArchitecture in Frameworks */,
+				E551B1F7FD2326BB426DCE83 /* Dependencies in Frameworks */,
+				A23F1FC5C1F389FA6A4D8836 /* CasePaths in Frameworks */,
+				3DDDB7C9882E8464829893D5 /* IdentifiedCollections in Frameworks */,
+				BC2CF678B7765939D3B68610 /* IssueReporting in Frameworks */,
+				3AABE2BA7D7C8B901A014946 /* XCTestDynamicOverlay in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24812F2908437DFB1037FA9C /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				50A76D7BEB5C19A389BB4E03 /* AmplitudeAnalyticsService.swift */,
+				2E2A18F4AF728BF8ED1487D5 /* AnalyticsClient+Live.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
 		610670E9297943E4F63E6981 /* Project */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +120,7 @@
 		9A53461327ACFB42B41A94FE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				24812F2908437DFB1037FA9C /* Analytics */,
 				E745A74AC3E402803D2E1E0E /* AppCoordinator.swift */,
 				9A6666AB4A3039C8D3F1F5C8 /* DailyDeviOSApp.swift */,
 			);
@@ -173,10 +193,13 @@
 			);
 			name = DailyDeviOS;
 			packageProductDependencies = (
+				354BD8877D9B138D0BCB5C0B /* AmplitudeSwift */,
 				8629424AE30F2BB82136050D /* ComposableArchitecture */,
 				4B8C76AA11048480435B74B8 /* Dependencies */,
 				15F2012FE010B3065ABFE41D /* CasePaths */,
 				136164CB889B8B31268FC41F /* IdentifiedCollections */,
+				CBC59023EB12541B069AA62E /* IssueReporting */,
+				DFE4109E3AD6B726A57837D9 /* XCTestDynamicOverlay */,
 			);
 			productName = DailyDev;
 			productReference = 49FEABAAA91EBF41BFF13A9A /* DailyDev.app */;
@@ -203,10 +226,12 @@
 			);
 			mainGroup = 783A2008BB095102DA141783;
 			packageReferences = (
+				0BB49D284E862F2447A4F850 /* XCRemoteSwiftPackageReference "Amplitude-Swift" */,
 				AC4469ACFAFF72DE9AEE6678 /* XCRemoteSwiftPackageReference "swift-case-paths" */,
 				1B4160CE6F06A5C370ABC51F /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				E77E639992EAD556A96DEFE7 /* XCRemoteSwiftPackageReference "swift-dependencies" */,
 				1F3D924D434378D7713F5A74 /* XCRemoteSwiftPackageReference "swift-identified-collections" */,
+				BA6535F565776B0D3608ADE9 /* XCRemoteSwiftPackageReference "xctest-dynamic-overlay" */,
 			);
 			productRefGroup = B339C83D9155BA49014E852D /* Products */;
 			projectDirPath = "";
@@ -235,6 +260,8 @@
 			files = (
 				E8B1DE2D1207C064D596F491 /* TuistAssets+DailyDeviOS.swift in Sources */,
 				B64AC1A9987CB82156AB4A97 /* TuistBundle+DailyDeviOS.swift in Sources */,
+				CD8666178915BDDAA1C488C8 /* AmplitudeAnalyticsService.swift in Sources */,
+				C669B2B84BAB22C32EFC6419 /* AnalyticsClient+Live.swift in Sources */,
 				0683D7D0B76E6A291B64A9B1 /* AppCoordinator.swift in Sources */,
 				D2A5388820358FEF9C708B40 /* DailyDeviOSApp.swift in Sources */,
 			);
@@ -455,6 +482,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0BB49D284E862F2447A4F850 /* XCRemoteSwiftPackageReference "Amplitude-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/amplitude/Amplitude-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.18.1;
+			};
+		};
 		1B4160CE6F06A5C370ABC51F /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
@@ -479,6 +514,14 @@
 				minimumVersion = 1.7.0;
 			};
 		};
+		BA6535F565776B0D3608ADE9 /* XCRemoteSwiftPackageReference "xctest-dynamic-overlay" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/xctest-dynamic-overlay";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.0;
+			};
+		};
 		E77E639992EAD556A96DEFE7 /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-dependencies";
@@ -498,6 +541,10 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = CasePaths;
 		};
+		354BD8877D9B138D0BCB5C0B /* AmplitudeSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AmplitudeSwift;
+		};
 		4B8C76AA11048480435B74B8 /* Dependencies */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Dependencies;
@@ -505,6 +552,14 @@
 		8629424AE30F2BB82136050D /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ComposableArchitecture;
+		};
+		CBC59023EB12541B069AA62E /* IssueReporting */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IssueReporting;
+		};
+		DFE4109E3AD6B726A57837D9 /* XCTestDynamicOverlay */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = XCTestDynamicOverlay;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

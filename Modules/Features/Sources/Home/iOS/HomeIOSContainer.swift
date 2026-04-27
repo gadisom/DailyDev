@@ -73,11 +73,11 @@ struct HomeIOSContainer: View {
             }
             .padding(.bottom, 2)
 
-            if store.isLoading {
+            if store.isLoading && cards.isEmpty {
                 HStack(spacing: 8) {
                     ProgressView()
                         .tint(BrandPalette.green)
-                    Text("콘텐츠 불러오는 중")
+                    Text("대주제 불러오는 중")
                         .font(.system(size: 12, weight: .medium))
                         .foregroundStyle(BrandPalette.ink3)
                 }

@@ -16,6 +16,7 @@ struct AppFeature {
     @ObservableState
     struct State: Equatable {
         var selectedTab: MainTab = .home
+        var homeNavigationPath: [HomeRoute] = []
         var homeNavigationRequest: HomeNavigationRequest?
         var didTrackAppOpened = false
         var home: HomeFeature.State

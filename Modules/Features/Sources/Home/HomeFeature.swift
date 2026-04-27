@@ -91,13 +91,9 @@ public struct HomeFeature {
                 state.categories = categories
                 state.isLoading = false
                 state.hasLoadedInitialData = true
-
-                guard let first = categories.first else {
-                    return .none
-                }
-
-                state.selectedCategoryID = first.id
-                return .send(.categorySelected(first.id))
+                state.selectedCategoryID = nil
+                state.selectedContent = nil
+                return .none
 
             case let .categoriesLoaded(.failure(error)):
                 state.isLoading = false

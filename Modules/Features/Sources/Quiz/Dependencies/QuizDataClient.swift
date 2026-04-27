@@ -21,7 +21,14 @@ private enum QuizDataClientKey: DependencyKey {
         return QuizDataClient(
             fetchQuizBank: {
                 let categories = try await fetchQuizBankUseCase.execute()
-                return categories.map(QuizCategoryUIModel.init)
+                return categories
+                    .map(QuizCategoryUIModel.init)
+                    .sorted {
+                        if $0.sortOrder != $1.sortOrder {
+                            return $0.sortOrder < $1.sortOrder
+                        }
+                        return $0.name.localizedCompare($1.name) == .orderedAscending
+                    }
             }
         )
     }()

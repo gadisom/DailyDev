@@ -5,6 +5,10 @@ let project = Project(
     organizationName: "DailyDev",
     packages: [
         .remote(
+            url: "https://github.com/amplitude/Amplitude-Swift.git",
+            requirement: .upToNextMajor(from: "1.18.1")
+        ),
+        .remote(
             url: "https://github.com/pointfreeco/swift-composable-architecture",
             requirement: .upToNextMajor(from: "1.25.0")
         ),
@@ -19,6 +23,10 @@ let project = Project(
         .remote(
             url: "https://github.com/pointfreeco/swift-identified-collections",
             requirement: .upToNextMajor(from: "1.1.0")
+        ),
+        .remote(
+            url: "https://github.com/pointfreeco/xctest-dynamic-overlay",
+            requirement: .upToNextMajor(from: "1.9.0")
         )
     ],
     settings: .settings(
@@ -55,10 +63,13 @@ let project = Project(
                 .project(target: "Core", path: "../../Modules/Core"),
                 .project(target: "DesignSystem", path: "../../Modules/DesignSystem"),
                 .project(target: "Features", path: "../../Modules/Features"),
+                .package(product: "AmplitudeSwift"),
                 .package(product: "ComposableArchitecture"),
                 .package(product: "Dependencies"),
                 .package(product: "CasePaths"),
                 .package(product: "IdentifiedCollections"),
+                .package(product: "IssueReporting"),
+                .package(product: "XCTestDynamicOverlay"),
             ],
             settings: .settings(
                 base: [

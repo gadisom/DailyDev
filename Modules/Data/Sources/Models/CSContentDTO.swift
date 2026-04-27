@@ -1,10 +1,9 @@
 import Entity
 import Foundation
 
-struct CSCategoryDTO: Decodable {
-    let categorySlug: String
-    let categoryTitle: String?
-    let displayOrder: Int
+struct CSLearningCategoryDTO: Decodable {
+    let id: String
+    let name: String
 }
 
 struct CSContentItemDTO: Decodable {

@@ -5,7 +5,7 @@ import ComposableArchitecture
 public struct SavedFeature {
     @ObservableState
     public struct State: Equatable {
-        public enum Tab: String, CaseIterable, Equatable {
+        public enum Tab: String, CaseIterable, Equatable, Sendable {
             case concepts = "개념"
             case quiz = "퀴즈"
             case posts = "Post"
