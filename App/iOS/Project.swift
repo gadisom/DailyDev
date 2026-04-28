@@ -58,8 +58,8 @@ let project = Project(
                 with: [
                     "CFBundleDisplayName": "DailyDev",
                     "CFBundleName": "DailyDev",
-                    "CFBundleShortVersionString": "$(MARKETING_VERSION)",
-                    "CFBundleVersion": "$(CURRENT_PROJECT_VERSION)",
+                    "CFBundleShortVersionString": "1.0.1",
+                    "CFBundleVersion": "2",
                     "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_sWMT0op09LVNmJpnHYY6wg_ZIy-bHMV",
                     "SUPABASE_ANON_KEY": "",
                     "UILaunchScreen": [:],
