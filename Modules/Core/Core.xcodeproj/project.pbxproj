@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43012D8EFD58276C3B178CCC /* CrashReportingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA606D232A4CBA4B2F9C994 /* CrashReportingClient.swift */; };
 		53DE60073AF5716A9584D9E0 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0915FF3D2E8A2EE8BC9C915A /* AnalyticsEvent.swift */; };
+		6197DB06C315AC5FB2955E71 /* CrashReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ADCE84EC2CA7D627C24E06 /* CrashReport.swift */; };
 		61E5C97F94E0844943CB342D /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE59B4F178DF5B68A884DB /* AppEnvironment.swift */; };
 		7C2CD83D70A33FD85DA08660 /* AnalyticsValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8345BDC93926D0E731AFE72 /* AnalyticsValue.swift */; };
 		B837477F7E5BFCA38A656270 /* AnalyticsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D47FED676441782F9D4E18 /* AnalyticsClient.swift */; };
-		FBEDF01382284545CCD03237 /* AmplitudeAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3D63A3252C15D39D6A0818 /* AmplitudeAnalyticsService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,10 +32,11 @@
 		0915FF3D2E8A2EE8BC9C915A /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		26BDD2D3E7FED8CDE9A52F46 /* Core-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Core-Info.plist"; sourceTree = "<group>"; };
 		2B0FA7F85F3573FB522F9478 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FA606D232A4CBA4B2F9C994 /* CrashReportingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashReportingClient.swift; sourceTree = "<group>"; };
 		8EBE59B4F178DF5B68A884DB /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		B8345BDC93926D0E731AFE72 /* AnalyticsValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsValue.swift; sourceTree = "<group>"; };
+		C8ADCE84EC2CA7D627C24E06 /* CrashReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashReport.swift; sourceTree = "<group>"; };
 		D6D47FED676441782F9D4E18 /* AnalyticsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsClient.swift; sourceTree = "<group>"; };
-		DF3D63A3252C15D39D6A0818 /* AmplitudeAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeAnalyticsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		43B826317EFDDEF63A576140 /* CrashReporting */ = {
+			isa = PBXGroup;
+			children = (
+				C8ADCE84EC2CA7D627C24E06 /* CrashReport.swift */,
+				4FA606D232A4CBA4B2F9C994 /* CrashReportingClient.swift */,
+			);
+			path = CrashReporting;
+			sourceTree = "<group>";
+		};
 		4B97075397CA6D3C7DEE06A1 /* InfoPlists */ = {
 			isa = PBXGroup;
 			children = (
@@ -75,7 +86,6 @@
 		7C2E9196984207040583DD5D /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				DF3D63A3252C15D39D6A0818 /* AmplitudeAnalyticsService.swift */,
 				D6D47FED676441782F9D4E18 /* AnalyticsClient.swift */,
 				0915FF3D2E8A2EE8BC9C915A /* AnalyticsEvent.swift */,
 				B8345BDC93926D0E731AFE72 /* AnalyticsValue.swift */,
@@ -87,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				7C2E9196984207040583DD5D /* Analytics */,
+				43B826317EFDDEF63A576140 /* CrashReporting */,
 				8EBE59B4F178DF5B68A884DB /* AppEnvironment.swift */,
 			);
 			path = Sources;
@@ -176,11 +187,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBEDF01382284545CCD03237 /* AmplitudeAnalyticsService.swift in Sources */,
 				B837477F7E5BFCA38A656270 /* AnalyticsClient.swift in Sources */,
 				53DE60073AF5716A9584D9E0 /* AnalyticsEvent.swift in Sources */,
 				7C2CD83D70A33FD85DA08660 /* AnalyticsValue.swift in Sources */,
 				61E5C97F94E0844943CB342D /* AppEnvironment.swift in Sources */,
+				6197DB06C315AC5FB2955E71 /* CrashReport.swift in Sources */,
+				43012D8EFD58276C3B178CCC /* CrashReportingClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

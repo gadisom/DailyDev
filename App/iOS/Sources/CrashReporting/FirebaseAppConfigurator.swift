@@ -1,0 +1,14 @@
+import FirebaseCore
+import Foundation
+
+enum FirebaseAppConfigurator {
+    static func configureIfPossible() {
+        guard FirebaseApp.app() == nil else { return }
+
+        guard Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") != nil else {
+            return
+        }
+
+        FirebaseApp.configure()
+    }
+}

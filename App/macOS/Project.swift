@@ -5,10 +5,6 @@ let project = Project(
     organizationName: "DailyDev",
     packages: [
         .remote(
-            url: "https://github.com/amplitude/Amplitude-Swift.git",
-            requirement: .upToNextMajor(from: "1.18.1")
-        ),
-        .remote(
             url: "https://github.com/pointfreeco/swift-composable-architecture",
             requirement: .upToNextMajor(from: "1.25.0")
         ),
@@ -44,7 +40,6 @@ let project = Project(
             infoPlist: .extendingDefault(
                 with: [
                     "CFBundleDisplayName": "DailyDev",
-                    "AMPLITUDE_API_KEY": "00dec6feb4467f881551bbaee76de617",
                     "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_sWMT0op09LVNmJpnHYY6wg_ZIy-bHMV",
                     "SUPABASE_ANON_KEY": ""
                 ]
@@ -55,7 +50,6 @@ let project = Project(
                 .project(target: "Core", path: "../../Modules/Core"),
                 .project(target: "DesignSystem", path: "../../Modules/DesignSystem"),
                 .project(target: "Features", path: "../../Modules/Features"),
-                .package(product: "AmplitudeSwift"),
                 .package(product: "ComposableArchitecture"),
                 .package(product: "Dependencies"),
                 .package(product: "CasePaths"),

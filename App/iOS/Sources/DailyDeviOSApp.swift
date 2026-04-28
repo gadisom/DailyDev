@@ -11,6 +11,11 @@ struct DailyDeviOSApp: App {
         AppFeature()
     } withDependencies: {
         $0.analyticsClient = .live()
+        $0.crashReportingClient = .live()
+    }
+
+    init() {
+        FirebaseAppConfigurator.configureIfPossible()
     }
 
     var body: some Scene {
