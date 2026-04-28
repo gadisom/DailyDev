@@ -6,22 +6,29 @@ import Foundation
 
 public struct PostContentClient: Sendable {
     public var fetchArticles: @Sendable (_ cursor: Int64?) async throws -> PostArticlesPage
+    public var fetchBlogSources: @Sendable () async throws -> [PostBlogSource]
 
     public init(
-        fetchArticles: @escaping @Sendable (_ cursor: Int64?) async throws -> PostArticlesPage
+        fetchArticles: @escaping @Sendable (_ cursor: Int64?) async throws -> PostArticlesPage,
+        fetchBlogSources: @escaping @Sendable () async throws -> [PostBlogSource]
     ) {
         self.fetchArticles = fetchArticles
+        self.fetchBlogSources = fetchBlogSources
     }
 }
 
 private enum PostContentClientKey: DependencyKey {
     static let liveValue: PostContentClient = {
         let repository = PostArticleRepository()
-        let useCase = FetchPostArticlesUseCase(repository: repository)
+        let fetchArticlesUseCase = FetchPostArticlesUseCase(repository: repository)
+        let fetchBlogSourcesUseCase = FetchPostBlogSourcesUseCase(repository: repository)
 
         return PostContentClient(
             fetchArticles: { cursor in
-                try await useCase.execute(cursor: cursor)
+                try await fetchArticlesUseCase.execute(cursor: cursor)
+            },
+            fetchBlogSources: {
+                try await fetchBlogSourcesUseCase.execute()
             }
         )
     }()

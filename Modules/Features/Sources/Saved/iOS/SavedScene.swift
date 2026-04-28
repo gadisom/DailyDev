@@ -30,6 +30,7 @@ private struct SavedView: View {
     @Query(sort: \SavedConcept.savedAt, order: .reverse) private var concepts: [SavedConcept]
     @Query(sort: \SavedQuizQuestion.savedAt, order: .reverse) private var questions: [SavedQuizQuestion]
     @Query(sort: \SavedPost.savedAt, order: .reverse) private var posts: [SavedPost]
+    @State private var webDestination: WebDestination?
 
     init(store: StoreOf<SavedFeature>) {
         _store = Bindable(wrappedValue: store)
@@ -74,6 +75,10 @@ private struct SavedView: View {
             if questionID == nil {
                 store.send(.questionDismissed)
             }
+        }
+        .sheet(item: $webDestination) { destination in
+            InAppWebView(url: destination.url)
+                .ignoresSafeArea()
         }
     }
 
@@ -425,11 +430,14 @@ private struct SavedView: View {
             Spacer()
 
             if let url = URL(string: item.articleLink) {
-                Link(destination: url) {
+                Button {
+                    webDestination = WebDestination(url: url)
+                } label: {
                     Image(systemName: "arrow.up.right.square")
                         .font(.system(size: 16, weight: .medium))
                         .foregroundStyle(BrandPalette.ink3)
                 }
+                .buttonStyle(.plain)
             }
         }
         .padding(.horizontal, 14)

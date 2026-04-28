@@ -4,6 +4,18 @@ struct PostArticlesAPIEnvelopeDTO: Decodable {
     let errorMessage: PostAPIErrorPayloadDTO?
 }
 
+struct PostBlogsAPIEnvelopeDTO: Decodable {
+    let resultType: String
+    let data: [PostBlogSourceDTO]?
+    let errorMessage: PostAPIErrorPayloadDTO?
+}
+
+struct PostBlogSourceDTO: Decodable {
+    let order: Int
+    let link: String
+    let name: String
+}
+
 struct PostArticlesPayloadDTO: Decodable {
     let data: [PostArticleEntryDTO]
     let hasNext: Bool

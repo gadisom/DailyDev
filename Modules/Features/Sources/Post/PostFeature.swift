@@ -36,7 +36,9 @@ public struct PostFeature {
         public var message: String
         public var canRetry: Bool
         public var isLoading: Bool
+        public var isLoadingBlogSources: Bool
         public var selectedFilterID: String
+        public var blogSources: [PostBlogSource]
 
         public var visibleArticles: [PostArticleListItem] {
             guard selectedFilterID != Self.allFilterID else { return articles }
@@ -57,13 +59,10 @@ public struct PostFeature {
                 }
             }
 
-            let dynamicChips = buckets
-                .map { key, value in
-                    FilterChip(id: key, title: value.title, count: value.count)
-                }
-                .sorted { lhs, rhs in
-                    return lhs.title.localizedCompare(rhs.title) == .orderedAscending
-                }
+            let sourceChips = Self.sourceFilterChips(from: blogSources, counts: buckets)
+            let dynamicChips = sourceChips.isEmpty
+                ? Self.fallbackFilterChips(from: buckets)
+                : sourceChips
 
             return [FilterChip(id: Self.allFilterID, title: "전체", count: articles.count)] + dynamicChips
         }
@@ -76,7 +75,9 @@ public struct PostFeature {
             message: String = "",
             canRetry: Bool = false,
             isLoading: Bool = false,
-            selectedFilterID: String = Self.allFilterID
+            isLoadingBlogSources: Bool = false,
+            selectedFilterID: String = Self.allFilterID,
+            blogSources: [PostBlogSource] = []
         ) {
             self.phase = phase
             self.articles = articles
@@ -85,7 +86,42 @@ public struct PostFeature {
             self.message = message
             self.canRetry = canRetry
             self.isLoading = isLoading
+            self.isLoadingBlogSources = isLoadingBlogSources
             self.selectedFilterID = selectedFilterID
+            self.blogSources = blogSources
+        }
+
+        private static func sourceFilterChips(
+            from blogSources: [PostBlogSource],
+            counts: [String: (title: String, count: Int)]
+        ) -> [FilterChip] {
+            var seenIDs = Set<String>()
+
+            return blogSources
+                .compactMap { source -> FilterChip? in
+                    let title = source.name.trimmingCharacters(in: .whitespacesAndNewlines)
+                    guard !title.isEmpty else { return nil }
+
+                    let id = Self.blogFilterID(from: title)
+                    guard seenIDs.insert(id).inserted else { return nil }
+
+                    return FilterChip(id: id, title: title, count: counts[id]?.count ?? 0)
+                }
+                .sorted { lhs, rhs in
+                    lhs.title.localizedCompare(rhs.title) == .orderedAscending
+                }
+        }
+
+        private static func fallbackFilterChips(
+            from buckets: [String: (title: String, count: Int)]
+        ) -> [FilterChip] {
+            buckets
+                .map { key, value in
+                    FilterChip(id: key, title: value.title, count: value.count)
+                }
+                .sorted { lhs, rhs in
+                    lhs.title.localizedCompare(rhs.title) == .orderedAscending
+                }
         }
 
         private static func blogDisplayName(from article: PostArticleListItem) -> String {
@@ -100,7 +136,11 @@ public struct PostFeature {
         }
 
         private static func blogFilterID(from article: PostArticleListItem) -> String {
-            blogDisplayName(from: article)
+            Self.blogFilterID(from: Self.blogDisplayName(from: article))
+        }
+
+        private static func blogFilterID(from value: String) -> String {
+            value
                 .trimmingCharacters(in: .whitespacesAndNewlines)
                 .lowercased()
         }
@@ -115,6 +155,8 @@ public struct PostFeature {
         case loadMoreTapped
 
         case _load(reset: Bool)
+        case _loadBlogSources(force: Bool)
+        case _loadBlogSourcesResponse(Result<[PostBlogSource], PostContentError>)
         case _loadResponse(reset: Bool, Result<PostArticlesPage, PostContentError>)
     }
 
@@ -128,13 +170,17 @@ public struct PostFeature {
             switch action {
             case .task:
                 guard state.phase == .idle || state.phase == .empty else { return .none }
-                return .send(._load(reset: true))
+                return .merge(
+                    .send(._loadBlogSources(force: false)),
+                    .send(._load(reset: true))
+                )
 
             case .refreshRequested:
                 return .merge(
                     .run { _ in
                         await analyticsClient.track(.postRefreshTapped)
                     },
+                    .send(._loadBlogSources(force: true)),
                     .send(._load(reset: true))
                 )
 
@@ -207,6 +253,39 @@ public struct PostFeature {
                         )
                     }
                 }
+
+            case let ._loadBlogSources(force):
+                guard force || state.blogSources.isEmpty else { return .none }
+                guard !state.isLoadingBlogSources else { return .none }
+                state.isLoadingBlogSources = true
+
+                return .run { send in
+                    do {
+                        let blogSources = try await postContentClient.fetchBlogSources()
+                        await send(._loadBlogSourcesResponse(.success(blogSources)))
+                    } catch let error as PostContentError {
+                        await send(._loadBlogSourcesResponse(.failure(error)))
+                    } catch {
+                        await send(
+                            ._loadBlogSourcesResponse(
+                                .failure(.unknown(code: nil, message: error.localizedDescription))
+                            )
+                        )
+                    }
+                }
+
+            case let ._loadBlogSourcesResponse(.success(blogSources)):
+                state.isLoadingBlogSources = false
+                state.blogSources = blogSources
+
+                if !state.filterChips.contains(where: { $0.id == state.selectedFilterID }) {
+                    state.selectedFilterID = State.allFilterID
+                }
+                return .none
+
+            case ._loadBlogSourcesResponse(.failure):
+                state.isLoadingBlogSources = false
+                return .none
 
             case let ._loadResponse(reset, .success(page)):
                 state.isLoading = false

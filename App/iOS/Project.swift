@@ -58,6 +58,8 @@ let project = Project(
                 with: [
                     "CFBundleDisplayName": "DailyDev",
                     "CFBundleName": "DailyDev",
+                    "CFBundleShortVersionString": "$(MARKETING_VERSION)",
+                    "CFBundleVersion": "$(CURRENT_PROJECT_VERSION)",
                     "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_sWMT0op09LVNmJpnHYY6wg_ZIy-bHMV",
                     "SUPABASE_ANON_KEY": "",
                     "UILaunchScreen": [:],
@@ -100,8 +102,10 @@ let project = Project(
             settings: .settings(
                 base: [
                     "CODE_SIGN_STYLE": "Automatic",
+                    "CURRENT_PROJECT_VERSION": "2",
                     "DEBUG_INFORMATION_FORMAT": "dwarf-with-dsym",
                     "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
+                    "MARKETING_VERSION": "1.0.1",
                     "OTHER_LDFLAGS": "$(inherited) -ObjC",
                     "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS": "YES",
                     "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOL_FRAMEWORKS": "SwiftUI UIKit",

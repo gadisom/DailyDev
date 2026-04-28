@@ -13,6 +13,7 @@ private enum PostNetworkDefaults {
 
 protocol PostArticleNetworkServing: Sendable {
     func fetchArticles(cursor: Int64?) async throws -> PostArticlesAPIEnvelopeDTO
+    func fetchBlogSources() async throws -> PostBlogsAPIEnvelopeDTO
 }
 
 struct PostArticleNetworkClient: PostArticleNetworkServing {
@@ -67,6 +68,36 @@ struct PostArticleNetworkClient: PostArticleNetworkServing {
         }
     }
 
+    func fetchBlogSources() async throws -> PostBlogsAPIEnvelopeDTO {
+        guard let url = URLComponents(
+            url: baseURL.appendingPathComponent("v1/blogs"),
+            resolvingAgainstBaseURL: false
+        )?.url else {
+            throw PostContentError.transport(message: "요청 URL을 생성할 수 없습니다.")
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.timeoutInterval = PostNetworkDefaults.requestTimeout
+
+        return try await withExponentialRetry {
+            do {
+                return try await requestBlogSources(request: request)
+            } catch let error as PostContentError {
+                throw error
+            } catch let error as URLError {
+                if error.code == .timedOut {
+                    throw PostContentError.timeout
+                }
+                throw PostContentError.transport(message: error.localizedDescription)
+            } catch let error as DecodingError {
+                throw PostContentError.decoding(message: error.localizedDescription)
+            } catch {
+                throw PostContentError.transport(message: error.localizedDescription)
+            }
+        }
+    }
+
     private func requestArticles(request: URLRequest) async throws -> PostArticlesAPIEnvelopeDTO {
         let (data, response) = try await transport.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse else {
@@ -74,6 +105,25 @@ struct PostArticleNetworkClient: PostArticleNetworkServing {
         }
 
         let envelope = try decoder.decode(PostArticlesAPIEnvelopeDTO.self, from: data)
+
+        if envelope.resultType.uppercased() == "SUCCESS" {
+            return envelope
+        }
+
+        throw mapHTTPFailure(
+            statusCode: httpResponse.statusCode,
+            errorCode: envelope.errorMessage?.code,
+            message: envelope.errorMessage?.message
+        )
+    }
+
+    private func requestBlogSources(request: URLRequest) async throws -> PostBlogsAPIEnvelopeDTO {
+        let (data, response) = try await transport.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw PostContentError.transport(message: "유효하지 않은 응답입니다.")
+        }
+
+        let envelope = try decoder.decode(PostBlogsAPIEnvelopeDTO.self, from: data)
 
         if envelope.resultType.uppercased() == "SUCCESS" {
             return envelope
@@ -194,6 +244,26 @@ public actor PostArticleRepository: PostResourceRepository {
             hasNext: payload.hasNext,
             nextCursor: payload.nextCursor
         )
+    }
+
+    public func fetchBlogSources() async throws -> [PostBlogSource] {
+        let envelope = try await client.fetchBlogSources()
+
+        guard envelope.resultType.uppercased() == "SUCCESS" else {
+            throw mapResultTypeFailure(errorPayload: envelope.errorMessage)
+        }
+
+        guard let payload = envelope.data else {
+            throw PostContentError.decoding(message: "blogs data is empty")
+        }
+
+        return payload.map { entry in
+            PostBlogSource(
+                order: entry.order,
+                link: entry.link,
+                name: entry.name
+            )
+        }
     }
 
     private func mapResultTypeFailure(errorPayload: PostAPIErrorPayloadDTO?) -> PostContentError {

@@ -6,9 +6,9 @@ import DesignSystem
 
 struct PostView: View {
     @Bindable var store: StoreOf<PostFeature>
-    @Environment(\.openURL) private var openURL
     @Environment(\.modelContext) private var modelContext
     @Query private var savedPosts: [SavedPost]
+    @State private var webDestination: WebDestination?
 
     private enum Layout {
         static let sectionSpacing: CGFloat = Spacing.sm
@@ -56,6 +56,10 @@ struct PostView: View {
                 store.send(.refreshRequested)
             }
             .tint(BrandPalette.green)
+            .sheet(item: $webDestination) { destination in
+                InAppWebView(url: destination.url)
+                    .ignoresSafeArea()
+            }
         }
     }
 
@@ -283,6 +287,6 @@ struct PostView: View {
 
     private func openArticle(_ stringURL: String) {
         guard let url = URL(string: stringURL) else { return }
-        openURL(url)
+        webDestination = WebDestination(url: url)
     }
 }

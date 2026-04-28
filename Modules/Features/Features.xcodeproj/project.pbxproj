@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09226607118D8AD4D40E6B26 /* InAppWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AB33C592B5630F0841A896 /* InAppWebView.swift */; };
 		09D88FF1851957D4C9D3DD22 /* PostFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446BE7F84C677D5EF5A66676 /* PostFeature.swift */; };
 		105BA16A0597D948BD6EB9ED /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBAC73EA60F6E402DEB8584 /* Core.framework */; };
 		12DE326B5091B8CF92BAE46A /* HomeLessonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515AE5416D1891241F71A729 /* HomeLessonDetailView.swift */; };
@@ -94,6 +95,7 @@
 		B9AD6C189BF2C16295A6D0A7 /* HomeIOSPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIOSPresentation.swift; sourceTree = "<group>"; };
 		BC0A40AF3BF7E6FC38591E93 /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBDB9BD48E1B87A70BEC1969 /* AnalyticsClientDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsClientDependency.swift; sourceTree = "<group>"; };
+		D8AB33C592B5630F0841A896 /* InAppWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppWebView.swift; sourceTree = "<group>"; };
 		DA836247ACFC66DB8F6AC46D /* Features.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Features.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E13EF69E0DA8832A0871688F /* QuizPresentationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizPresentationModels.swift; sourceTree = "<group>"; };
 		E195205DD28B43F9092E54E9 /* QuizRandomSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizRandomSetupView.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 			children = (
 				2623F26868B617AAC09862DA /* Analytics */,
 				A74730C16684E4A28BFFBFD3 /* Dependencies */,
+				D8AB33C592B5630F0841A896 /* InAppWebView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				6C4DA3925C68F4B03FBB6034 /* AppEvent.swift in Sources */,
 				451C554843F9B38E6C06F439 /* AnalyticsClientDependency.swift in Sources */,
 				B0C43D812593BDAF7FBBC799 /* CrashReportingClientDependency.swift in Sources */,
+				09226607118D8AD4D40E6B26 /* InAppWebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
