@@ -61,11 +61,13 @@ let project = Project(
                     "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_sWMT0op09LVNmJpnHYY6wg_ZIy-bHMV",
                     "SUPABASE_ANON_KEY": "",
                     "UILaunchScreen": [:],
-                    "ITSAppUsesNonExemptEncryption": false
+                    "ITSAppUsesNonExemptEncryption": false,
+                    "UIBackgroundModes": ["remote-notification"]
                 ]
             ),
             sources: ["Sources/**"],
             resources: ["Resources/**"],
+            entitlements: "Sources/DailyDeviOS.entitlements",
             scripts: [
                 .post(
                     script: crashlyticsDSYMScript,
@@ -87,6 +89,7 @@ let project = Project(
                 .package(product: "FirebaseAnalytics"),
                 .package(product: "FirebaseCore"),
                 .package(product: "FirebaseCrashlytics"),
+                .package(product: "FirebaseMessaging"),
                 .package(product: "ComposableArchitecture"),
                 .package(product: "Dependencies"),
                 .package(product: "CasePaths"),

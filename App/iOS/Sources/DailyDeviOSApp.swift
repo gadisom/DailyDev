@@ -7,6 +7,8 @@ import DesignSystem
 
 @main
 struct DailyDeviOSApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     @State private var store = Store(initialState: AppFeature.State()) {
         AppFeature()
     } withDependencies: {
