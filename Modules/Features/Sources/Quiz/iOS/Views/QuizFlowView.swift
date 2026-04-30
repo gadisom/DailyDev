@@ -124,14 +124,8 @@ struct QuizQuestionView: View {
                     }
                     .padding(.horizontal, 24)
 
-                    // Question number + text
+                    // Question text
                     VStack(alignment: .leading, spacing: 10) {
-                        Text(String(format: "Question %02d", question.id))
-                            .font(.system(size: 11, weight: .bold, design: .monospaced))
-                            .tracking(1.2)
-                            .textCase(.uppercase)
-                            .foregroundStyle(BrandPalette.ink3)
-
                         Text(question.question)
                             .font(.system(size: 22, weight: .bold))
                             .foregroundStyle(BrandPalette.ink)
@@ -300,7 +294,7 @@ struct QuizQuestionView: View {
                 .textCase(.uppercase)
                 .foregroundStyle(BrandPalette.ink3)
 
-            TextField("예: O(n)", text: $fillInput)
+            TextField("", text: $fillInput)
                 .font(.system(size: 16, weight: .semibold, design: .monospaced))
                 .foregroundStyle(BrandPalette.ink)
                 .padding(.horizontal, 16)
@@ -358,12 +352,6 @@ struct QuizExplainView: View {
 
                         VStack(alignment: .leading, spacing: 1) {
                             Text(isCorrect ? "정답" : "오답")
-                                .font(.system(size: 11, weight: .bold, design: .monospaced))
-                                .foregroundStyle(isCorrect ? BrandPalette.greenInk : BrandPalette.danger)
-                                .tracking(1)
-                                .textCase(.uppercase)
-                                .opacity(0.7)
-                            Text(isCorrect ? "정확해요!" : "아쉬워요.")
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundStyle(isCorrect ? BrandPalette.greenInk : BrandPalette.danger)
                         }
@@ -377,12 +365,6 @@ struct QuizExplainView: View {
 
                     // Question
                     VStack(alignment: .leading, spacing: 6) {
-                        Text(String(format: "Question %02d", question.id))
-                            .font(.system(size: 11, weight: .bold, design: .monospaced))
-                            .tracking(1.2)
-                            .textCase(.uppercase)
-                            .foregroundStyle(BrandPalette.ink3)
-
                         Text(question.question)
                             .font(.system(size: 17, weight: .bold))
                             .foregroundStyle(BrandPalette.ink)
