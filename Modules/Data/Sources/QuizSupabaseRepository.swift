@@ -96,7 +96,7 @@ private extension QuizQuestion {
             type: type,
             question: dto.question,
             choices: dto.choices,
-            correctIndex: dto.correctIndex,
+            correctIndices: dto.parsedCorrectIndices,
             oxAnswer: dto.oxAnswer,
             fillAnswer: dto.fillAnswer,
             explanation: dto.explanation,

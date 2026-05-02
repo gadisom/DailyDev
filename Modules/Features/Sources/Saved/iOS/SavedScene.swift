@@ -119,7 +119,7 @@ private struct SavedView: View {
             type: type,
             question: saved.question,
             choices: saved.choices,
-            correctIndex: saved.correctIndex,
+            correctIndices: saved.resolvedCorrectIndices,
             oxAnswer: saved.oxAnswer,
             fillAnswer: saved.fillAnswer,
             explanation: saved.explanation,
@@ -372,9 +372,11 @@ private struct SavedView: View {
         case "fill":
             return item.fillAnswer
         case "mcq":
-            guard item.correctIndex >= 0, item.correctIndex < item.choices.count else { return "" }
-            let letter = String(UnicodeScalar(65 + item.correctIndex)!)
-            return "\(letter). \(item.choices[item.correctIndex])"
+            let indices = item.resolvedCorrectIndices.filter { $0 >= 0 && $0 < item.choices.count }
+            guard !indices.isEmpty else { return "" }
+            return indices
+                .map { i in "\(String(UnicodeScalar(65 + i)!)). \(item.choices[i])" }
+                .joined(separator: ", ")
         default:
             return ""
         }

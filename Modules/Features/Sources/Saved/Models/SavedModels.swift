@@ -31,7 +31,8 @@ public final class SavedQuizQuestion {
     public var question: String
     public var questionType: String    // "mcq" | "ox" | "fill"
     public var choices: [String]
-    public var correctIndex: Int
+    public var correctIndex: Int       // legacy — 신규 저장 시에는 correctIndices 사용
+    public var correctIndices: [Int]   // 복수 정답 지원. 비어있으면 correctIndex 폴백
     public var oxAnswer: String
     public var fillAnswer: String
     public var explanation: String
@@ -40,12 +41,17 @@ public final class SavedQuizQuestion {
     public var categoryName: String
     public var savedAt: Date
 
+    /// 실제 정답 인덱스 목록. 신규/레거시 모두 안전하게 반환.
+    public var resolvedCorrectIndices: [Int] {
+        correctIndices.isEmpty ? (correctIndex >= 0 ? [correctIndex] : []) : correctIndices
+    }
+
     public init(
         questionID: Int,
         question: String,
         questionType: String,
         choices: [String],
-        correctIndex: Int,
+        correctIndices: [Int],
         oxAnswer: String,
         fillAnswer: String,
         explanation: String,
@@ -57,7 +63,8 @@ public final class SavedQuizQuestion {
         self.question = question
         self.questionType = questionType
         self.choices = choices
-        self.correctIndex = correctIndex
+        self.correctIndex = correctIndices.first ?? -1  // legacy compat
+        self.correctIndices = correctIndices
         self.oxAnswer = oxAnswer
         self.fillAnswer = fillAnswer
         self.explanation = explanation

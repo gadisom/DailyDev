@@ -34,7 +34,7 @@ struct QuizFlowView: View {
                     index: store.currentIndex,
                     total: store.total,
                     categoryName: store.quizSet.chapter,
-                    selectedChoice: $store.selectedChoice,
+                    selectedChoices: $store.selectedChoices,
                     selectedOX: $store.selectedOX,
                     fillInput: $store.fillInput,
                     onConfirm: { store.send(.confirmAnswer) }
@@ -83,7 +83,7 @@ struct QuizQuestionView: View {
     let index: Int
     let total: Int
     let categoryName: String
-    @Binding var selectedChoice: Int?
+    @Binding var selectedChoices: Set<Int>
     @Binding var selectedOX: String?
     @Binding var fillInput: String
 
@@ -98,7 +98,7 @@ struct QuizQuestionView: View {
 
     private var canConfirm: Bool {
         switch question.type {
-        case .mcq:  return selectedChoice != nil
+        case .mcq:  return !selectedChoices.isEmpty
         case .ox:   return selectedOX != nil
         case .fill: return !fillInput.trimmingCharacters(in: .whitespaces).isEmpty
         }
@@ -118,6 +118,9 @@ struct QuizQuestionView: View {
                     HStack(spacing: 8) {
                         DailyDevChip(typeLabel, tone: .green, size: .sm)
                         DailyDevChip(question.tag, tone: .outline, size: .sm)
+                        if question.isMultiSelect {
+                            DailyDevChip("복수 선택", tone: .neutral, size: .sm)
+                        }
                     }
                     .padding(.horizontal, 24)
 
@@ -137,6 +140,12 @@ struct QuizQuestionView: View {
                         case .mcq:  mcqChoices
                         case .ox:   oxChoices
                         case .fill: fillChoice
+                        }
+                        if question.isMultiSelect {
+                            Text("해당하는 것을 모두 선택하세요")
+                                .font(.system(size: 11, weight: .medium))
+                                .foregroundStyle(BrandPalette.ink3)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                         }
                     }
                     .padding(.horizontal, 24)
@@ -211,7 +220,7 @@ struct QuizQuestionView: View {
                 question: question.question,
                 questionType: typeStr,
                 choices: question.choices,
-                correctIndex: question.correctIndex,
+                correctIndices: question.correctIndices,
                 oxAnswer: question.oxAnswer,
                 fillAnswer: question.fillAnswer,
                 explanation: question.explanation,
@@ -233,15 +242,33 @@ struct QuizQuestionView: View {
     @ViewBuilder
     private var mcqChoices: some View {
         ForEach(Array(question.choices.enumerated()), id: \.offset) { i, choice in
-            let on = selectedChoice == i
-            Button { selectedChoice = i } label: {
+            let on = selectedChoices.contains(i)
+            Button {
+                if question.isMultiSelect {
+                    if selectedChoices.contains(i) {
+                        selectedChoices.remove(i)
+                    } else {
+                        selectedChoices.insert(i)
+                    }
+                } else {
+                    selectedChoices = [i]
+                }
+            } label: {
                 HStack(spacing: 14) {
-                    Text(String(UnicodeScalar(65 + i)!))
-                        .font(.system(size: 12, weight: .bold, design: .monospaced))
-                        .foregroundStyle(on ? .white : BrandPalette.ink3)
-                        .frame(width: 28, height: 28)
-                        .background(on ? Color.white.opacity(0.2) : BrandPalette.surfaceAlt)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                    ZStack {
+                        if question.isMultiSelect {
+                            Image(systemName: on ? "checkmark.square.fill" : "square")
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundStyle(on ? .white : BrandPalette.ink3)
+                        } else {
+                            Text(String(UnicodeScalar(65 + i)!))
+                                .font(.system(size: 12, weight: .bold, design: .monospaced))
+                                .foregroundStyle(on ? .white : BrandPalette.ink3)
+                        }
+                    }
+                    .frame(width: 28, height: 28)
+                    .background(on ? Color.white.opacity(0.2) : BrandPalette.surfaceAlt)
+                    .clipShape(RoundedRectangle(cornerRadius: question.isMultiSelect ? 6 : 8))
 
                     Text(choice)
                         .font(.system(size: 15, weight: on ? .semibold : .regular, design: .monospaced))
@@ -374,14 +401,23 @@ struct QuizExplainView: View {
                     if question.type == .mcq {
                         VStack(spacing: 8) {
                             ForEach(Array(question.choices.enumerated()), id: \.offset) { i, choice in
-                                let isRight = i == question.correctIndex
+                                let isRight = question.correctIndices.contains(i)
                                 HStack(spacing: 12) {
-                                    Text(String(UnicodeScalar(65 + i)!))
-                                        .font(.system(size: 10, weight: .bold, design: .monospaced))
-                                        .foregroundStyle(isRight ? .white : BrandPalette.ink3)
-                                        .frame(width: 22, height: 22)
-                                        .background(isRight ? BrandPalette.green : BrandPalette.surfaceAlt)
-                                        .clipShape(RoundedRectangle(cornerRadius: 6))
+                                    if question.isMultiSelect {
+                                        Image(systemName: isRight ? "checkmark.square.fill" : "square")
+                                            .font(.system(size: 14, weight: .semibold))
+                                            .foregroundStyle(isRight ? .white : BrandPalette.ink3)
+                                            .frame(width: 22, height: 22)
+                                            .background(isRight ? BrandPalette.green : BrandPalette.surfaceAlt)
+                                            .clipShape(RoundedRectangle(cornerRadius: 6))
+                                    } else {
+                                        Text(String(UnicodeScalar(65 + i)!))
+                                            .font(.system(size: 10, weight: .bold, design: .monospaced))
+                                            .foregroundStyle(isRight ? .white : BrandPalette.ink3)
+                                            .frame(width: 22, height: 22)
+                                            .background(isRight ? BrandPalette.green : BrandPalette.surfaceAlt)
+                                            .clipShape(RoundedRectangle(cornerRadius: 6))
+                                    }
 
                                     Text(choice)
                                         .font(.system(size: 13.5, weight: .medium, design: .monospaced))
@@ -546,7 +582,7 @@ struct QuizExplainView: View {
             question: question.question,
             questionType: typeStr,
             choices: question.choices,
-            correctIndex: question.correctIndex,
+            correctIndices: question.correctIndices,
             oxAnswer: question.oxAnswer,
             fillAnswer: question.fillAnswer,
             explanation: question.explanation,
@@ -884,7 +920,7 @@ struct QuizResultView: View {
                 question: q.question,
                 questionType: typeStr,
                 choices: q.choices,
-                correctIndex: q.correctIndex,
+                correctIndices: q.correctIndices,
                 oxAnswer: q.oxAnswer,
                 fillAnswer: q.fillAnswer,
                 explanation: q.explanation,

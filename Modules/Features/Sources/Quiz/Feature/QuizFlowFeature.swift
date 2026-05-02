@@ -10,7 +10,7 @@ struct QuizFlowFeature {
         var quizSet: QuizSet
         var currentIndex: Int = 0
         var answers: [Int: String] = [:]
-        var selectedChoice: Int? = nil
+        var selectedChoices: Set<Int> = []
         var selectedOX: String? = nil
         var fillInput: String = ""
         var phase: Phase = .question
@@ -43,7 +43,7 @@ struct QuizFlowFeature {
                 let q = state.current
                 let isCorrect: Bool
                 switch q.type {
-                case .mcq:  isCorrect = state.selectedChoice == q.correctIndex
+                case .mcq:  isCorrect = state.selectedChoices == Set(q.correctIndices)
                 case .ox:   isCorrect = state.selectedOX == q.oxAnswer
                 case .fill: isCorrect = state.fillInput
                                 .trimmingCharacters(in: .whitespaces)
@@ -64,7 +64,7 @@ struct QuizFlowFeature {
                     }
                 } else {
                     state.currentIndex += 1
-                    state.selectedChoice = nil
+                    state.selectedChoices = []
                     state.selectedOX = nil
                     state.fillInput = ""
                     state.phase = .question
@@ -75,7 +75,7 @@ struct QuizFlowFeature {
                 state.quizSet = quizSet
                 state.currentIndex = 0
                 state.answers = [:]
-                state.selectedChoice = nil
+                state.selectedChoices = []
                 state.selectedOX = nil
                 state.fillInput = ""
                 state.phase = .question
