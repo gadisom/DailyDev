@@ -28,8 +28,8 @@ struct PostView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 filterBar
-                    .opacity(store.filterChips.count > 1 ? 1 : 0)
-                    .animation(.easeInOut(duration: 0.2), value: store.filterChips.count > 1)
+                    .opacity(store.blogSources.isEmpty ? 0 : 1)
+                    .animation(.easeInOut(duration: 0.2), value: store.blogSources.isEmpty)
 
                 switch store.phase {
                 case .idle, .loading:
