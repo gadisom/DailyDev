@@ -94,9 +94,7 @@ private struct SavedView: View {
     }
 
     private func singleQuizSet(_ item: SavedQuizQuestion) -> QuizSet {
-        let allQs = questions.compactMap { toQuizQuestion($0) }
-        let start = allQs.firstIndex(where: { $0.id == item.questionID }) ?? 0
-        let qs = Array(allQs[start...])
+        let qs = toQuizQuestion(item).map { [$0] } ?? []
         return QuizSet(
             chapter: item.categoryName,
             chapterNum: "—",
