@@ -49,5 +49,5 @@ UseCase는 단일 책임 원칙. 여러 Repository를 조합하거나 복잡한 
 | Repository | UseCase |
 |-----------|---------|
 | `CSContentRepository` | `FetchCSCategoriesUseCase`, `FetchCSCategoryContentUseCase` |
-| `PostResourceRepository` | `FetchPostArticlesUseCase`, `FetchPostBlogSourcesUseCase` |
+| `PostArticleRepository` | `FetchPostArticlesUseCase`, `FetchPostBlogSourcesUseCase` |
 | `QuizRepository` | `FetchQuizBankUseCase` |

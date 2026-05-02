@@ -12,9 +12,9 @@
 		61CBDFF707335F87DD87A723 /* FetchCSCategoryContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DFECB6E4FF8BD813664FA3 /* FetchCSCategoryContentUseCase.swift */; };
 		63D07B5576EC3D367175EA16 /* QuizRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1480DAD507DE0457EBB0516A /* QuizRepository.swift */; };
 		6698D2011BD7601ECBE6E687 /* FetchPostBlogSourcesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479B400DBEDC740C6437838 /* FetchPostBlogSourcesUseCase.swift */; };
+		73BC048651FCD8E35FFCC373 /* PostArticleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21674921DCE308F925AB34 /* PostArticleRepository.swift */; };
 		7E00B03A01A4F616AA67A5BC /* Entity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC9ACEEDE9F864270F54384 /* Entity.framework */; };
 		88CAB4F4727A5A9B6C782B85 /* CSContentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A640228AEB37AB9EA967A1D /* CSContentRepository.swift */; };
-		A63354BA8E091D7CE7273DB9 /* PostResourceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F74A8AF5EB97AB6FF49546B /* PostResourceRepository.swift */; };
 		F08F6A5E66C9BE650263ED02 /* FetchCSCategoriesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B8EDD21E20AEA91E0238B /* FetchCSCategoriesUseCase.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,9 +37,9 @@
 		2A640228AEB37AB9EA967A1D /* CSContentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSContentRepository.swift; sourceTree = "<group>"; };
 		3CC9ACEEDE9F864270F54384 /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C3B8EDD21E20AEA91E0238B /* FetchCSCategoriesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCSCategoriesUseCase.swift; sourceTree = "<group>"; };
-		7F74A8AF5EB97AB6FF49546B /* PostResourceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResourceRepository.swift; sourceTree = "<group>"; };
 		8479B400DBEDC740C6437838 /* FetchPostBlogSourcesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPostBlogSourcesUseCase.swift; sourceTree = "<group>"; };
 		A7425EFF36FA1384393B6D27 /* FetchPostArticlesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPostArticlesUseCase.swift; sourceTree = "<group>"; };
+		BC21674921DCE308F925AB34 /* PostArticleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostArticleRepository.swift; sourceTree = "<group>"; };
 		BD15A37E85BAE3A36B2CE72C /* Domain-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Domain-Info.plist"; sourceTree = "<group>"; };
 		D222573E1B45EAF5495A054E /* FetchQuizBankUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchQuizBankUseCase.swift; sourceTree = "<group>"; };
 		FD49F277B86481D3D105FAC8 /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,7 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				2A640228AEB37AB9EA967A1D /* CSContentRepository.swift */,
-				7F74A8AF5EB97AB6FF49546B /* PostResourceRepository.swift */,
+				BC21674921DCE308F925AB34 /* PostArticleRepository.swift */,
 				1480DAD507DE0457EBB0516A /* QuizRepository.swift */,
 			);
 			path = Repositories;
@@ -198,7 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88CAB4F4727A5A9B6C782B85 /* CSContentRepository.swift in Sources */,
-				A63354BA8E091D7CE7273DB9 /* PostResourceRepository.swift in Sources */,
+				73BC048651FCD8E35FFCC373 /* PostArticleRepository.swift in Sources */,
 				63D07B5576EC3D367175EA16 /* QuizRepository.swift in Sources */,
 				F08F6A5E66C9BE650263ED02 /* FetchCSCategoriesUseCase.swift in Sources */,
 				61CBDFF707335F87DD87A723 /* FetchCSCategoryContentUseCase.swift in Sources */,

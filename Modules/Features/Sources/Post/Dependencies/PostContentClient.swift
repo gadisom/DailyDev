@@ -19,7 +19,7 @@ public struct PostContentClient: Sendable {
 
 private enum PostContentClientKey: DependencyKey {
     static let liveValue: PostContentClient = {
-        let repository = PostArticleRepository()
+        let repository = PostArticleRepositoryImpl()
         let fetchArticlesUseCase = FetchPostArticlesUseCase(repository: repository)
         let fetchBlogSourcesUseCase = FetchPostBlogSourcesUseCase(repository: repository)
 

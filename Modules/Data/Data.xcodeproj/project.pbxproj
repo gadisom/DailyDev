@@ -13,7 +13,7 @@
 		352AD78EB3B606E57F0FD47B /* SupabaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38279D34E65692B9CC48CD3E /* SupabaseClient.swift */; };
 		3E78F6EB737134CF6FA6E6B3 /* CSContentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7F50FBE24AF4AA770C2C5D /* CSContentDTO.swift */; };
 		5F9E986969B5CBFE44E868B0 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F8F7A1FD5C363584F77988 /* HTTPClient.swift */; };
-		67EF3C7FF2DD5DBB5E4A0B9B /* PostArticleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FE3449766EDE1E26266CFF /* PostArticleRepository.swift */; };
+		807E09709997C81BBC3B73BA /* PostArticleRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF6C54FDDC78751D174EA3C /* PostArticleRepositoryImpl.swift */; };
 		901ACA7B98089AB702ADA830 /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FAA1459D11CCE724C34195 /* Domain.framework */; };
 		D0756E494F531881DD4CFE6A /* QuizSupabaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8163F5907EC4A764FF2EAC3 /* QuizSupabaseRepository.swift */; };
 		DE5B00BC35650E686F27CD32 /* CSSupabaseContentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B355FFE9B7015815FC513AEA /* CSSupabaseContentRepository.swift */; };
@@ -39,13 +39,13 @@
 		0D7F50FBE24AF4AA770C2C5D /* CSContentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSContentDTO.swift; sourceTree = "<group>"; };
 		38279D34E65692B9CC48CD3E /* SupabaseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseClient.swift; sourceTree = "<group>"; };
 		42F8F7A1FD5C363584F77988 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
-		42FE3449766EDE1E26266CFF /* PostArticleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostArticleRepository.swift; sourceTree = "<group>"; };
 		4E75197C294DE74F5162FAA7 /* Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E08F6B1066EF03598856C1A /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B355FFE9B7015815FC513AEA /* CSSupabaseContentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSSupabaseContentRepository.swift; sourceTree = "<group>"; };
 		B9325B6783C186090698D034 /* PostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDTO.swift; sourceTree = "<group>"; };
 		E6799EBC84F4DBDEDB6C2FB0 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8163F5907EC4A764FF2EAC3 /* QuizSupabaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSupabaseRepository.swift; sourceTree = "<group>"; };
+		EEF6C54FDDC78751D174EA3C /* PostArticleRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostArticleRepositoryImpl.swift; sourceTree = "<group>"; };
 		FBE4582E1C3789D3ED6FE328 /* QuizDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,7 +104,7 @@
 				E9A2778152368EC94F479F54 /* Models */,
 				C964E22F0F1D644DF0BADFEF /* Networking */,
 				B355FFE9B7015815FC513AEA /* CSSupabaseContentRepository.swift */,
-				42FE3449766EDE1E26266CFF /* PostArticleRepository.swift */,
+				EEF6C54FDDC78751D174EA3C /* PostArticleRepositoryImpl.swift */,
 				E8163F5907EC4A764FF2EAC3 /* QuizSupabaseRepository.swift */,
 			);
 			path = Sources;
@@ -211,7 +211,7 @@
 				1694768E7DFB690ED3E25CF2 /* QuizDTO.swift in Sources */,
 				5F9E986969B5CBFE44E868B0 /* HTTPClient.swift in Sources */,
 				352AD78EB3B606E57F0FD47B /* SupabaseClient.swift in Sources */,
-				67EF3C7FF2DD5DBB5E4A0B9B /* PostArticleRepository.swift in Sources */,
+				807E09709997C81BBC3B73BA /* PostArticleRepositoryImpl.swift in Sources */,
 				D0756E494F531881DD4CFE6A /* QuizSupabaseRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

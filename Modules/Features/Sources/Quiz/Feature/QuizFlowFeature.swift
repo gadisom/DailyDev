@@ -14,7 +14,6 @@ struct QuizFlowFeature {
         var selectedOX: String? = nil
         var fillInput: String = ""
         var phase: Phase = .question
-        var showWrongNotes: Bool = false
         var isDone: Bool = false
 
         enum Phase: Equatable { case question, explain, result }
@@ -30,7 +29,6 @@ struct QuizFlowFeature {
         case advanceAfterExplain
         case reset(QuizSet)
         case earlyFinish
-        case retryWrong
         case done
     }
 
@@ -81,16 +79,11 @@ struct QuizFlowFeature {
                 state.selectedOX = nil
                 state.fillInput = ""
                 state.phase = .question
-                state.showWrongNotes = false
                 state.isDone = false
                 return .none
 
             case .earlyFinish:
                 state.phase = .result
-                return .none
-
-            case .retryWrong:
-                state.showWrongNotes = true
                 return .none
 
             case .done:

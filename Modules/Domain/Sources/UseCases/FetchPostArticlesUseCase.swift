@@ -2,9 +2,9 @@ import Entity
 import Foundation
 
 public struct FetchPostArticlesUseCase: Sendable {
-    private let repository: any PostResourceRepository
+    private let repository: any PostArticleRepository
 
-    public init(repository: any PostResourceRepository) {
+    public init(repository: any PostArticleRepository) {
         self.repository = repository
     }
 

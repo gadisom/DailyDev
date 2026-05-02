@@ -56,12 +56,8 @@ struct QuizFlowView: View {
                 QuizResultView(
                     quizSet: store.quizSet,
                     answers: store.answers,
-                    onRetryWrong: { store.send(.retryWrong) },
                     onDone: { store.send(.done) }
                 )
-                .navigationDestination(isPresented: $store.showWrongNotes) {
-                    WrongNotesView()
-                }
             }
         }
         .navigationBarBackButtonHidden(store.phase == .result || store.phase == .explain)
@@ -565,7 +561,6 @@ struct QuizExplainView: View {
 struct QuizResultView: View {
     let quizSet: QuizSet
     let answers: [Int: String]
-    let onRetryWrong: () -> Void
     let onDone: () -> Void
 
     @State private var selectedWrongIDs: Set<Int> = []
@@ -755,7 +750,6 @@ struct QuizResultView: View {
 
                 // Actions
                 VStack(spacing: 10) {
-                    ctaButton("틀린 문제만 다시 풀기", enabled: true, style: .dark, action: onRetryWrong)
                     ctaButton("완료", enabled: true, style: .outline, action: onDone)
                 }
                 .padding(.horizontal, 24)
@@ -805,145 +799,6 @@ struct QuizResultView: View {
         }
     }
 }
-
-// MARK: - Wrong Notes View
-
-struct WrongNotesView: View {
-    @State private var selectedFilter = "전체"
-    private let filters = ["전체", "자료구조", "알고리즘", "자주 틀림"]
-
-    var body: some View {
-        ZStack {
-            BrandPalette.background.ignoresSafeArea()
-
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 0) {
-
-                    // Summary card
-                    HStack(alignment: .bottom) {
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text("누적 오답")
-                                .font(.system(size: 11, weight: .bold, design: .monospaced))
-                                .tracking(1.2)
-                                .textCase(.uppercase)
-                                .foregroundStyle(BrandPalette.ink3)
-
-                            HStack(alignment: .lastTextBaseline, spacing: 4) {
-                                Text("\(dummyWrongNotes.count)")
-                                    .font(.system(size: 34, weight: .bold, design: .monospaced))
-                                    .foregroundStyle(BrandPalette.ink)
-                                Text("문제")
-                                    .font(.system(size: 16, weight: .medium))
-                                    .foregroundStyle(BrandPalette.ink4)
-                            }
-                        }
-
-                        Spacer()
-
-                        Button(action: {}) {
-                            HStack(spacing: 6) {
-                                Image(systemName: "play.fill")
-                                    .font(.system(size: 11))
-                                Text("한번에 복습")
-                                    .font(.system(size: 12, weight: .semibold))
-                            }
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 10)
-                            .background(BrandPalette.ink)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                        }
-                    }
-                    .padding(.horizontal, 18)
-                    .padding(.vertical, 16)
-                    .background(BrandPalette.surface)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                    .overlay(RoundedRectangle(cornerRadius: 16)
-                        .stroke(BrandPalette.line, lineWidth: 1))
-                    .padding(.horizontal, 24)
-                    .padding(.top, 16)
-
-                    // Filter chips
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 6) {
-                            ForEach(filters, id: \.self) { f in
-                                Button { selectedFilter = f } label: {
-                                    DailyDevChip(
-                                        f == "전체" ? "전체 · \(dummyWrongNotes.count)" : f,
-                                        tone: selectedFilter == f ? .green : .neutral,
-                                        size: .sm
-                                    )
-                                }
-                                .buttonStyle(ScaleButtonStyle())
-                            }
-                        }
-                        .padding(.horizontal, 24)
-                    }
-                    .padding(.top, 14)
-
-                    // List
-                    VStack(spacing: 10) {
-                        ForEach(dummyWrongNotes) { item in
-                            wrongNoteCard(item)
-                        }
-                    }
-                    .padding(.horizontal, 24)
-                    .padding(.top, 10)
-                    .padding(.bottom, 48)
-                }
-            }
-        }
-        .navigationTitle("오답노트")
-        .navigationBarTitleDisplayMode(.inline)
-    }
-
-    private func wrongNoteCard(_ item: WrongNoteItem) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            HStack(spacing: 8) {
-                Text("CH \(item.chapterNum)")
-                    .font(.system(size: 10, weight: .bold, design: .monospaced))
-                    .foregroundStyle(BrandPalette.green)
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .background(BrandPalette.greenSoft)
-                    .clipShape(RoundedRectangle(cornerRadius: 4))
-
-                Text(item.chapter)
-                    .font(.system(size: 11.5, weight: .medium))
-                    .foregroundStyle(BrandPalette.ink2)
-
-                Spacer()
-
-                if item.wrongCount > 1 {
-                    DailyDevChip("× \(item.wrongCount)", tone: .banana, size: .sm)
-                }
-            }
-            .padding(.bottom, 8)
-
-            Text(item.question)
-                .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(BrandPalette.ink)
-                .lineSpacing(3)
-
-            HStack(spacing: 8) {
-                DailyDevChip(item.type, tone: .outline, size: .sm)
-                DailyDevChip(item.tag, tone: .outline, size: .sm)
-                Spacer()
-                Text(item.relativeDate)
-                    .font(.system(size: 10.5, weight: .medium, design: .monospaced))
-                    .foregroundStyle(BrandPalette.ink3)
-            }
-            .padding(.top, 12)
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 14)
-        .background(BrandPalette.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 14))
-        .overlay(RoundedRectangle(cornerRadius: 14)
-            .stroke(BrandPalette.line, lineWidth: 1))
-    }
-}
-
 // MARK: - Shared helpers
 
 private enum CTAStyle { case dark, green, outline }

@@ -34,12 +34,12 @@ public struct SupabaseClient: SupabaseRequesting {
     private let baseURL: URL
     private let anonKey: String?
     private let decoder: JSONDecoder
-    private let httpClient: any HTTPRequestExecuting
+    private let httpClient: any HTTPClient
 
     public init(
         baseURL: URL = URL(string: "https://yfkrjmcfpvnnsbgehvjm.supabase.co/rest/v1")!,
         anonKey: String? = nil,
-        httpClient: any HTTPRequestExecuting = URLSessionHTTPClient.shared
+        httpClient: any HTTPClient = URLSessionHTTPClient.shared
     ) {
         self.baseURL = baseURL
         self.anonKey = Self.resolveAnonKey(explicit: anonKey)
@@ -68,34 +68,31 @@ public struct SupabaseClient: SupabaseRequesting {
         request.addValue(anonKey, forHTTPHeaderField: "apikey")
         request.addValue("Bearer \(anonKey)", forHTTPHeaderField: "Authorization")
 
-        let (data, response) = try await httpClient.data(for: request)
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw SupabaseClientError.invalidResponse
-        }
+        let response = try await httpClient.data(for: request)
 
-        guard (200...299).contains(httpResponse.statusCode) else {
+        guard (200...299).contains(response.statusCode) else {
             #if DEBUG
-            let bodyPreview = String(data: data, encoding: .utf8)?
+            let bodyPreview = String(data: response.body, encoding: .utf8)?
                 .trimmingCharacters(in: .whitespacesAndNewlines)
                 .prefix(1200)
-            let headerPreview = httpResponse.allHeaderFields
+            let headerPreview = response.headers
                 .compactMap { key, value in
                     "\(key): \(value)"
                 }
                 .joined(separator: ", ")
             print("""
             [SupabaseClient] ❌ request failed
-            status: \(httpResponse.statusCode)
+            status: \(response.statusCode)
             url: \(url.absoluteString)
             headers: \(headerPreview)
             body: \(bodyPreview ?? "<non-utf8-body>")
             """)
             #endif
-            throw SupabaseClientError.invalidStatusCode(httpResponse.statusCode)
+            throw SupabaseClientError.invalidStatusCode(response.statusCode)
         }
 
         do {
-            return try decoder.decode(T.self, from: data)
+            return try decoder.decode(T.self, from: response.body)
         } catch {
             throw SupabaseClientError.decodingFailed(error.localizedDescription)
         }
