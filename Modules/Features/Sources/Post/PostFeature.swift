@@ -1,6 +1,5 @@
 import ComposableArchitecture
 import Entity
-import Foundation
 
 @Reducer
 public struct PostFeature {
@@ -11,12 +10,10 @@ public struct PostFeature {
         public struct FilterChip: Identifiable, Equatable, Sendable {
             public let id: String
             public let title: String
-            public let count: Int
 
-            public init(id: String, title: String, count: Int) {
+            public init(id: String, title: String) {
                 self.id = id
                 self.title = title
-                self.count = count
             }
         }
 
@@ -42,29 +39,22 @@ public struct PostFeature {
 
         public var visibleArticles: [PostArticleListItem] {
             guard selectedFilterID != Self.allFilterID else { return articles }
-            return articles.filter { Self.blogFilterID(from: $0) == selectedFilterID }
+            return articles.filter { Self.blogFilterID(from: $0.blogName) == selectedFilterID }
         }
 
         public var filterChips: [FilterChip] {
-            var buckets: [String: (title: String, count: Int)] = [:]
-
-            for article in articles {
-                let id = Self.blogFilterID(from: article)
-                let title = Self.blogDisplayName(from: article)
-
-                if let existing = buckets[id] {
-                    buckets[id] = (title: existing.title, count: existing.count + 1)
-                } else {
-                    buckets[id] = (title: title, count: 1)
+            var seen = Set<String>()
+            let chips = blogSources
+                .compactMap { source -> FilterChip? in
+                    let title = source.name.trimmingCharacters(in: .whitespacesAndNewlines)
+                    guard !title.isEmpty else { return nil }
+                    let id = Self.blogFilterID(from: title)
+                    guard seen.insert(id).inserted else { return nil }
+                    return FilterChip(id: id, title: title)
                 }
-            }
+                .sorted { $0.title.localizedCompare($1.title) == .orderedAscending }
 
-            let sourceChips = Self.sourceFilterChips(from: blogSources, counts: buckets)
-            let dynamicChips = sourceChips.isEmpty
-                ? Self.fallbackFilterChips(from: buckets)
-                : sourceChips
-
-            return [FilterChip(id: Self.allFilterID, title: "전체", count: articles.count)] + dynamicChips
+            return [FilterChip(id: Self.allFilterID, title: "전체")] + chips
         }
 
         public init(
@@ -91,58 +81,8 @@ public struct PostFeature {
             self.blogSources = blogSources
         }
 
-        private static func sourceFilterChips(
-            from blogSources: [PostBlogSource],
-            counts: [String: (title: String, count: Int)]
-        ) -> [FilterChip] {
-            var seenIDs = Set<String>()
-
-            return blogSources
-                .compactMap { source -> FilterChip? in
-                    let title = source.name.trimmingCharacters(in: .whitespacesAndNewlines)
-                    guard !title.isEmpty else { return nil }
-
-                    let id = Self.blogFilterID(from: title)
-                    guard seenIDs.insert(id).inserted else { return nil }
-
-                    return FilterChip(id: id, title: title, count: counts[id]?.count ?? 0)
-                }
-                .sorted { lhs, rhs in
-                    lhs.title.localizedCompare(rhs.title) == .orderedAscending
-                }
-        }
-
-        private static func fallbackFilterChips(
-            from buckets: [String: (title: String, count: Int)]
-        ) -> [FilterChip] {
-            buckets
-                .map { key, value in
-                    FilterChip(id: key, title: value.title, count: value.count)
-                }
-                .sorted { lhs, rhs in
-                    lhs.title.localizedCompare(rhs.title) == .orderedAscending
-                }
-        }
-
-        private static func blogDisplayName(from article: PostArticleListItem) -> String {
-            let trimmed = article.blogName.trimmingCharacters(in: .whitespacesAndNewlines)
-            if !trimmed.isEmpty {
-                return trimmed
-            }
-            if let host = URL(string: article.blogLink)?.host {
-                return host.replacingOccurrences(of: "www.", with: "")
-            }
-            return "기타"
-        }
-
-        private static func blogFilterID(from article: PostArticleListItem) -> String {
-            Self.blogFilterID(from: Self.blogDisplayName(from: article))
-        }
-
         private static func blogFilterID(from value: String) -> String {
-            value
-                .trimmingCharacters(in: .whitespacesAndNewlines)
-                .lowercased()
+            value.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         }
     }
 
