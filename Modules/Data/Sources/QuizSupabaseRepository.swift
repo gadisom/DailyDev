@@ -39,7 +39,7 @@ public actor QuizSupabaseRepository: QuizRepository {
     private func fetchQuestions() async throws -> [QuizQuestionDTO] {
         do {
             return try await request(
-                path: "quiz_questions",
+                path: "quiz_questions_dev",
                 queryItems: [.init(name: "order", value: "id.asc")]
             )
         } catch {

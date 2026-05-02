@@ -150,7 +150,7 @@ struct QuizQuestionView: View {
                     }
                     .padding(.horizontal, 24)
                     .padding(.top, 20)
-                    .padding(.bottom, 120)
+                    .padding(.bottom, 100)
                 }
             }
 
@@ -255,20 +255,12 @@ struct QuizQuestionView: View {
                 }
             } label: {
                 HStack(spacing: 14) {
-                    ZStack {
-                        if question.isMultiSelect {
-                            Image(systemName: on ? "checkmark.square.fill" : "square")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundStyle(on ? .white : BrandPalette.ink3)
-                        } else {
-                            Text(String(UnicodeScalar(65 + i)!))
-                                .font(.system(size: 12, weight: .bold, design: .monospaced))
-                                .foregroundStyle(on ? .white : BrandPalette.ink3)
-                        }
-                    }
-                    .frame(width: 28, height: 28)
-                    .background(on ? Color.white.opacity(0.2) : BrandPalette.surfaceAlt)
-                    .clipShape(RoundedRectangle(cornerRadius: question.isMultiSelect ? 6 : 8))
+                    Text(String(UnicodeScalar(65 + i)!))
+                        .font(.system(size: 12, weight: .bold, design: .monospaced))
+                        .foregroundStyle(on ? .white : BrandPalette.ink3)
+                        .frame(width: 28, height: 28)
+                        .background(on ? Color.white.opacity(0.2) : BrandPalette.surfaceAlt)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
 
                     Text(choice)
                         .font(.system(size: 15, weight: on ? .semibold : .regular, design: .monospaced))
@@ -403,21 +395,12 @@ struct QuizExplainView: View {
                             ForEach(Array(question.choices.enumerated()), id: \.offset) { i, choice in
                                 let isRight = question.correctIndices.contains(i)
                                 HStack(spacing: 12) {
-                                    if question.isMultiSelect {
-                                        Image(systemName: isRight ? "checkmark.square.fill" : "square")
-                                            .font(.system(size: 14, weight: .semibold))
-                                            .foregroundStyle(isRight ? .white : BrandPalette.ink3)
-                                            .frame(width: 22, height: 22)
-                                            .background(isRight ? BrandPalette.green : BrandPalette.surfaceAlt)
-                                            .clipShape(RoundedRectangle(cornerRadius: 6))
-                                    } else {
-                                        Text(String(UnicodeScalar(65 + i)!))
-                                            .font(.system(size: 10, weight: .bold, design: .monospaced))
-                                            .foregroundStyle(isRight ? .white : BrandPalette.ink3)
-                                            .frame(width: 22, height: 22)
-                                            .background(isRight ? BrandPalette.green : BrandPalette.surfaceAlt)
-                                            .clipShape(RoundedRectangle(cornerRadius: 6))
-                                    }
+                                    Text(String(UnicodeScalar(65 + i)!))
+                                        .font(.system(size: 10, weight: .bold, design: .monospaced))
+                                        .foregroundStyle(isRight ? .white : BrandPalette.ink3)
+                                        .frame(width: 22, height: 22)
+                                        .background(isRight ? BrandPalette.green : BrandPalette.surfaceAlt)
+                                        .clipShape(RoundedRectangle(cornerRadius: 6))
 
                                     Text(choice)
                                         .font(.system(size: 13.5, weight: .medium, design: .monospaced))
