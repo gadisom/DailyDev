@@ -3,14 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0F4BF7BE77E1556A8AF33A73 /* CSCategoriesIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7863AF7CD149FB1D86827707 /* CSCategoriesIndex.swift */; };
-		1454567B12540DF898C3ED4A /* WrongNoteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F48CF99C03621728518ED /* WrongNoteItem.swift */; };
 		29B4F4730418C504BDC210AF /* PostContentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF90588840CBA71851778F0F /* PostContentError.swift */; };
-		312D165A32630DFB2B7E0A57 /* QuizBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1718F1FF2E4FDC21750F938B /* QuizBank.swift */; };
 		371D938C380AED0C1BDFEA5B /* CSCategoryDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FBF24D71C0AC92E63CE119 /* CSCategoryDefinition.swift */; };
 		3DCCB2C34BA7B08293267C3D /* QuizSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408A3D0EA954358AF0520D55 /* QuizSet.swift */; };
 		427855AF9394F3B80F8D6BEF /* PostBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840664276DECB7F57374F933 /* PostBlog.swift */; };
@@ -21,7 +19,6 @@
 		B773E932DFFFE46FA2FD5742 /* QuizCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906666CE191A32D17695F648 /* QuizCategory.swift */; };
 		D602F699EC014C86165F7C78 /* PostArticlesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48BAE7CB65A9EADF35D0516 /* PostArticlesPage.swift */; };
 		D73968A277FD8235BD5B55C0 /* PostBlogSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83B3644D072EAD252DF8F49 /* PostBlogSource.swift */; };
-		D9A24B79520E5FF89DB786DC /* DummyWrongNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E024E86927CE165CCEAD3CC /* DummyWrongNotes.swift */; };
 		EF10F04044D3277FB306B645 /* CSCategoryContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED4EA468FD41872C0C2E49B /* CSCategoryContent.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,9 +37,7 @@
 
 /* Begin PBXFileReference section */
 		0A01EF244AC3A98C101AF9C8 /* QuizQuestionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionType.swift; sourceTree = "<group>"; };
-		1718F1FF2E4FDC21750F938B /* QuizBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizBank.swift; sourceTree = "<group>"; };
 		408A3D0EA954358AF0520D55 /* QuizSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSet.swift; sourceTree = "<group>"; };
-		4E024E86927CE165CCEAD3CC /* DummyWrongNotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyWrongNotes.swift; sourceTree = "<group>"; };
 		61E374F035D07553C966CE6C /* PostArticleListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostArticleListItem.swift; sourceTree = "<group>"; };
 		6D3D722D8A39C97CE4035A34 /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75FBF24D71C0AC92E63CE119 /* CSCategoryDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSCategoryDefinition.swift; sourceTree = "<group>"; };
@@ -50,7 +45,6 @@
 		7863AF7CD149FB1D86827707 /* CSCategoriesIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSCategoriesIndex.swift; sourceTree = "<group>"; };
 		840664276DECB7F57374F933 /* PostBlog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBlog.swift; sourceTree = "<group>"; };
 		906666CE191A32D17695F648 /* QuizCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCategory.swift; sourceTree = "<group>"; };
-		BF7F48CF99C03621728518ED /* WrongNoteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongNoteItem.swift; sourceTree = "<group>"; };
 		CED4EA468FD41872C0C2E49B /* CSCategoryContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSCategoryContent.swift; sourceTree = "<group>"; };
 		D83B3644D072EAD252DF8F49 /* PostBlogSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBlogSource.swift; sourceTree = "<group>"; };
 		DA25156C819AFF5CDBDAA90C /* QuizQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestion.swift; sourceTree = "<group>"; };
@@ -94,13 +88,10 @@
 		82BAA3F30409F623544F0953 /* Quiz */ = {
 			isa = PBXGroup;
 			children = (
-				4E024E86927CE165CCEAD3CC /* DummyWrongNotes.swift */,
-				1718F1FF2E4FDC21750F938B /* QuizBank.swift */,
 				906666CE191A32D17695F648 /* QuizCategory.swift */,
 				DA25156C819AFF5CDBDAA90C /* QuizQuestion.swift */,
 				0A01EF244AC3A98C101AF9C8 /* QuizQuestionType.swift */,
 				408A3D0EA954358AF0520D55 /* QuizSet.swift */,
-				BF7F48CF99C03621728518ED /* WrongNoteItem.swift */,
 			);
 			path = Quiz;
 			sourceTree = "<group>";
@@ -189,6 +180,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = DailyDev;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = C85ABA34F5262643211DAA3D /* Build configuration list for PBXProject "Entity" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -232,13 +225,10 @@
 				427855AF9394F3B80F8D6BEF /* PostBlog.swift in Sources */,
 				D73968A277FD8235BD5B55C0 /* PostBlogSource.swift in Sources */,
 				29B4F4730418C504BDC210AF /* PostContentError.swift in Sources */,
-				D9A24B79520E5FF89DB786DC /* DummyWrongNotes.swift in Sources */,
-				312D165A32630DFB2B7E0A57 /* QuizBank.swift in Sources */,
 				B773E932DFFFE46FA2FD5742 /* QuizCategory.swift in Sources */,
 				44BA6F6B2CB6D85FB9BF714C /* QuizQuestion.swift in Sources */,
 				99A32204887A7A8082FF568C /* QuizQuestionType.swift in Sources */,
 				3DCCB2C34BA7B08293267C3D /* QuizSet.swift in Sources */,
-				1454567B12540DF898C3ED4A /* WrongNoteItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,7 +335,10 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

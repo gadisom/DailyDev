@@ -14,7 +14,7 @@ struct QuizQuestionDTO: Decodable, Sendable {
     let type: String
     let question: String
     let choices: [String]
-    let correctIndices: [Int]
+    let correctIndex: [Int]
     let oxAnswer: String
     let fillAnswer: String
     let explanation: String
