@@ -32,7 +32,7 @@ public final class SavedQuizQuestion {
     public var questionType: String    // "mcq" | "ox" | "fill"
     public var choices: [String]
     public var correctIndex: Int       // legacy — 신규 저장 시에는 correctIndices 사용
-    public var correctIndices: [Int]   // 복수 정답 지원. 비어있으면 correctIndex 폴백
+    public var correctIndices: [Int] = []  // 복수 정답 지원. 비어있으면 correctIndex 폴백
     public var oxAnswer: String
     public var fillAnswer: String
     public var explanation: String

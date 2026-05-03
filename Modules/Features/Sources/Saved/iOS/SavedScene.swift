@@ -409,42 +409,42 @@ private struct SavedView: View {
     }
 
     private func postRow(_ item: SavedPost) -> some View {
-        HStack(spacing: 12) {
-            VStack(alignment: .leading, spacing: 5) {
-                Text(item.blogName)
-                    .font(.system(size: 10, weight: .bold, design: .monospaced))
-                    .tracking(0.8)
-                    .foregroundStyle(BrandPalette.green)
+        let url = URL(string: item.articleLink)
+        return Button {
+            if let url { webDestination = WebDestination(url: url) }
+        } label: {
+            HStack(spacing: 12) {
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(item.blogName)
+                        .font(.system(size: 10, weight: .bold, design: .monospaced))
+                        .tracking(0.8)
+                        .foregroundStyle(BrandPalette.green)
 
-                Text(item.title)
-                    .font(.system(size: 13.5, weight: .semibold))
-                    .foregroundStyle(BrandPalette.ink)
-                    .lineLimit(2)
-                    .lineSpacing(2)
+                    Text(item.title)
+                        .font(.system(size: 13.5, weight: .semibold))
+                        .foregroundStyle(BrandPalette.ink)
+                        .lineLimit(2)
+                        .lineSpacing(2)
 
-                Text(relativeDate(item.savedAt))
-                    .font(.system(size: 10, weight: .medium, design: .monospaced))
-                    .foregroundStyle(BrandPalette.ink4)
-            }
-
-            Spacer()
-
-            if let url = URL(string: item.articleLink) {
-                Button {
-                    webDestination = WebDestination(url: url)
-                } label: {
-                    Image(systemName: "arrow.up.right.square")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundStyle(BrandPalette.ink3)
+                    Text(relativeDate(item.savedAt))
+                        .font(.system(size: 10, weight: .medium, design: .monospaced))
+                        .foregroundStyle(BrandPalette.ink4)
                 }
-                .buttonStyle(.plain)
+
+                Spacer()
+
+                Image(systemName: "arrow.up.right.square")
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundStyle(BrandPalette.ink3)
             }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 12)
+            .background(BrandPalette.surface)
+            .clipShape(RoundedRectangle(cornerRadius: 14))
+            .overlay(RoundedRectangle(cornerRadius: 14).stroke(BrandPalette.line, lineWidth: 1))
         }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 12)
-        .background(BrandPalette.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 14))
-        .overlay(RoundedRectangle(cornerRadius: 14).stroke(BrandPalette.line, lineWidth: 1))
+        .buttonStyle(.plain)
+        .disabled(url == nil)
     }
 
     // MARK: - Shared helpers
