@@ -9,27 +9,31 @@
 /* Begin PBXBuildFile section */
 		0683D7D0B76E6A291B64A9B1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E745A74AC3E402803D2E1E0E /* AppCoordinator.swift */; };
 		0AE65A6DA5DB78DA763650C6 /* FCMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA122E22024E74F94DAF2C4 /* FCMService.swift */; };
+		0B430CAD4EDC6BEDBEEF33BA /* AppUpdateClient+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B73087A75B5ACB6B7313F94 /* AppUpdateClient+Live.swift */; };
 		0DB3655C9BF685D6E644244C /* FirebaseCrashlyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D8EAF3A9A2FCAC0EAA7840 /* FirebaseCrashlyticsService.swift */; };
 		12B01DAE8D73255F3FE7E15E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B107840521EEE0E950414FBD /* GoogleService-Info.plist */; };
 		15A41E004A71C19406355548 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8B58E2A3FFC4EAD8B252DC07 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3AABE2BA7D7C8B901A014946 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 15F2012FE010B3065ABFE41D /* CasePaths */; };
-		3DDDB7C9882E8464829893D5 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 8629424AE30F2BB82136050D /* ComposableArchitecture */; };
-		46A9FD7945AD60F0158894BF /* XCTestDynamicOverlay in Frameworks */ = {isa = PBXBuildFile; productRef = DFE4109E3AD6B726A57837D9 /* XCTestDynamicOverlay */; };
+		205752AF25E8B0BBC6EC8A96 /* XCTestDynamicOverlay in Frameworks */ = {isa = PBXBuildFile; productRef = DFE4109E3AD6B726A57837D9 /* XCTestDynamicOverlay */; };
+		3AABE2BA7D7C8B901A014946 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 4B8C76AA11048480435B74B8 /* Dependencies */; };
+		3DDDB7C9882E8464829893D5 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 71D4890593E2A4F29C634D08 /* FirebaseRemoteConfig */; };
+		46A9FD7945AD60F0158894BF /* IssueReporting in Frameworks */ = {isa = PBXBuildFile; productRef = CBC59023EB12541B069AA62E /* IssueReporting */; };
 		4950E9913F76B750F5F47506 /* FirebaseAppConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E76A110EC5D59ACC04A9A98 /* FirebaseAppConfigurator.swift */; };
-		4DD956DEA103133332295EAC /* IssueReporting in Frameworks */ = {isa = PBXBuildFile; productRef = CBC59023EB12541B069AA62E /* IssueReporting */; };
+		4DD956DEA103133332295EAC /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 136164CB889B8B31268FC41F /* IdentifiedCollections */; };
 		4DFF445F8B47427C034BA091 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8C2234DC4F42CDBBCAD900F /* Assets.xcassets */; };
 		52D7445AD20C5389AFC6C804 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 95B6948CAD56A39528E177A7 /* FirebaseCore */; };
 		58F26249843B15D6A503B2DC /* Features.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBEEEA08AFA86E3BE9B818FD /* Features.framework */; };
+		719FEC0802B846477C7B0BF5 /* FirebaseRemoteConfigAppUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65164A085A8097AC3C7E0D0B /* FirebaseRemoteConfigAppUpdateService.swift */; };
 		85F13A28E16FDA0775379A69 /* DesignSystem.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10D27FA7D0925A79AF2DC890 /* DesignSystem.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		87641015A8F1D7D57116A220 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171D0D549BE5594160D23BB /* FirebaseAnalyticsService.swift */; };
 		897F3AACAF3F8C973449ADF1 /* DesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10D27FA7D0925A79AF2DC890 /* DesignSystem.framework */; };
 		A23F1FC5C1F389FA6A4D8836 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = BB7461D9CC16753EA4C3F516 /* FirebaseMessaging */; };
-		A99D11C5F8CB8ABF5CCEBD19 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 136164CB889B8B31268FC41F /* IdentifiedCollections */; };
+		A99D11C5F8CB8ABF5CCEBD19 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 15F2012FE010B3065ABFE41D /* CasePaths */; };
 		AF587F78C8C7CC26F255D732 /* Entity.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7F6D2B8A72DA801D1ECEDB /* Entity.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B500716BB1B1600B9B40537D /* CrashReportingClient+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1535130A9EC1BAC58D888C1 /* CrashReportingClient+Live.swift */; };
 		B64AC1A9987CB82156AB4A97 /* TuistBundle+DailyDeviOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C741F7C29C5290CF9209083D /* TuistBundle+DailyDeviOS.swift */; };
 		B7197C1EC12F2BC6162154DF /* Domain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 17C689B8D3B3407522CA994D /* Domain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BC2CF678B7765939D3B68610 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 4B8C76AA11048480435B74B8 /* Dependencies */; };
+		B7A70DCCE5D470689973310F /* ForceUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4133241943AB34009E4C18 /* ForceUpdateView.swift */; };
+		BC2CF678B7765939D3B68610 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 8629424AE30F2BB82136050D /* ComposableArchitecture */; };
 		C2E43C82F85AC7E166F02AE1 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8F3BF97A8B70AC84264B8372 /* FirebaseAnalytics */; };
 		C669B2B84BAB22C32EFC6419 /* AnalyticsClient+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2A18F4AF728BF8ED1487D5 /* AnalyticsClient+Live.swift */; };
 		C942BEDB8726578F81DF60DA /* Data.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02BD5F64CD54E453FF3EFBC7 /* Data.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -72,15 +76,18 @@
 		49FEABAAA91EBF41BFF13A9A /* DailyDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C46DA7E043916AF543ECDAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63313E7F1C53A9654A5D478F /* TuistAssets+DailyDeviOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+DailyDeviOS.swift"; sourceTree = "<group>"; };
+		65164A085A8097AC3C7E0D0B /* FirebaseRemoteConfigAppUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRemoteConfigAppUpdateService.swift; sourceTree = "<group>"; };
 		67E5B8D0CB054A489E33D692 /* DailyDeviOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DailyDeviOS-Info.plist"; sourceTree = "<group>"; };
 		8A7F6D2B8A72DA801D1ECEDB /* Entity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Entity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B58E2A3FFC4EAD8B252DC07 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A6666AB4A3039C8D3F1F5C8 /* DailyDeviOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDeviOSApp.swift; sourceTree = "<group>"; };
+		9B73087A75B5ACB6B7313F94 /* AppUpdateClient+Live.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppUpdateClient+Live.swift"; sourceTree = "<group>"; };
 		B107840521EEE0E950414FBD /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C741F7C29C5290CF9209083D /* TuistBundle+DailyDeviOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+DailyDeviOS.swift"; sourceTree = "<group>"; };
 		DBEEEA08AFA86E3BE9B818FD /* Features.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Features.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1535130A9EC1BAC58D888C1 /* CrashReportingClient+Live.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CrashReportingClient+Live.swift"; sourceTree = "<group>"; };
 		E745A74AC3E402803D2E1E0E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		EE4133241943AB34009E4C18 /* ForceUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceUpdateView.swift; sourceTree = "<group>"; };
 		F8C2234DC4F42CDBBCAD900F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FDE1DE6A51453F702754485D /* DailyDeviOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DailyDeviOS.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,18 +104,29 @@
 				52D7445AD20C5389AFC6C804 /* FirebaseCore in Frameworks */,
 				E551B1F7FD2326BB426DCE83 /* FirebaseCrashlytics in Frameworks */,
 				A23F1FC5C1F389FA6A4D8836 /* FirebaseMessaging in Frameworks */,
-				3DDDB7C9882E8464829893D5 /* ComposableArchitecture in Frameworks */,
-				BC2CF678B7765939D3B68610 /* Dependencies in Frameworks */,
-				3AABE2BA7D7C8B901A014946 /* CasePaths in Frameworks */,
-				A99D11C5F8CB8ABF5CCEBD19 /* IdentifiedCollections in Frameworks */,
-				4DD956DEA103133332295EAC /* IssueReporting in Frameworks */,
-				46A9FD7945AD60F0158894BF /* XCTestDynamicOverlay in Frameworks */,
+				3DDDB7C9882E8464829893D5 /* FirebaseRemoteConfig in Frameworks */,
+				BC2CF678B7765939D3B68610 /* ComposableArchitecture in Frameworks */,
+				3AABE2BA7D7C8B901A014946 /* Dependencies in Frameworks */,
+				A99D11C5F8CB8ABF5CCEBD19 /* CasePaths in Frameworks */,
+				4DD956DEA103133332295EAC /* IdentifiedCollections in Frameworks */,
+				46A9FD7945AD60F0158894BF /* IssueReporting in Frameworks */,
+				205752AF25E8B0BBC6EC8A96 /* XCTestDynamicOverlay in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D532AAC17B5CB9CB8A9AE26 /* AppUpdate */ = {
+			isa = PBXGroup;
+			children = (
+				9B73087A75B5ACB6B7313F94 /* AppUpdateClient+Live.swift */,
+				65164A085A8097AC3C7E0D0B /* FirebaseRemoteConfigAppUpdateService.swift */,
+				EE4133241943AB34009E4C18 /* ForceUpdateView.swift */,
+			);
+			path = AppUpdate;
+			sourceTree = "<group>";
+		};
 		0E2305F2E7FB3924C77C960B /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				24812F2908437DFB1037FA9C /* Analytics */,
+				0D532AAC17B5CB9CB8A9AE26 /* AppUpdate */,
 				CE4EE201251B2770564BD26D /* CrashReporting */,
 				0E2305F2E7FB3924C77C960B /* Notifications */,
 				E745A74AC3E402803D2E1E0E /* AppCoordinator.swift */,
@@ -240,6 +259,7 @@
 				95B6948CAD56A39528E177A7 /* FirebaseCore */,
 				0CB9AC87600E3CE05CF64C0E /* FirebaseCrashlytics */,
 				BB7461D9CC16753EA4C3F516 /* FirebaseMessaging */,
+				71D4890593E2A4F29C634D08 /* FirebaseRemoteConfig */,
 				8629424AE30F2BB82136050D /* ComposableArchitecture */,
 				4B8C76AA11048480435B74B8 /* Dependencies */,
 				15F2012FE010B3065ABFE41D /* CasePaths */,
@@ -337,6 +357,9 @@
 				C669B2B84BAB22C32EFC6419 /* AnalyticsClient+Live.swift in Sources */,
 				87641015A8F1D7D57116A220 /* FirebaseAnalyticsService.swift in Sources */,
 				0683D7D0B76E6A291B64A9B1 /* AppCoordinator.swift in Sources */,
+				0B430CAD4EDC6BEDBEEF33BA /* AppUpdateClient+Live.swift in Sources */,
+				719FEC0802B846477C7B0BF5 /* FirebaseRemoteConfigAppUpdateService.swift in Sources */,
+				B7A70DCCE5D470689973310F /* ForceUpdateView.swift in Sources */,
 				B500716BB1B1600B9B40537D /* CrashReportingClient+Live.swift in Sources */,
 				4950E9913F76B750F5F47506 /* FirebaseAppConfigurator.swift in Sources */,
 				0DB3655C9BF685D6E644244C /* FirebaseCrashlyticsService.swift in Sources */,
@@ -360,7 +383,7 @@
 				CODE_SIGN_ENTITLEMENTS = Sources/DailyDeviOS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -370,7 +393,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				OTHER_LDFLAGS = "$(inherited) -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dailydev.ios;
 				PRODUCT_NAME = DailyDev;
@@ -464,7 +487,7 @@
 				CODE_SIGN_ENTITLEMENTS = Sources/DailyDeviOS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -474,7 +497,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				OTHER_LDFLAGS = "$(inherited) -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dailydev.ios;
 				PRODUCT_NAME = DailyDev;
@@ -637,6 +660,10 @@
 		4B8C76AA11048480435B74B8 /* Dependencies */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Dependencies;
+		};
+		71D4890593E2A4F29C634D08 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseRemoteConfig;
 		};
 		8629424AE30F2BB82136050D /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;

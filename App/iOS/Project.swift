@@ -58,8 +58,8 @@ let project = Project(
                 with: [
                     "CFBundleDisplayName": "DailyDev",
                     "CFBundleName": "DailyDev",
-                    "CFBundleShortVersionString": "1.0.1",
-                    "CFBundleVersion": "2",
+                    "CFBundleShortVersionString": "1.0.2",
+                    "CFBundleVersion": "1",
                     "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_sWMT0op09LVNmJpnHYY6wg_ZIy-bHMV",
                     "SUPABASE_ANON_KEY": "",
                     "UILaunchScreen": [:],
@@ -92,6 +92,7 @@ let project = Project(
                 .package(product: "FirebaseCore"),
                 .package(product: "FirebaseCrashlytics"),
                 .package(product: "FirebaseMessaging"),
+                .package(product: "FirebaseRemoteConfig"),
                 .package(product: "ComposableArchitecture"),
                 .package(product: "Dependencies"),
                 .package(product: "CasePaths"),
@@ -102,10 +103,10 @@ let project = Project(
             settings: .settings(
                 base: [
                     "CODE_SIGN_STYLE": "Automatic",
-                    "CURRENT_PROJECT_VERSION": "2",
+                    "CURRENT_PROJECT_VERSION": "1",
                     "DEBUG_INFORMATION_FORMAT": "dwarf-with-dsym",
                     "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
-                    "MARKETING_VERSION": "1.0.1",
+                    "MARKETING_VERSION": "1.0.2",
                     "OTHER_LDFLAGS": "$(inherited) -ObjC",
                     "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS": "YES",
                     "ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOL_FRAMEWORKS": "SwiftUI UIKit",

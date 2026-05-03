@@ -5,6 +5,7 @@ import Features
 @Reducer
 struct AppFeature {
     @Dependency(\.analyticsClient) private var analyticsClient
+    @Dependency(\.appUpdateClient) private var appUpdateClient
 
     enum MainTab: Hashable {
         case home
@@ -18,6 +19,7 @@ struct AppFeature {
         var selectedTab: MainTab = .home
         var homeNavigationPath: [HomeRoute] = []
         var homeNavigationRequest: HomeNavigationRequest?
+        var forceUpdatePolicy: AppUpdatePolicy?
         var didTrackAppOpened = false
         var home: HomeFeature.State
         var quiz: QuizFeature.State
@@ -35,6 +37,8 @@ struct AppFeature {
     enum Action: BindableAction {
         case binding(BindingAction<State>)
         case task
+        case checkAppUpdate
+        case appUpdatePolicyChecked(AppUpdatePolicy?)
         case home(HomeFeature.Action)
         case quiz(QuizFeature.Action)
         case post(PostFeature.Action)
@@ -53,12 +57,25 @@ struct AppFeature {
             switch action {
             case .task:
                 guard !state.didTrackAppOpened else {
-                    return .none
+                    return .send(.checkAppUpdate)
                 }
                 state.didTrackAppOpened = true
-                return .run { _ in
-                    await analyticsClient.track(.appOpened)
+                return .merge(
+                    .run { _ in
+                        await analyticsClient.track(.appOpened)
+                    },
+                    .send(.checkAppUpdate)
+                )
+
+            case .checkAppUpdate:
+                return .run { send in
+                    let policy = try? await appUpdateClient.requiredUpdatePolicy()
+                    await send(.appUpdatePolicyChecked(policy))
                 }
+
+            case let .appUpdatePolicyChecked(policy):
+                state.forceUpdatePolicy = policy
+                return .none
 
             case .binding(\.selectedTab):
                 let tabName: String
